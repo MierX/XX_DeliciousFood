@@ -15,6 +15,11 @@ class BaseController extends Controller
             $this->signUp();
             exit;
         }
+        if($_GET['check'] == 1)
+        {
+            $this->checkValue();
+            exit;
+        }
         $_GET['signIn'] == 1 ? $this->signIn() : $this->isSign();
     }
 
@@ -54,8 +59,17 @@ class BaseController extends Controller
         exit;
     }
 
-    public function head()
+    public function checkValue()
     {
-        $this->display('Base/head');
+        $result = false;
+        $table = $_POST['table'];
+        $field = $_POST['field'];
+        $where = $_POST['where'];
+        $value = $_POST['value'];
+        if ($table && $field && $where && $value)
+        {
+            $result = D($table)->field('id')->where("$field $where $value")->find();
+        }
+        echo $result;
     }
 }

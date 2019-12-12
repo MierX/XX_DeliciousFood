@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <title>{$title}</title>
+
     <link rel="shortcut icon" type="image/png" href="__PUBLIC__/img/favicon.ico">
     <link rel="stylesheet" href="__PUBLIC__/css/base.head.css" />
     <link rel="stylesheet" href="__PUBLIC__/css/base.foot.css" />
@@ -17,18 +18,19 @@
         .checkbar span.three{margin-right:0;}
         .checklist{margin-top:5px;}
         .checklist li{padding:1px 0;font-size:12px;}
-        .checklist b{display: inline-block;width:20px;height:20px;vertical-align: middle;background: url(https://i1.douguo.com//upload/banner/1531891081.png) no-repeat;background-size: 15px; }
-        .checklist .right b{background: url("https://i1.douguo.com//upload/banner/1550215311.png") no-repeat 1px; background-size: 13px;}
-        .checklist .err b{background: url("https://i1.douguo.com//upload/banner/1550215325.png") no-repeat 1px;background-size: 13px;}
+        .checklist b{display: inline-block;width:20px;height:20px;vertical-align: middle;background: url(../../../../Public/img/1531891081.png) no-repeat;background-size: 15px; }
+        .checklist .right b{background: url(../../../../Public/img/1550215311.png) no-repeat 1px; background-size: 13px;}
+        .checklist .err b{background: url(../../../../Public/img/1550215325.png) no-repeat 1px;background-size: 13px;}
         .cicon{display: block;width:12px;height:12px;position: absolute;top:15px;left:-10px; }
     </style>
+
 </head>
 <body>
     <header>
         <div class="loheader">
             <div class="htop">
                 <div class="hlogo">
-                    <a title="豆果美食" href="http://xhm.df.local/index.php/Home/index?noSign=1">豆果美食</a>
+                    <a title="豆果美食" href="{:U('index')}?noSign=1">豆果美食</a>
                 </div>
             </div>
         </div>
@@ -38,13 +40,13 @@
             <div class="thed">
                 <h2>新用户注册</h2>
                 <span>已有账号，
-                    <a href="http://xhm.df.local/index.php/Home/index?signIn=1">直接登录 ></a>
+                    <a href="{:U('index')}?signIn=1">直接登录 ></a>
                 </span>
             </div>
             <div class="logibox">
                 <div class="itm clearfix">
                     <div class="iput">
-                        <input id="username" placeholder="请输入手机号" autocomplete="off" onfocusout="username(this.value);" class="wwinct r5" type="text" name="username" value="" />
+                        <input id="username" placeholder="请输入手机号" autocomplete="off" onfocus="showdesc(this)" onblur="username(this.value);" class="wwinct r5" type="text" name="username" value="" />
                     </div>
                     <span class="lowrong mll" id="err_username">
                         <p></p>
@@ -53,7 +55,7 @@
                 <div class="iisi" style="visibility: visible;">输入常用的手机号，便于登录和找回密码</div>
                 <div class="itm clearfix">
                     <div class="iput">
-                        <input id="nickname" placeholder="请输入昵称" onfocus="showdesc(this);" class="wwinct r5" maxlength="16" type="text">
+                        <input id="nickname" placeholder="请输入昵称" onfocus="showdesc(this)" onblur="nickname(this.value);" class="wwinct r5" maxlength="16" type="text">
                     </div>
                     <span class="lowrong mll" id="err_nickname">
                         <p></p>
@@ -62,42 +64,16 @@
                 <div class="iisi">中英文均可，最多16个字喔~</div>
                 <div class="itm clearfix" style="position: relative;">
                     <div class="iput">
-                        <input id="password" placeholder="请输入密码" onfocus="showPassportDesc(this);" class="wwinct r5" maxlength="20" type="password">
+                        <input id="password" placeholder="请输入密码" onfocus="showdesc(this)" onblur="password(this.value);" class="wwinct r5" maxlength="20" type="password">
                     </div>
                     <span class="lowrong mll" id="err_password">
                         <p></p>
                     </span>
-                    <div class="passcheck">
-                        <img class="cicon" src="https://i1.douguo.com//upload/banner/1550543732.jpg" alt="">
-                        <div>
-                            强度：
-                            <p class="checkbar" >
-                                <span class="one"></span>
-                                <span class="two"></span>
-                                <span class="three"></span>
-                            </p>
-                            <span class="checktype"></span>
-                        </div>
-                        <ul class="checklist">
-                            <li class="citem1">
-                                <b></b>
-                                密码长度为6-20位
-                            </li>
-                            <li class="citem2">
-                                <b></b>
-                                只能包含字母，数字以及标点符号（除空格）
-                            </li>
-                            <li class="citem3">
-                                <b></b>
-                                字母数字和标点符号至少包含两种
-                            </li>
-                        </ul>
-                    </div>
                 </div>
-                <div class="iisi">密码长度为6-20位，不能含有空格</div>
+                <div class="iisi">密码长度为6-20位，不能含有空格或纯数字（字母）</div>
                 <div class="itm clearfix">
                     <div class="iput">
-                        <input id="dpasswd" placeholder="确认密码" onfocus="showdesc(this);" class="wwinct r5" maxlength="20" type="password">
+                        <input id="dpasswd" placeholder="确认密码" onfocus="showdesc(this)" onblur="rePassword(this.value);" class="wwinct r5" maxlength="20" type="password">
                     </div>
                     <span class="lowrong mll" id="err_dpasswd">
                         <p></p>
@@ -115,7 +91,7 @@
                 </div>
                 <div class="iloo" style="margin-bottom: 30px;">
                     <span class="lxieyi">
-                        <input type="checkbox" checked="checked" class="czl" id="agreement">
+                        <input type="checkbox" class="czl" id="agreement">
                         我已阅读并且同意
                         <a href="http://www.douguo.com/privacy.html" target="_blank" title="用户协议">豆果美食使用协议</a>
                         <b id="agreement_tip" class="fwn ff0 pls"></b>
@@ -155,22 +131,90 @@
             </div>
         </div>
     </footer>
-</body>
-<script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
-<script src="__PUBLIC__/js/layui/layui.all.js"></script>
-<script src="__PUBLIC__/js/layer/layer.js"></script>
-<script>
-    function username(v) {
-        if(!v) {
-            $('#err_username > p').text('请输入手机号！');
-        } else {
-            var phone = /^1[3|4|5|6|7|8][0-9]\d{8}$/;
-            if (v && phone.test(v)) {
-                $('#err_username > p').addClass('ver_success');
-            } else{
-                $('#err_username > p').text('输入的手机号格式错误！');
+
+    <script src="__PUBLIC__/js/base.js"></script>
+    <script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
+    <script src="__PUBLIC__/js/layui/layui.all.js"></script>
+    <script src="__PUBLIC__/js/layer/layer.js"></script>
+    <script>
+        function showdesc(obj) {
+            obj	= $(obj);
+            obj.parents('.itm').next().css({'visibility':'visible'});
+        }
+        function username(v) {
+            $('#err_username > p').text('').removeClass('ver_success');
+            if(!v) {
+                $('#err_username > p').text('手机号不能为空！');
+            } else {
+                var phone = /^1[3|4|5|6|7|8][0-9]\d{8}$/;
+                if(v && phone.test(v)) {
+                    var status = checkValue('user','username','=',v);
+                    if(status) {
+                        $('#err_username > p').text('手机号已被注册！');
+                    } else {
+                        $('#err_username > p').addClass('ver_success');
+                        $('#err_username').parents('.itm').next().css({'visibility':'hidden'});
+                    }
+                } else {
+                    $('#err_username > p').text('输入的手机号格式错误！');
+                }
             }
         }
-    }
-</script>
+        function nickname(v) {
+            $('#err_nickname > p').text('').removeClass('ver_success');
+            if(!v) {
+                $('#err_nickname > p').text('昵称不能为空！');
+            } else {
+                if(v.length >= 2 || v.length <= 16) {
+                    var status = checkValue('user','nickname','=',v);
+                    if(status) {
+                        $('#err_nickname > p').text('昵称已被使用！');
+                    } else {
+                        $('#err_nickname > p').addClass('ver_success');
+                        $('#err_nickname').parents('.itm').next().css({'visibility':'hidden'});
+                    }
+                } else {
+                    $('#err_nickname > p').text('请输入2~16个字的昵称！');
+                }
+            }
+        }
+
+        function password(v) {
+            $('#err_password > p').text('').removeClass('ver_success');
+            var regNumber = /\d+/;
+            var regString = /[a-zA-Z]+/;
+            var regSpecial= /[-~!@#$%^&*()/\|,.<>?"'();:_+=\[\]{}]/;
+            var check_3 = 0;
+            if(regNumber.test(v)){
+                check_3 += 1;
+            }
+            if(regString.test(v)){
+                check_3 += 1;
+            }
+            if(regSpecial.test(v)){
+                check_3 += 1;
+            }
+            if(!v) {
+                $('#err_password > p').text('一定要设置密码！');
+            } else {
+                if(v.length < 6 || v.length > 20 || v.indexOf(" ") != -1 || check_3 < 2) {
+                    $('#err_password > p').text('密码不符合我们的要求！');
+                } else {
+                    $('#err_password > p').addClass('ver_success');
+                    $('#err_password').parents('.itm').next().css({'visibility':'hidden'});
+                }
+            }
+        }
+
+        function rePassword(v) {
+            $('#err_dpasswd > p').text('').removeClass('ver_success');
+            if(v !== $('#password').val()) {
+                $('#err_dpasswd > p').text('两次密码不同！');
+            } else {
+                $('#err_dpasswd > p').addClass('ver_success');
+                $('#err_dpasswd').parents('.itm').next().css({'visibility':'hidden'});
+            }
+        }
+    </script>
+</body>
 </html>
