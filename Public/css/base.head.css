@@ -65,7 +65,7 @@ a:hover {text-decoration:underline;color:#ed585c;}
     margin-right: 5px;
     margin-bottom: 3px;
     vertical-align: middle;
-    background: url(/public/img/web/loicon.png) no-repeat;}
+    background: url(../img/loicon.png) no-repeat;}
 .ic_txzh{background-position: -3px -47px;}
 .ic_xlwb{background-position: -32px -47px;}
 .ic_txwb{background-position: -64px -47px;}
@@ -80,7 +80,7 @@ a:hover {text-decoration:underline;color:#ed585c;}
     margin-right: 5px;
     margin-bottom: 3px;
     vertical-align: middle;
-    background: url(/public/img/web/loicon.png) no-repeat;}
+    background: url(../img/loicon.png) no-repeat;}
 .ic_email{height: 18px;background-position: -64px -21px;}
 .ic_phone{height: 28px;background-position: -23px -18px;}
 .ml36{margin-left:36px;}
