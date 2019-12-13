@@ -1,4 +1,4 @@
-function checkValue(table,field,where,value) {
+function checkValue(table,field,condition,value) {
     let status = '';
     $.ajax({
         url:"/Home/index?check=1",
@@ -7,7 +7,7 @@ function checkValue(table,field,where,value) {
         data:{
             'table':table,
             'field':field,
-            'where':where,
+            'condition':condition,
             "value":value,
         },
         success:function (data) {

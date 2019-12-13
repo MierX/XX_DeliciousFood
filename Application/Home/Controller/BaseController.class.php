@@ -20,6 +20,16 @@ class BaseController extends Controller
             $this->checkValue();
             exit;
         }
+        if($_GET['is_signUp'] == 1)
+        {
+            $this->goSignUp();
+            exit;
+        }
+        if($_GET['is_signIn'] == 1)
+        {
+            $this->goSignIn();
+            exit;
+        }
         $_GET['signIn'] == 1 ? $this->signIn() : $this->isSign();
     }
 
@@ -42,6 +52,7 @@ class BaseController extends Controller
         else
         {
             $this->index();
+            exit;
         }
     }
 
@@ -52,6 +63,20 @@ class BaseController extends Controller
         exit;
     }
 
+    public function goSignIn()
+    {
+        $data = $_POST;
+        $result = D('User')->field('*')->where($data)->find();
+        if($result)
+        {
+            $_SESSION = $result;
+            unset($_SESSION['password']);
+            $_SESSION['isLogin'] = 1;
+            $_SESSION['addtime'] = date('Y-m-d H:i:s', $result['addtime']);
+        }
+        echo $result;
+    }
+
     public function signUp()
     {
         $this->assign('title','手机号注册 - 豆果美食');
@@ -59,16 +84,36 @@ class BaseController extends Controller
         exit;
     }
 
+    public function goSignUp()
+    {
+        $data = $_POST;
+        $data['addtime'] = time();
+        $result = D('User')->add($data);
+        if($result)
+        {
+            $_SESSION = $data;
+            unset($_SESSION['password']);
+            $_SESSION['addtime'] = date('Y-m-d H:i:s', $data['addtime']);
+            $_SESSION['isLogin'] = 1;
+            $_SESSION['status'] = 1;
+            $_SESSION['id'] = $result;
+        }
+        echo $result;
+    }
+
     public function checkValue()
     {
         $result = false;
-        $table = $_POST['table'];
-        $field = $_POST['field'];
-        $where = $_POST['where'];
-        $value = $_POST['value'];
+        $table =  $_POST['table'];
+        $field =  $_POST['field'];
+        $condition =  $_POST['condition'];
+        $value =  $_POST['value'];
+
+        $where[$field] = array($condition,$value);
+
         if ($table && $field && $where && $value)
         {
-            $result = D($table)->field('id')->where("$field $where $value")->find();
+            $result = D($table)->field('id')->where($where)->find();
         }
         echo $result;
     }

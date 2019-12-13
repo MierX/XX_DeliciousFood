@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$title}</title>
+
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/img/favicon_index.ico">
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/index.css">
+    <link rel="stylesheet" href="__PUBLIC__/js/layui/css/layui.css" />
+</head>
+<body>
+    <div id="header" class="">
+        <div class="header clearfix">
+            <a class="logo left" href="/">
+                <img src="__PUBLIC__/img/logo3.png" alt="">
+            </a>
+            <ul class="nav">
+                <li class="act" >
+                    <a href="javascript:void(0);" onclick="location.reload();">首页</a>
+                </li>
+                <li class="relative " onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
+                    <a href="{:U('Menu/index')}?status=0">菜谱
+                        <span class="naww"></span>
+                    </a>
+                    <div class="ctip">
+                        <span class="arwwj"> </span>
+                        <div class="ctab clearfix">
+                            <a href="{:U('Menu/index')}?status=1" target="_blank">
+                                <img src="__PUBLIC__/img/jx3.png" alt="">
+                                精选
+                            </a>
+                        </div>
+                        <div class="ctab clearfix">
+                            <a href="{:U('Menu/index')}?status=2" target="_blank">
+                                <img src="__PUBLIC__/img/jx3.png" alt="">
+                                最新
+                            </a>
+                        </div>
+                        <div class="ctab clearfix">
+                            <a href="{:U('Menu/index')}?status=3" target="_blank">
+                                <img src="__PUBLIC__/img/jx3.png" alt="">
+                                热门
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li >
+                    <a href="{:U('Article/index')}">文章</a>
+                </li>
+                <li >
+                    <a href="#">主题站</a>
+                </li>
+                <li >
+                    <a href="#">商城</a>
+                </li>
+                <li >
+                    <a href="#">动漫</a>
+                </li>
+                <li>
+                    <a href="#">药品</a>
+                </li>
+            </ul>
+            <form class="search br4 left" method="POST" id="searchForm" action="" accept-charset="utf-8" onsubmit="document.charset='utf-8';return Search();">
+                <input type="text" id="global_search_inpt" class="sput" name="keywords" value="搜索菜谱、文章、食材" lang="zh-CN" autocomplete="off" onfocus="if(this.value=='搜索菜谱、菜单、食材、用户') {this.value=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.value='';$(this).removeClass('fcbm');} setTimeout(function (){$('#mysu2').html('')},500)" onkeyup="selectItem(event)" onclick="selectItem(event)">
+                <input type="button" value=" " class="lib">
+                <div class="sugg2" id="mysu2" style="display:none;"></div>
+            </form>
+            <if condition="$Think.SESSION.isLogin eq 1">
+                <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
+                    <a class="btn-pubt" href="{:U('Menu/add')}" title="发布菜谱">发布</a>
+                </div>
+                <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
+                    <a class="headicon" href="{:U('User/info')}">
+                        <img class="wb100 br50" src="__PUBLIC__/img/70.jpg" alt="">
+                        <span class="msgnum"></span>
+                    </a>
+                    <div class="myedit br8">
+                        <span class="arwwj"> </span>
+                        <a class="relative" href="#" target="_blank">
+                            消息提醒
+                            <span class="boll"></span>
+                        </a>
+                        <a href="#">我的收藏</a>
+                        <a href="#" target="_blank">账号设置</a>
+                        <a href="#">退出</a>
+                    </div>
+                </div>
+                <else />
+                <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
+                    <a class="btn-pubt" href="{:U('Menu/add')}" title="发布菜谱">发布</a>
+                </div>
+                <div class="perinfo">
+                    <a class="login" href="{:U('index')}"> 登录 </a>
+                    |
+                    <a class="register" href="{:U('index')}" target="_blank"> 注册 </a>
+                </div>
+            </if>
+        </div>
+    </div>
+
+
+
+    <script src='__PUBLIC__/js/jquery.js' ></script>
+    <script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
+    <script src="__PUBLIC__/js/layui/layui.all.js"></script>
+    <script src="__PUBLIC__/js/layer/layer.js"></script>
+</body>
+</html>

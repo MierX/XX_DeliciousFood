@@ -1,0 +1,79 @@
+﻿#content .more{font-size: 13px;color: #256DC6;float: right;height:20px;line-height:20px;font-weight:normal;}
+#content .more img{height:10px;vertical-align: middle;position: relative;top:-1px;}
+#content .title{font-size: 20px;color: #333;font-weight: bold;margin-top:40px;line-height: 20px;}
+/*轮播banner*/
+#banner{width:100%;min-width:1000px;overflow: hidden;position: relative;padding-top:26.354167%;min-height:264px;overflow: hidden;}
+#banner .banner{top:0;left:0;width:100%;height:100%;}
+#banner .prev{position: absolute;top:0;left:0;width:15%;height:100%;background: url("../images/prev.png") no-repeat center center;}
+#banner .next{position: absolute;top:0;right:0;width:15%;height:100%;background: url("../images/next.png") no-repeat center center;}
+#banner .blist{display: inline-block;width:700%;min-width:7000px;position: relative;}
+#banner .blist li{float:left;width:14.2857143%;min-width:1000px;min-height:264px;}  
+#banner .bpages{position: absolute;top: 90.5%;left: 0;width: 100%;text-align: center;} 
+#banner .bpages li{cursor: pointer;width:8px;height:8px;border-radius:100%;background:#fff;display: inline-block;margin:0 5px;}
+#banner .bpages li.act{background:#000;}
+/*菜谱*/
+.recipe-list .item{width:220px;height:270px;float:left;margin:25px 40px 0 0;display: inline-block;}
+.recipe-list .cover,.note-list .cover{width:220px;height:220px;display: block;overflow: hidden;position:relative;}
+.recipe-list .name{display:block;width:220px;height:35px;line-height:35px;font-size: 15px;}
+.recipe-list .author{display:block;font-size: 12px;height:16px;line-height:13px;}
+.recipe-list .name:hover,.recipe-list .author:hover a{color:#ffaa00;}
+/*笔记*/
+.note-list .item{width:220px;height:290px;float:left;margin:20px 40px 0 0;}
+.note-list .cover{border-top-right-radius: 8px;border-top-left-radius: 8px;}
+.note-list .info{padding:0 10px;height:70px;overflow: hidden;border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;box-shadow: 1px 1px 4px rgba(124,131,140,0.04),1px 1px 4px rgba(124,131,140,0.04),-1px 1px 4px rgba(124,131,140,0.04),-1px 1px 4px rgba(124,131,140,0.04);}
+.note-list .name{display: block;width:100%;line-height:35px;font-size: 15px;height:35px;overflow: hidden}
+.note-list .author{display:inline-block;font-size: 12px;height:22px;line-height:22px;}
+.note-list .headicon{display:inline-block;width:22px;height:22px;vertical-align: middle;}
+.note-list .nickname{display:inline-block;vertical-align: middle;}
+/*菜单*/
+.menu-list{padding-top:6px;}
+.menu-list .item{width:324px;height:182px;float:left;margin:22px 24px 0 0;overflow: hidden;position: relative;}
+.menu-list .cover{display:block;width:100%;height:100%;text-align: center;overflow: hidden;}
+.menu-list .menuinfo{position: absolute;top:0;left:0;width:100%;height:100%;background: rgba(0,0,0,.14);}
+.menu-list p{width:298px;font-size: 15px;line-height:15px;color: #FFF;text-shadow: 0 1px 2px rgba(0,0,0,0.28);margin: 0 auto;padding-top:10px; }
+.menu-list .name{font-weight: bold;padding-top:66px;font-size:20px;line-height:24px;}
+/*食材*/
+.material-list{width:690px;height:276px;background: #F1F7FA;margin-top: 20px;padding:4px 3px 24px;}
+.material-list .item{margin:20px 17px 0;width:80px;height:104px;float:left;text-align: center;overflow: hidden;font-size: 13px;}
+.material-list .item img{width: 80px; height: 80px;margin-bottom: 5px;display: block;}
+.note-list .name:hover,.note-list .nickname:hover,.material-list .item:hover a{color:#ffaa00;}
+/*主题站*/
+.hot-article{height:112px;margin:20px 0 30px;}
+.hot-article .cover{width:200px;height:112px;float: left;overflow: hidden;}
+.hot-article .info{width:478px;height:112px;margin:3px 0 0 12px;float: left;}
+.hot-article .name{font-size: 16px;line-height:30px;display: block;height:60px;}
+.hot-article .sour-auth{margin-top:25px;font-size:13px;line-height:13px;}
+.hot-article .source{margin-right:55px;}
+.alist li{width:320px;float: left;text-overflow: ellipsis; white-space: nowrap; overflow: hidden;font-size:13px;line-height:16px;margin:10px 0;}
+.alist .ar{margin-left:50px;}
+.hot-article .name:hover,.hot-article .sour-auth a:hover,.alist li:hover a{color:#ffaa00;}
+/*大家的作品*/
+.zp-list{margin-top: 25px;}
+.zp-list li{margin-bottom: 30px;}
+.zp-list .zpinfo{float:left;width:202px;height:110px;margin-left:6px;font-size:13px;color:#333;padding-top:26px;}
+.zp-list .dishnum{margin-top:23px;}
+.zp-list .dishnum span{color:#000;font-weight:bold;}
+.zp-list .zpinfo:hover,.zp-list .zpinfo:hover span{color:#ffaa00;}
+
+.zp-list .zp{display:inline-block;width:110px;height:110px;float:left;overflow: hidden;}
+.zpwork  .zp{margin-left:14px;}
+/*达人*/
+.dr-list{margin-top: 5px;width:280px;height:355px;overflow: hidden;}
+.dr-list li{margin-top: 20px;height:46px;}
+.dr-list .headicon{width:46px;height:46px;overflow:hidden;}
+.dr-list .info{margin-left:6px;width:130px;height:100%;float:left;}
+.dr-list .nickname{display: inline-block;max-width:120px;font-size:15px;vertical-align:middle;}
+.dr-list .fans{font-size: 12px;color: #999;margin-top:8px;}
+.dr-list .gz{float:right;color:#333;border: 1px solid #333;width:73px;height:30px;line-height:28px;text-align:center;margin-top:8px;border-radius:4px;}
+.dr-list .addicon{font-size:14px;}
+/*商城精选*/
+.mall-list{margin-top: 5px;width:280px;height:324px;overflow: hidden;}
+.mall-list li{margin-top: 20px;height:88px;}
+.mall-list .info{margin-left:6px;width:186px;height:100%;}
+.mall-list .name{width:100%;font-size: 15px;color: #333;line-height:20px;height: 40px;}
+.mall-list .price{font-size: 16px;color: #FF4C44;margin-top:4px;}
+.mall-list .count{font-size: 12px;color: #999;margin-top:7px;}
+/*豆果实验室*/
+.test-list,dm-list{padding-top:5px;}
+.test-list li,.dm-list li{margin-top:20px;font-size: 13px;line-height:13px;color: #333;}
+.dr-list .nickname:hover,.mall-list .name:hover,.test-list li:hover a, .dm-list li:hover a{color:#ffaa00;}

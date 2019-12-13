@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <title>{$title}</title>
+
     <link rel="shortcut icon" type="image/png" href="__PUBLIC__/img/favicon.ico">
     <link rel="stylesheet" href="__PUBLIC__/css/base.head.css" />
     <link rel="stylesheet" href="__PUBLIC__/css/base.foot.css" />
@@ -36,7 +37,7 @@
             </div>
             <div class="logone">
                 <div class="iput">
-                    <input id="username" placeholder="请输入手机号" class="dlsi r5" type="text">
+                    <input id="username" placeholder="请输入手机号" class="dlsi r5" type="text" onblur="username(this.value);" />
                 </div>
                 <div class="iput">
                     <input id="password" placeholder="请输入密码" class="dlsi r5" maxlength="20" type="password">
@@ -44,15 +45,13 @@
                 <div id="captcha" class="tymm">
                     <input id="code" class="yzma r5" maxlength="4" type="text" placeholder="输入验证码">
                     <img alt="" class="czl mls mrs" width="100" height="30" id="codeimg" src="__PUBLIC__/img/captcha.png">
-<!--                    <a href="javascript:void(0);" id="chgcapt">换一张</a>-->
                 </div>
-                <input id="ajaxurl" type="hidden" value="">
                 <div class="forg">
                     <a href="__ROOT__/index.php/Home/index?forget=1">忘记密码 ></a>
-                    <span id="err" class="twro" style="margin-left:20px;visibility: hidden"></span>
+                    <span id="err" class="twro" style="margin-left:20px;visibility: hidden"><p></p></span>
                 </div>
                 <div class="mtsu">
-                    <button id="login" class="btnrlo r3" style="background: #FFB31A">登录</button>
+                    <button id="login" type="button" class="btnrlo r3" style="background: #FFB31A">登录</button>
                 </div>
                 <div class="otth">
                     <h3>使用社交账号登录豆果美食</h3>
@@ -98,8 +97,44 @@
             </div>
         </div>
     </footer>
+
+    <script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
+    <script src="__PUBLIC__/js/layui/layui.all.js"></script>
+    <script src="__PUBLIC__/js/layer/layer.js"></script>
+    <script type="text/javascript">
+        function username(v) {
+            $('#err_username > p').text('').removeClass('ver_success');
+            var phone = /^1[3|4|5|6|7|8][0-9]\d{8}$/;
+            if(v && phone.test(v)) {
+                $('#err').text('').css({'visibility':'hidden'});
+            } else {
+                $('#err').text('输入的手机号格式错误！').css({'visibility':'visible'});
+            }
+        }
+        $('#login').click(function () {
+            var code = $('#code').val().toLowerCase();
+            if(code != 'fr3r') {
+                $('#err').text('验证码错误！').css({'visibility':'visible'});
+            } else {
+                $('#err').text('').css({'visibility':'hidden'});
+                var data = {};
+                $('input').each(function () {
+                    data[$(this).attr('id')] = $(this).val();
+                });
+                delete data['code'];
+                $.ajax({
+                    url:"{:U('index')}?is_signIn=1",
+                    type:"post",
+                    data:data,
+                    success:function (data) {
+                        if(data) location.href = "{:U('index')}";
+                    },
+                    error:function () {
+                        layer.msg("未知错误");
+                    },
+                });
+            }
+        })
+    </script>
 </body>
-<script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
-<script src="__PUBLIC__/js/layui/layui.all.js"></script>
-<script src="__PUBLIC__/js/layer/layer.js"></script>
 </html>
