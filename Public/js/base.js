@@ -19,3 +19,12 @@ function checkValue(table,field,condition,value) {
     });
     return status;
 }
+
+function selfMsg(content,title = false,closeBtn = true,shadeClose= false,button = []) {
+    layer.confirm(content, {
+        title:title,
+        closeBtn:closeBtn,
+        shadeClose:shadeClose,
+        btn: button,
+    });
+}

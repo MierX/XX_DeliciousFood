@@ -16,7 +16,7 @@
         <div class="loheader">
             <div class="htop">
                 <div class="hlogo">
-                    <a title="豆果美食" href="__ROOT__/index.php/Home/index?noSign=1">豆果美食</a>
+                    <a title="豆果美食" href="{:U('index')}">豆果美食</a>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
             <div class="wizh">
                 <h2>登录</h2>
                 <span>
-                    <a href="__ROOT__/index.php/Home/index?goSignUp=1">去注册 ></a>
+                    <a href="{:U('register')}">去注册 ></a>
                 </span>
             </div>
             <div class="logone">
@@ -47,7 +47,7 @@
                     <img alt="" class="czl mls mrs" width="100" height="30" id="codeimg" src="__PUBLIC__/img/captcha.png">
                 </div>
                 <div class="forg">
-                    <a href="__ROOT__/index.php/Home/index?forget=1">忘记密码 ></a>
+                    <a href="{:U('forget')}">忘记密码 ></a>
                     <span id="err" class="twro" style="margin-left:20px;visibility: hidden"><p></p></span>
                 </div>
                 <div class="mtsu">
@@ -98,6 +98,8 @@
         </div>
     </footer>
 
+    <script src="__PUBLIC__/js/base.js"></script>
+    <script src='__PUBLIC__/js/jquery.js' ></script>
     <script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
     <script src="__PUBLIC__/js/layui/layui.all.js"></script>
     <script src="__PUBLIC__/js/layer/layer.js"></script>
@@ -123,11 +125,18 @@
                 });
                 delete data['code'];
                 $.ajax({
-                    url:"{:U('index')}?is_signIn=1",
+                    url:"{:U('login')}",
                     type:"post",
                     data:data,
                     success:function (data) {
-                        if(data) location.href = "{:U('index')}";
+                        if(data == 'error') {
+                            selfMsg('您的账号或密码有误','登录提示',false,true);
+                        } else if(data == 'close') {
+                            selfMsg('您的账号目前被关闭，请致电客服','封号提示',false,true);
+                        } else if(data == 'success') {
+                            layer.msg('登录成功……');
+                            location.href = "{:U('index')}";
+                        }
                     },
                     error:function () {
                         layer.msg("未知错误");
