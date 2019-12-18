@@ -1,7 +1,6 @@
 <?php
 namespace Home\Controller;
 
-use \Home\Controller\BaseController;
 use Think\Controller;
 use Think\Db;
 
@@ -18,20 +17,20 @@ class IndexController extends BaseController
         if($_POST)
         {
             $userInfo = D()->query("select * from user where binary username = '".$_POST['username']."' and binary password = '".$_POST['password']."' limit 1");
-            if(empty($userInfo))
+            if(empty($userInfo[0]))
             {
                 echo 'error';
             }
-            elseif ($userInfo['status'] == 0)
+            elseif ($userInfo[0]['status'] == 0)
             {
                 echo 'close';
             }
             else
             {
-                $_SESSION = $userInfo;
-                unset($_SESSION['password']);
-                $_SESSION['addtime'] = date('Y-m-d H:i:s', $_SESSION['addtime']);
-                $_SESSION['isLogin'] = 1;
+                $_SESSION['user'] = $userInfo[0];
+                unset($_SESSION['user']['password']);
+                $_SESSION['user']['addtime'] = date('Y-m-d H:i:s', $_SESSION['addtime']);
+                $_SESSION['user']['isLogin'] = 1;
                 echo 'success';
             }
             exit;
@@ -49,10 +48,10 @@ class IndexController extends BaseController
             $result = D('User')->add($_POST);
             if($result)
             {
-                $_SESSION = $_POST;
-                $_SESSION['id'] = $result;
-                $_SESSION['isLogin'] = 1;
-                unset($_SESSION['password']);
+                $_SESSION['user'] = $_POST;
+                $_SESSION['user']['id'] = $result;
+                $_SESSION['user']['isLogin'] = 1;
+                unset($_SESSION['user']['password']);
             }
             echo $result;
         }

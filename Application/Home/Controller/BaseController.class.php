@@ -10,7 +10,7 @@ class BaseController extends Controller
 
     public function out()
     {
-        session(null);
+        session('user',null);
         echo true;
     }
 

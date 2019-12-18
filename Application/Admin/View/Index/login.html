@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <title>{$title}</title>
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/img/favicon_index.ico">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/x-admin.css" media="all">
+</head>
+<body style="background-color: #393D49">
+    <div class="x-box">
+        <div class="x-top">
+            <i class="layui-icon x-login-close">&#x1007;</i>
+            <ul class="x-login-right">
+                <li style="background-color: #F1C85F;" color="#F1C85F"></li>
+                <li style="background-color: #EA569A;" color="#EA569A"></li>
+                <li style="background-color: #393D49;" color="#393D49"></li>
+            </ul>
+        </div>
+        <div class="x-mid">
+            <div class="x-avtar">
+                <img src="__PUBLIC__/img/favicon_index.ico" alt="">
+            </div>
+            <div class="input">
+                <form class="layui-form">
+                    <div class="layui-form-item x-login-box">
+                        <label for="username" class="layui-form-label">
+                            <i class="layui-icon">&#xe612;</i>
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="username" name="username" required="" lay-verify="username" autocomplete="off" placeholder="username" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-form-item x-login-box">
+                        <label for="pass" class="layui-form-label">
+                            <i class="layui-icon">&#xe628;</i>
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="password" id="pass" name="password" required="" lay-verify="pass" autocomplete="off" placeholder="******" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-form-item" id="loginbtn">
+                        <button  class="layui-btn" lay-filter="save" lay-submit="">登 录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <p style="color:#fff;text-align: center;">Copyright © 2019.Company name All rights df </p>
+
+    <script src="__PUBLIC__/js/base.js"></script>
+    <script src='__PUBLIC__/js/jquery.js' ></script>
+    <script src="__PUBLIC__/js/layer/layer.js"></script>
+
+    <script src="__PUBLIC__/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'],
+        function() {
+            $ = layui.jquery;
+            var form = layui.form(),layer = layui.layer;
+            $('.x-login-right li').click(function(event) {
+                color = $(this).attr('color');
+                $('body').css('background-color', color);
+            });
+            //监听提交
+            form.on(
+                'submit(save)',
+                function(data) {
+                    selfAjax(
+                        "{:U('login')}",
+                        "post",
+                        data.field,
+                        true,
+                        function (data) {
+                            if(data == 'error') {
+                                selfMsg('您的账号或密码有误','登录提示',false,true);
+                            } else if(data == 'close') {
+                                selfMsg('您的账号目前被关闭，请致电客服','封号提示',false,true);
+                            } else if(data == 'success') {
+                                layer.msg('登录成功……');location.href = "{:U('index')}";
+                            }
+                        }
+                    );
+                }
+            );
+        });
+    </script>
+</body>
+
+</html>
