@@ -10,14 +10,14 @@ class IndexController extends BaseController
     public function index()
     {
         $this->assign('title','豆果美食_菜谱_菜谱大全_优质美食社区');
-        $this->display();
+        $this->display('index');
     }
 
     public function login()
     {
         if($_POST)
         {
-            $userInfo = D('User') -> field('*') -> where(['username' => $_POST['username'], 'password' => $_POST['password']]) -> find();
+            $userInfo = D()->query("select * from user where binary username = '".$_POST['username']."' and binary password = '".$_POST['password']."' limit 1");
             if(empty($userInfo))
             {
                 echo 'error';
@@ -42,6 +42,20 @@ class IndexController extends BaseController
 
     public function register()
     {
+        if($_POST['username'] && $_POST['nickname'] && $_POST['password'])
+        {
+            $_POST['addtime'] = time();
+            $_POST['status'] = 1;
+            $result = D('User')->add($_POST);
+            if($result)
+            {
+                $_SESSION = $_POST;
+                $_SESSION['id'] = $result;
+                $_SESSION['isLogin'] = 1;
+                unset($_SESSION['password']);
+            }
+            echo $result;
+        }
         $this->assign('title','注册 - 豆果美食');
         $this->display();
     }

@@ -30,7 +30,7 @@
         <div class="loheader">
             <div class="htop">
                 <div class="hlogo">
-                    <a title="豆果美食" href="{:U('index')}?noSign=1">豆果美食</a>
+                    <a title="豆果美食" href="{:U('index')}">豆果美食</a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
             <div class="thed">
                 <h2>新用户注册</h2>
                 <span>已有账号，
-                    <a href="{:U('index')}?signIn=1">直接登录 ></a>
+                    <a href="{:U('login')}">直接登录 ></a>
                 </span>
             </div>
             <div class="logibox">
@@ -152,7 +152,8 @@
             } else {
                 var phone = /^1[3|4|5|6|7|8][0-9]\d{8}$/;
                 if(v && phone.test(v)) {
-                    var status = checkValue('user','username','eq',v);
+                    var status = selfCheck("{:U('check')}",'user','username','=',v);
+                    console.log(status);
                     if(status) {
                         $('#err_username > p').text('手机号已被注册！');
                         $('.btn').attr('disabled', 'disabled');
@@ -173,7 +174,7 @@
                 $('#err_nickname > p').text('昵称不能为空！');
             } else {
                 if(v.length >= 2 || v.length <= 16) {
-                    var status = checkValue('user','nickname','eq',v);
+                    var status = selfCheck("{:U('check')}",'user','nickname','=',v);
                     if(status) {
                         $('#err_nickname > p').text('昵称已被使用！');
                     } else {
@@ -240,17 +241,15 @@
                 delete data['dpasswd'];
                 delete data['code'];
                 delete data['agreement'];
-                $.ajax({
-                    url:"{:U('index')}?is_signUp=1",
-                    type:"post",
-                    data:data,
-                    success:function (data) {
+                selfAjax(
+                    "{:U('register')}",
+                    "post",
+                    data,
+                    false,
+                    function (data) {
                         if(data) location.href = "{:U('index')}";
-                    },
-                    error:function () {
-                        layer.msg("未知错误");
-                    },
-                });
+                    }
+                );
             }
         }
     </script>
