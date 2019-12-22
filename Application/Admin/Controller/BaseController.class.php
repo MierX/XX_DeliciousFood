@@ -19,16 +19,30 @@ class BaseController extends Controller
 
     }
 
+    public function content()
+    {
+        $title = $_GET['title'];
+        $data = D($_GET['table'])->where($_GET['where'])->find();
+
+        $this->assign('title',$title);
+        $this->assign('data',$data);
+    }
+
     public function list()
     {
-        $page = (intval(I('page')) > 0) ? intval(I('page')) : 1;
-        $size = (intval(I('size')) > 0) ? intval(I('size')) : 10;
-        $data = D($_GET['table'])->field('*')->where($_GET['where'])->order('id asc')->page($page.",".$size)->select();
+        $title = $_GET['title'];
         $count = D($_GET['table'])->field('*')->where($_GET['where'])->count();
+        $data = D($_GET['table'])->field('*')->where($_GET['where'])->select();
 
-        $this->assign('page',$page);
+        $this->assign('title',$title);
         $this->assign('count',$count);
         $this->assign('data',$data);
+    }
+
+    public function change()
+    {
+        $result = D($_POST['table'])->where(['id' => $_POST['id']])->save([$_POST['field'] => $_POST['value']]);
+        echo $result;
     }
 
     public function out()
