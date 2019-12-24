@@ -21,4 +21,10 @@ class SpecialController extends BaseController
         parent::list();
         $this->display();
     }
+
+    public function edit()
+    {
+        parent::edit();
+        $this->display();
+    }
 }

@@ -24,7 +24,7 @@
 	<nav class="breadcrumb">
 		<div class="text-c">
 			<span class="l" style="margin-left: -20px">
-				<button type="submit" class="btn btn-success radius" onclick="search()">
+				<button type="submit" class="btn btn-success radius" onclick="show('添加食谱专题','{:U(\'edit\')}?table=Special&where[id]=0',0,0)">
 					<i class="Hui-iconfont">&#xe600;</i>
 					添加
 				</button>
@@ -36,8 +36,8 @@
 			</span>
 			<input name="title" type="text" class="input-text searchValue" style="width:250px" placeholder="输入标题" />
 			<span class="select-box" style="width:150px;height: 30px;line-height: 30px;">
-				<select class="select" name="status">
-					<option class="select-option">选择专题状态：</option>
+				<select class="select searchValue" name="status">
+					<option class="select-option" value="">选择专题状态：</option>
 					<option class="select-option" value="0">隐藏</option>
 					<option class="select-option" value="1">显示</option>
 				</select>
@@ -69,7 +69,7 @@
 					<tr class="text-c">
 						<td>{$do.id}</td>
 						<td>{$do.title}</td>
-						<td>{$do.toptime|date='Y-m-d H:i:s',###}</td>
+						<td>{$do.toptime|default='无'|date='Y-m-d H:i:s',###}</td>
 						<td>{$do.addtime|date='Y-m-d H:i:s',###}</td>
 						<td class="td-status">
 						<eq name="do.status" value="1">
@@ -82,9 +82,17 @@
 							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="隐藏"<else />title="显示"</eq> >
 								<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
 							</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="show('专题管理 - 专题列表','{:U(\'content\')}?table=User&where[id]={$do.id}&title=专题管理 - 专题列表',320,230)" href="javascript:void(0);">
-								<i class="Hui-iconfont">&#xe725;</i>
+							&nbsp;&nbsp;
+							<a style="text-decoration:none" onClick="operation('{:U(\'changeV2\')}?table=Special&where[id]={$do.id}&save[toptime]='+Date.parse(new Date())/1000)" href="javascript:void(0);" title="置顶">
+								<i class="Hui-iconfont">&#xe679;</i>
+							</a>
+							&nbsp;&nbsp;
+							<a style="text-decoration:none" onClick="show('添加食谱专题','{:U(\'edit\')}?table=Special&where[id]={$do.id}',0,0)" href="javascript:void(0);" title="编辑">
+								<i class="Hui-iconfont">&#xe6df;</i>
+							</a>
+							&nbsp;&nbsp;
+							<a style="text-decoration:none" onClick="operation('{:U(\'del\')}?table=Special&where[id]={$do.id}')" href="javascript:void(0);" title="删除">
+								<i class="Hui-iconfont">&#xe609;</i>
 							</a>
 						</td>
 					</tr>
@@ -128,45 +136,8 @@
 		}
 
 		function status(id,status) {
-			var question = status == 1 ? '确认要封号吗？请输入封号原因' : '确认要解除封号吗？请输入“确认”';
-			layer.prompt({title: question,closeBtn: false,},function(value, index) {
-				if(status != 1) {
-					if(value == '确认') {
-						value = '';
-					} else {
-						return false;
-					}
-				}
-				var data = {
-					'table' : 'User',
-					'id' : id,
-					'field' : 'reason',
-					'value' : value,
-				};
-				selfAjax("{:U('change')}",'post',data,true,function(data) {
-					if(data) {
-						status = status == 1 ? 0 : 1;
-						var info = {
-							'table' : 'User',
-							'id' : id,
-							'field' : 'status',
-							'value' : status,
-						};
-						selfAjax("{:U('change')}",'post',info,true,function(data){
-							if(data) {
-								layer.close(index);
-								location.reload();
-							}
-						});
-					}
-				});
-			});
-		}
-
-		function show(title,url,w,h){
-			if(w == 0) w = parent.document.body.clientWidth*0.95;
-			if(h == 0) h = parent.document.body.clientHeight*0.85;
-			layer_show(title,url,w,h);
+			status = status == 1 ? 0 : 1;
+			operation('{:U(\'changeV2\')}?table=Special&where[id]='+id+'&save[status]='+status);
 		}
 	</script>
 </body>

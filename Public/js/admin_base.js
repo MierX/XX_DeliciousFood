@@ -45,3 +45,23 @@ function selfMsg(content, title = false, closeBtn = true, shadeClose= false, but
         btn: button,
     },fun1,fun2, fun3, fun4, fun5, fun6, fun7, fun8, fun9,);
 }
+
+function show(title,url,w,h){
+    if(w == 0) w = document.body.clientWidth*0.75;
+    if(h == 0) h = document.body.clientHeight*0.75;
+    layer_show(title,url,w,h);
+}
+
+function edit(url) {
+    var data = {};
+    var form = $('form').serializeArray();
+    for(let i = 0; i < form.length; i++) {
+        if(form[i]['value']) data[form[i]['name']] = form[i]['value'];
+    }
+    // if(JSON.stringify(data) != "{}") selfAjax(url,"post", data,true,function (data) {if(data){selfMsg('操作成功！','提示',false,false,['确定'],function () {parent.location.reload();});}else{selfMsg('操作失败！','提示',false,true,[])}});
+    if(JSON.stringify(data) != "{}") selfAjax(url,"post", data,true,function (data) {if(data){parent.location.reload();}else{selfMsg('操作失败！','提示',false,true,[])}});
+}
+
+function operation(url) {
+    if(url) selfAjax(url,"post", {},true,function (data) {if(data){location.reload();}else{selfMsg('操作失败！','提示',false,true,[])}});
+}

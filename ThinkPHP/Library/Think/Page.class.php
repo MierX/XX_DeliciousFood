@@ -81,7 +81,7 @@ class Page{
         $this->parameter[$this->p] = '[PAGE]';
         $this->url = U(ACTION_NAME, $this->parameter);
         /* 计算分页信息 */
-        $this->totalPages = ceil($this->totalRows / $this->listRows); //总页数
+        $this->totalPages = ceil(intval($this->totalRows) / intval($this->totalRows)); //总页数
         if(!empty($this->totalPages) && $this->nowPage > $this->totalPages) {
             $this->nowPage = $this->totalPages;
         }
