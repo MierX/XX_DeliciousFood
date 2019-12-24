@@ -21,45 +21,16 @@
 	<title>{$title}</title>
 </head>
 <body>
-	<nav class="breadcrumb">
-		<div class="text-c">
-			<span class="l" style="margin-left: -20px">
-				<button type="submit" class="btn btn-success radius" onclick="show('添加食谱专题','{:U(\'edit\')}?table=Special&where[id]=0',0,0)">
-					<i class="Hui-iconfont">&#xe600;</i>
-					添加
-				</button>
-			</span>
-			<span class="l">
-				共有数据：
-				<strong>{$count}</strong>
-				条
-			</span>
-			<input name="title" type="text" class="input-text searchValue" style="width:250px" placeholder="输入标题" />
-			<span class="select-box" style="width:150px;height: 30px;line-height: 30px;">
-				<select class="select searchValue" name="status">
-					<option class="select-option" value="">选择专题状态：</option>
-					<option class="select-option" value="0">隐藏</option>
-					<option class="select-option" value="1">显示</option>
-				</select>
-			</span>
-			<button type="submit" class="btn btn-success radius" onclick="search()">
-				<i class="Hui-iconfont">&#xe665;</i>
-				搜索
-			</button>
-			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:void(0);" onclick="location.reload();" title="刷新" >
-				<i class="Hui-iconfont">&#xe68f;</i>
-			</a>
-		</div>
-	</nav>
 	<div class="page-container">
 		<div class="mt-20">
 			<table class="table table-border table-bordered table-hover table-bg table-sort">
 				<thead>
 					<tr class="text-c">
 						<th>ID</th>
-						<th>专题名称</th>
-						<th>置顶时间</th>
-						<th>创建时间</th>
+						<th>菜谱标题</th>
+						<th>发布人</th>
+						<th>手机号</th>
+						<th>发布时间</th>
 						<th>状态</th>
 						<th>操作</th>
 					</tr>
@@ -69,7 +40,8 @@
 					<tr class="text-c">
 						<td>{$do.id}</td>
 						<td>{$do.title}</td>
-						<td>{$do.toptime|default='无'|date='Y-m-d H:i:s',###}</td>
+						<td>{$do.author}</td>
+						<td>{$do.phone}</td>
 						<td>{$do.addtime|date='Y-m-d H:i:s',###}</td>
 						<td class="td-status">
 						<eq name="do.status" value="1">
@@ -79,28 +51,16 @@
 						</eq>
 						</td>
 						<td class="td-manage">
+							<a style="text-decoration:none" onClick="show('菜谱列表 - 查看菜谱','{:U(\'content\')}?table=Menu&where[id]={$do.id}&title=菜谱列表 - 查看菜谱',0,0)" href="javascript:void(0);" title="查看">
+								<i class="Hui-iconfont">&#xe725;</i>
+							</a>
+							&nbsp;&nbsp;
 							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="隐藏"<else />title="显示"</eq> >
 								<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
 							</a>
 							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="operation('{:U(\'changeV2\')}?table=Special&where[id]={$do.id}&save[toptime]='+Date.parse(new Date())/1000)" href="javascript:void(0);" title="置顶">
-								<i class="Hui-iconfont">&#xe679;</i>
-							</a>
-							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="show('编辑专题','{:U(\'edit\')}?table=Special&where[id]={$do.id}',0,0)" href="javascript:void(0);" title="编辑">
-								<i class="Hui-iconfont">&#xe6df;</i>
-							</a>
-							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="show('添加菜谱','{:U(\'addMenu\')}?table=Menu&&field=sid&value={$do.id}&title=添加菜谱',1100,700)" href="javascript:void(0);" title="添加">
-								<i class="Hui-iconfont">&#xe600;</i>
-							</a>
-							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="show('{$do.title} - 菜谱列表','{:U(\'menuList\')}?table=Menu&&where[sid]={$do.id}&title={$do.title} - 菜谱列表',1100,700)" href="javascript:void(0);" title="踢出">
+							<a style="text-decoration:none" onClick="operation('{:U(\'changeV2\')}?table=Menu&where[id]={$do.id}&save[sid]=0')" href="javascript:void(0);" title="踢出">
 								<i class="Hui-iconfont">&#xe6a1;</i>
-							</a>
-							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="operation('{:U(\'del\')}?table=Special&where[id]={$do.id}')" href="javascript:void(0);" title="删除">
-								<i class="Hui-iconfont">&#xe609;</i>
 							</a>
 						</td>
 					</tr>
@@ -132,7 +92,7 @@
 				"aoColumnDefs": [
 					{
 						"orderable":false,
-						"aTargets":[5]
+						"aTargets":[1,2,3,6]
 					},
 				]
 			});
@@ -140,12 +100,12 @@
 
 		function search() {
 			var where = selfSearch();
-			location.href = where ? "{:U('Special/list')}?table=special&title=专题管理 - 专题列表"+where : "{:U('Special/list')}?table=special&title=专题管理 - 专题列表";
+			location.href = where ? "{:U('Menu/list')}?table=Menu&title=专题管理 - 专题列表"+where : "{:U('Menu/list')}?table=Menu&title=专题管理 - 专题列表";
 		}
 
 		function status(id,status) {
 			status = status == 1 ? 0 : 1;
-			operation('{:U(\'changeV2\')}?table=Special&where[id]='+id+'&save[status]='+status);
+			operation('{:U(\'changeV2\')}?table=Menu&where[id]='+id+'&save[status]='+status);
 		}
 	</script>
 </body>

@@ -27,4 +27,16 @@ class SpecialController extends BaseController
         parent::edit();
         $this->display();
     }
+
+    public function menuList()
+    {
+        parent::list();
+        $this->display();
+    }
+
+    public function addMenu()
+    {
+        parent::add();
+        $this->display();
+    }
 }

@@ -76,6 +76,19 @@ class BaseController extends Controller
         $this->assign('data',$data);
     }
 
+    public function add()
+    {
+        $title = $_GET['title'];
+        $id = $_GET['value'];
+        $count = D($_GET['table'])->field('*')->where([$_GET['field'] => ['neq', $_GET['value']]])->count();
+        $data = D($_GET['table'])->field('*')->where([$_GET['field'] => ['neq', $_GET['value']]])->select();
+
+        $this->assign('title',$title);
+        $this->assign('id',$id);
+        $this->assign('count',$count);
+        $this->assign('data',$data);
+    }
+
     public function del()
     {
         $result = false;
