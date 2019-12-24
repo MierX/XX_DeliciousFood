@@ -8,7 +8,23 @@ class IndexController extends BaseController
 {
     public function index()
     {
+        $special = D('Special')->field('*')->where(['status' => 1])->order('toptime desc,addtime asc')->select();
+        foreach ($special as $key => &$value)
+        {
+            $value['menu'] = D('Menu')->field('*')->where(['status' => 1, 'sid' => $value['id']])->order('addtime desc')->select();
+            $value['menu'] = $this->checkStatus($value['menu']);
+            if(count($value['menu']) < 8)
+            {
+                unset($special[$key]);
+            }
+            else
+            {
+                $value['menu'] = array_slice($value['menu'],0,8);
+            }
+        }
+
         $this->assign('title','豆果美食_菜谱_菜谱大全_优质美食社区');
+        $this->assign('special',$special);
         $this->display('index');
     }
 

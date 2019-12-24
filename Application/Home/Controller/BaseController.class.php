@@ -43,4 +43,14 @@ class BaseController extends Controller
         }
         echo $result;
     }
+
+    public function checkStatus($data)
+    {
+        foreach ($data as $k => $v)
+        {
+            $status = D('User')->field('status')->where(['id' => $v['uid']])->find();
+            if($status['status'] != 1) unset($data[$k]);
+        }
+        return $data;
+    }
 }
