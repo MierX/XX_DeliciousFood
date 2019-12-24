@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 24/12/2019 00:40:05
+ Date: 24/12/2019 18:25:07
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,20 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES (1, 'admin', 'Admin', '123456', 7, 1);
+INSERT INTO `admin` VALUES (1, 'admin', 'Admin', '123456', 8, 1);
+
+-- ----------------------------
+-- Table structure for special
+-- ----------------------------
+DROP TABLE IF EXISTS `special`;
+CREATE TABLE `special`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '',
+  `status` int(1) NULL DEFAULT 1,
+  `addtime` int(11) NULL DEFAULT 0,
+  `toptime` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '-',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user
@@ -54,8 +67,8 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, '13616019194', 'mier', '123456a', 1576222795, 'test', 0);
-INSERT INTO `user` VALUES (2, '13616019195', 'Mier123', '123456A', 1576222897, 'test', 0);
+INSERT INTO `user` VALUES (1, '13616019194', 'mier', '123456a', 1576222795, '确认a ', 1);
+INSERT INTO `user` VALUES (2, '13616019195', 'Mier123', '123456A', 1576222897, '', 1);
 INSERT INTO `user` VALUES (3, '13616016165', 'test', '123456a', 1576224755, '', 1);
 INSERT INTO `user` VALUES (4, '13616019191', 'Mier', '123456a', 1576648140, '', 1);
 INSERT INTO `user` VALUES (5, '13616019110', 'mier1', '123456a', 1576222795, '', 1);

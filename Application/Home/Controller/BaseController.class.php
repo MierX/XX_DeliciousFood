@@ -26,7 +26,21 @@ class BaseController extends Controller
         $sql = "select id from ".$table." where binary ".$where." limit 1";
 
         if ($table && $field && $where && $value) $result = D()->execute($sql) ? true : false;
-//        if ($table && $field && $where && $value) $result = D()->query($sql) ? true : false;
+        echo $result;
+    }
+
+    public function status()
+    {
+        $result = true;
+        if($_SESSION['user'])
+        {
+            $status = D('User')->field('status')->where(['id' => $_SESSION['user']['id']])->find();
+            if($status['status'] != 1)
+            {
+                session('user',null);
+                $result = false;
+            }
+        }
         echo $result;
     }
 }

@@ -1,4 +1,4 @@
-setInterval(selfStatus,10000);
+// setInterval(selfStatus,10000);
 
 function selfCheck(url,table,field,condition,value) {
     let status = '';
@@ -12,9 +12,9 @@ function selfCheck(url,table,field,condition,value) {
     return status;
 }
 
-function selfStatus() {
-    selfAjax("/Home/Index/status","get", {},true,function (data) {if(!data){clearInterval();selfMsg('您的账号目前被关闭，请致电客服','封号提示',false,false,['确定'],function () {location.href = "/Home/Index/index"});}});
-}
+// function selfStatus() {
+//     selfAjax("/Home/Index/status","get", {},true,function (data) {if(!data){clearInterval();selfMsg('您的账号目前被关闭，请致电客服','封号提示',false,false,['确定'],function () {location.href = "/Home/Index/index"});}});
+// }
 
 function selfAjax(url, type = 'get', data = {}, async = true, success = function () {return true}, error = function () {layer.msg('出错了~')}) {
     $.ajax({

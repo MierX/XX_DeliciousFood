@@ -23,13 +23,25 @@
 <body>
 	<nav class="breadcrumb">
 		<div class="text-c">
+			<span class="l" style="margin-left: -20px">
+				<button type="submit" class="btn btn-success radius" onclick="search()">
+					<i class="Hui-iconfont">&#xe600;</i>
+					添加
+				</button>
+			</span>
 			<span class="l">
 				共有数据：
 				<strong>{$count}</strong>
 				条
 			</span>
-			<input name="username" type="text" class="input-text searchValue" style="width:250px" placeholder="输入手机号" />
-			<input name="nickname" type="text" class="input-text searchValue" style="width:250px" placeholder="输入用户名" />
+			<input name="title" type="text" class="input-text searchValue" style="width:250px" placeholder="输入标题" />
+			<span class="select-box" style="width:150px;height: 30px;line-height: 30px;">
+				<select class="select" name="status">
+					<option class="select-option">选择专题状态：</option>
+					<option class="select-option" value="0">隐藏</option>
+					<option class="select-option" value="1">显示</option>
+				</select>
+			</span>
 			<button type="submit" class="btn btn-success radius" onclick="search()">
 				<i class="Hui-iconfont">&#xe665;</i>
 				搜索
@@ -45,9 +57,9 @@
 				<thead>
 					<tr class="text-c">
 						<th>ID</th>
-						<th>手机号</th>
-						<th>用户名</th>
-						<th>注册时间</th>
+						<th>专题名称</th>
+						<th>置顶时间</th>
+						<th>创建时间</th>
 						<th>状态</th>
 						<th>操作</th>
 					</tr>
@@ -56,22 +68,22 @@
 				<volist name="data" id="do">
 					<tr class="text-c">
 						<td>{$do.id}</td>
-						<td>{$do.username}</td>
-						<td>{$do.nickname}</td>
+						<td>{$do.title}</td>
+						<td>{$do.toptime|date='Y-m-d H:i:s',###}</td>
 						<td>{$do.addtime|date='Y-m-d H:i:s',###}</td>
 						<td class="td-status">
 						<eq name="do.status" value="1">
-							<span class="label label-success radius">正常</span>
+							<span class="label label-success radius">显示</span>
 						<else />
-							<span class="label label-default radius">封号</span>
+							<span class="label label-default radius">隐藏</span>
 						</eq>
 						</td>
 						<td class="td-manage">
-							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="停用"<else />title="启用"</eq> >
+							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="隐藏"<else />title="显示"</eq> >
 								<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
 							</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="show('用户列表 - 查看用户','{:U(\'content\')}?table=User&where[id]={$do.id}&title=用户列表 - 查看用户',320,230)" href="javascript:void(0);">
+							<a style="text-decoration:none" onClick="show('专题管理 - 专题列表','{:U(\'content\')}?table=User&where[id]={$do.id}&title=专题管理 - 专题列表',320,230)" href="javascript:void(0);">
 								<i class="Hui-iconfont">&#xe725;</i>
 							</a>
 						</td>
@@ -112,7 +124,7 @@
 
 		function search() {
 			var where = selfSearch();
-			location.href = where ? "{:U('User/list')}?table=User&title=用户管理 - 用户列表"+where : "{:U('User/list')}?table=User&title=用户管理 - 用户列表";
+			location.href = where ? "{:U('Special/list')}?table=special&title=专题管理 - 专题列表"+where : "{:U('Special/list')}?table=special&title=专题管理 - 专题列表";
 		}
 
 		function status(id,status) {

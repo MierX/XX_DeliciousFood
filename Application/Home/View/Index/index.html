@@ -17,7 +17,7 @@
             </a>
             <ul class="nav">
                 <li class="act" >
-                    <a href="javascript:void(0);" onclick="location.reload();">首页</a>
+                    <a href="{:U('index')}">首页</a>
                 </li>
                 <li class="relative " onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
                     <a href="{:U('Menu/index')}?status=0">菜谱
@@ -96,8 +96,40 @@
             </if>
         </div>
     </div>
-
-
+    <div id="banner" style="margin-top: 60px" class="relative">
+        <div class="banner absolute">
+            <ul class="blist">
+                <li>
+                    <a href="https://m.douguo.com/note/27710140.html" target="_blank" class="DGTrack">
+                        <img  width="100%" src="__PUBLIC__/img/1577093190.jpg" alt="排骨不焯水，也能去腥又美味" >
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="content" class="clearfix">
+    <volist name="special" id="so">
+        <h2 class="title">
+            {$so.title}
+        </h2>
+        <ul class="recipe-list clearfix">
+        <volist name="so.menu" id="mo">
+            <li class="item" >
+                <a class="cover br8" href="{:U{'Menu/content'}}?id={$mo.id}" target="_blank">
+                    <img width="220" height="220" src="{$mo.img}" alt="{$mo.title}" title="{$mo.title}">
+                </a>
+                <div>
+                    <a class="name text-lips" target="_blank" href="{:U{'Menu/content'}}?id={$mo.id}">{$mo.title}</a>
+                    <p class="author text-lips">
+                        by
+                        <a  class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="{$mo.uid}">{$mo.author}</a>
+                    </p>
+                </div>
+            </li>
+        </volist>
+        </ul>
+    </volist>
+    </div>
     <script src="__PUBLIC__/js/base.js"></script>
     <script src='__PUBLIC__/js/jquery.js' ></script>
     <script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
