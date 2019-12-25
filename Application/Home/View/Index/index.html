@@ -11,53 +11,34 @@
 <body>
     <div id="header" class="">
         <div class="header clearfix">
-            <a class="logo left" href="/">
+            <a class="logo left" href="{:U('Index/index')}">
                 <img src="__PUBLIC__/img/logo3.png" alt="">
             </a>
             <ul class="nav">
                 <li class="act" >
-                    <a href="{:U('index')}">首页</a>
+                    <a href="{:U('Index/index')}">首页</a>
                 </li>
                 <li class="relative " onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
-                    <a href="{:U('Menu/index')}?status=0">菜谱
+                    <a href="javascript:void(0)">专题
                         <span class="naww"></span>
                     </a>
                     <div class="ctip">
                         <span class="arwwj"> </span>
+                    <volist name="special" id="so">
                         <div class="ctab clearfix">
-                            <a href="{:U('Menu/index')}?status=1" target="_blank">
+                            <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id}&status=1&order=addtime desc&title={$so.title}" target="_blank">
                                 <img src="__PUBLIC__/img/jx3.png" alt="">
-                                精选
+                                {$so.title}
                             </a>
                         </div>
-                        <div class="ctab clearfix">
-                            <a href="{:U('Menu/index')}?status=2" target="_blank">
-                                <img src="__PUBLIC__/img/jx3.png" alt="">
-                                最新
-                            </a>
-                        </div>
-                        <div class="ctab clearfix">
-                            <a href="{:U('Menu/index')}?status=3" target="_blank">
-                                <img src="__PUBLIC__/img/jx3.png" alt="">
-                                热门
-                            </a>
-                        </div>
+                    </volist>
                     </div>
                 </li>
                 <li >
-                    <a href="{:U('Article/index')}">文章</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=sid != 0&status=1&order=addtime desc&title=菜谱列表">菜谱</a>
                 </li>
                 <li >
-                    <a href="#">主题站</a>
-                </li>
-                <li >
-                    <a href="#">商城</a>
-                </li>
-                <li >
-                    <a href="#">动漫</a>
-                </li>
-                <li>
-                    <a href="#">药品</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id}&status=1&order=addtime desc&title=文章列表">文章</a>
                 </li>
             </ul>
             <form class="search br4 left" method="POST" id="searchForm" action="" accept-charset="utf-8" onsubmit="document.charset='utf-8';return Search();">
@@ -89,7 +70,7 @@
                 <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
                     <a class="btn-pubt" href="{:U('Menu/add')}" title="发布菜谱">发布</a>
                 </div>
-                <div class="perinfo" style="float: right;margin-top: -30px;margin-right: -15px">
+                <div class="perinfo" style="float: right;">
                     <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>
                 </div>
             </if>
@@ -99,8 +80,8 @@
         <div class="banner absolute">
             <ul class="blist">
                 <li>
-                    <a href="https://m.douguo.com/note/27710140.html" target="_blank" class="DGTrack">
-                        <img  width="100%" src="__PUBLIC__/img/1577093190.jpg" alt="排骨不焯水，也能去腥又美味" >
+                    <a href="javascript:void(0);" class="DGTrack">
+                        <img  width="100%" src="https://i1.douguo.com//upload/banner/1576658265.jpg" alt="" >
                     </a>
                 </li>
             </ul>
@@ -238,6 +219,50 @@
     </volist>
     </empty>
     </div>
+    <div id="footer">
+        <div class="foot">
+            <div class="clink relative">
+                <a href="http://www.douguo.com/about.html" rel="nofollow" target="_blank">关于豆果</a> ·
+                <a href="http://www.douguo.com/hr.html" rel="nofollow" target="_blank">在豆果工作</a> ·
+                <a href="http://www.douguo.com/user/feedback" rel="nofollow" target="_blank">意见反馈</a> ·
+                <a href="http://www.douguo.com/links.html" target="_blank">友情链接</a> ·
+                <a href="http://www.douguo.com/allrecipes/" target="_blank">菜谱大全</a> ·
+                <a href="http://www.douguo.com/brand" target="_blank">品牌馆</a>
+            </div>
+            <div class="cght" style="text-align: center;">
+                ©2009-2018
+                <a href="https://www.douguo.com" target="_blank">北京豆果信息技术有限公司</a>
+                <a href="http://www.miibeian.gov.cn" target="_blank" rel="nofollow">京ICP证111032号</a>
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502038268">
+                    <img alt="" src="https://i1.douguo.com//upload/banner/1564469142.png" lazysrc="" style="margin-bottom: -3px;width:20px" />
+                    京公网安备 11010502038268号
+                </a>
+                <p style="margin:5px 0;cursor: pointer;" onclick="$('.smask2').show();$('.medicinal_box').show();">互联网药品信息服务资格证书</p>
+                <a href="http://sq.ccm.gov.cn/ccnt/sczr/doLogin" target="_blank">
+                    <img alt="" src="https://i1.douguo.com//upload/banner/1522057799.png" style="margin-bottom: -3px;width:20px"/>
+                    京网文【2017】6954-770号
+                </a>
+                食品流通许可证SP1101061510252413
+                <a href="javascript:void(0);" style="display:block;text-align:center;margin-top:5px;" onclick="$('.smask2').show();$('.tvbox').show();">广播电视节目制作经营许可证（京）字第11624号</a>
+                <p style="margin:5px 0;">本网站不涉及药品交易、不撮合药品交易、不发布麻醉药品、精神药品、医疗用毒性药品、放射性药品、性药品、戒毒药品和医疗机构制剂的药品信息</p>
+                <div class="smask2" style="position:fixed;width:100%;height:100%;top:0;left:0;background: black;z-index:999;display: none;opacity: .6;filter: alpha(opacity=60)"></div>
+                <div class="tvbox" style="position: fixed;top:50%;left:50%;z-index:1000;margin-left:-350px;margin-top:-250px;display: none;">
+                    <img src="https://i1.douguo.com//upload/banner/1551092008.jpg" alt="">
+                    <img style="position: absolute;top:15px;right:15px;cursor: pointer;" src="https://cp1.douguo.com/static/nweb/images/close.png" alt="" onclick="$('.smask2').hide();$('.tvbox').hide();">
+                </div>
+                <div class="medicinal_box" style="position: fixed;top:50%;left:50%;z-index:1000;margin-left:-350px;margin-top:-250px;display: none;">
+                    <img style="display:block;width:700px;" src="https://i1.douguo.com//upload/banner/1577185524.jpg" alt="">
+                    <img style="position: absolute;top:15px;right:15px;cursor: pointer;" src="https://cp1.douguo.com/static/nweb/images/close.png" alt="" onclick="$('.smask2').hide();$('.medicinal_box').hide();">
+                </div>
+            </div>
+            <div class="botfans">
+                <span class="bonefans" style="display: inline-block;width: 64px;overflow: hidden;position: relative;top: 6px;"></span>
+                <a style="margin-left: 12px;" id='___szfw_logo___' href='https://credit.szfw.org/CX20170707035016320368.html' target='_blank'>
+                    <img alt="" src='https://i1.douguo.com/upload/banner/1528470330.png' border='0' style="height: 22px;"/>
+                </a>
+            </div>
+        </div>
+    </div>
     <script src="__PUBLIC__/js/base.js"></script>
     <script src='__PUBLIC__/js/jquery.js' ></script>
     <script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
@@ -254,6 +279,12 @@
                 }
             );
         }
+
+        (function () {
+            document.getElementById('___szfw_logo___').oncontextmenu = function () {
+                return false;
+            }
+        })();
     </script>
 </body>
 </html>

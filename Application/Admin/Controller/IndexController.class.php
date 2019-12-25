@@ -5,7 +5,7 @@ class IndexController extends BaseController
 {
     public function index()
     {
-        $this->assign('title','豆果美食 - 后台管理系统');
+//        $this->assign('title','豆果美食 - 后台管理系统');
         $this->display();
     }
 

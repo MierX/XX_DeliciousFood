@@ -1,0 +1,47 @@
+/*空页*/
+.sort-more{margin: 25px 0;}
+.sort-more a{padding: 0 10px;font-size: 14px;color: #999;}
+.sort-more .active{color: #333;font-weight:bold;}
+.sort-more a:hover{color:#ffaa00;}
+a.one{padding-left: 0;}
+.cook-book.type-head,.search-user.type-head,.cook-menu.type-head{margin: 30px 0;}
+/*未关注*/
+.not-atten{background: #FFB31A;}
+.atten{background: #CCC;}
+/*食材*/
+.material-img{width: 138px;height: 138px;margin-right: 12px;border-radius: 8px;float: left;overflow: hidden;}
+.material-img img{width: 138px;height: 138px;}
+.des-material{float:left;width:540px;height:138px;overflow:hidden;padding-top:15px;}
+.des-material h3{font-size: 20px;font-weight: bold;line-height:20px;}
+.des-material p{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;font-size: 12px;color:#666;margin:6px 0;line-height: 16px;}
+.upload-material a{margin-top:12px;display: inline-block;width: 120px;text-align:center;height:34px;line-height:32px;border-radius: 4px;border:1px solid #FFB31A;font-size: 14px;color: #FFB31A;}
+
+/*搜索菜谱列表*/
+.cook-list{min-height:600px;}
+.cook-list li{width: 690px;padding-bottom: 40px;}
+.cook-list .cook-img{width: 180px;height:125px;float: left;border-radius: 8px;overflow: hidden;margin-right:15px;}
+.cook-list .cook-info{width: 495px;height:125px;float: left;}
+.cook-info .cookname{padding-top:8px;font-size: 18px;font-weight: bold;overflow: hidden;line-height:18px;display:inline-block;width:483px;margin-bottom:14px;}
+.cook-info .cookname:hover{color:#ffaa00;}
+.cook-info .author a:hover{color:#ffaa00;}
+.cook-info .headicon{display:inline-block;vertical-align:middle;overflow:hidden;}
+.cook-info .headicon img{display: inline-block;width: 21px;height: 21px;vertical-align:middle;border-radius:50%;position:relative;top:-2px;}
+.cook-info p,.cook-info span{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;font-size:14px;color: #2a2a2a;line-height:14px;vertical-align:middle;}
+.cook-info .major a{color: #256DC6;}
+.cook-info .aut-num{font-size: 14px;line-height:22px;height:24px;}
+.cook-info .aut-num>p,.cook-info .aut-num>.nickname{color:#333;font-size: 14px;line-height:21px;vertical-align:middle;}
+.cook-info .aut-num>.nickname:hover{color:#ffaa00;}
+.cook-info .score{margin:11px 0 10px;}
+.cook-info .star{display: inline-block;width: 91px;height: 16px;vertical-align: text-bottom;background: url("../images/star.png?1") no-repeat;background-size: 100%;}
+.cook-info .star50{background-position: 0 0;}
+.cook-info .star45{background-position: 0 -16px;}
+.cook-info .star40{background-position: 0 -32px;}
+.cook-info .star35{background-position: 0 -48px;}
+.cook-info .star30{background-position: 0 -64px;}
+.cook-info .star25{background-position: 0 -80px;}
+.cook-info .star20{background-position: 0 -96px;}
+.cook-info .star15{background-position: 0 -112px;}
+.cook-info .star10{background-position: 0 -128px;}
+.cook-info .star05{background-position: 0 -144px;}
+.cook-info .star0{background-position: 0 -160px;}
+.no-search{font-size: 15px;line-height: 27px;margin-bottom:20px;}

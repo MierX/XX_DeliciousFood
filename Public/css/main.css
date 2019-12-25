@@ -36,7 +36,7 @@ input[type=button], input[type=text], input[type=password]{-webkit-appearance:no
 #header .logo>img{height:30px;}
 /*导航栏*/
 #header .nav{float:left;margin-left:20px;display: inline-block;}
-#header .nav li{float: left;height:30px;line-height:30px;font-size: 15px;color: #333;padding:0 15px;}
+#header .nav li{float: left;height:30px;line-height:30px;font-size: 15px;color: #333;padding:0 30px;}
 #header .nav li>a{display: block;width:auto;height:30px;line-height:30px;color: #000;letter-spacing:1px;}
 #header .nav li.act{border-radius: 8px 8px 0 0;}
 #header .nav li.act>a{color: #FFB31A;font-weight: bold;border-bottom:2px solid #FFB31A;}
@@ -70,7 +70,7 @@ input[type=button], input[type=text], input[type=password]{-webkit-appearance:no
 #header .myedit .boll{display:none;width:6px;height:6px;background: #FF3229;border-radius: 50%;position:absolute;top:8px;right:23px;}
 
 /*菜单弹窗*/
-.nav .ctip {display:none;box-shadow: 0 2px 5px 0 rgba(64,71,81,0.10);border-bottom-right-radius:8px;border-bottom-left-radius:8px;font-size:14px;text-align:center;width: 250px;height:200px;background: #fff;position: absolute;top: 45px;left: -80px;z-index: 99;padding:0 16px;}
+.nav .ctip {display:none;box-shadow: 0 2px 5px 0 rgba(64,71,81,0.10);border-bottom-right-radius:8px;border-bottom-left-radius:8px;font-size:14px;text-align:center;width: 250px;height:auto;background: #fff;position: absolute;top: 45px;left: -80px;z-index: 99;padding:0 16px;}
 .nav .ctip .arwwj {height: 15px;width: 492px;position: absolute;display: block;left: 0;top: -15px;background:transform;}
 .nav .ctip img{vertical-align: middle;position: relative;top: -1px;height: 12px;}
 .nav .ctab {line-height:55px;}

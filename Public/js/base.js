@@ -45,3 +45,13 @@ function selfMsg(content, title = false, closeBtn = true, shadeClose= false, but
         btn: button,
     },fun1,fun2, fun3, fun4, fun5, fun6, fun7, fun8, fun9,);
 }
+
+function nextPage(page,lastPage,url) {
+    page = parseInt(page) + 1 <= lastPage ? parseInt(page) + 1 : lastPage;
+    location.href = url+page;
+}
+
+function lastPage(page,url) {
+    page = parseInt(page) - 1 >= 1 ? parseInt(page) - 1 : 1;
+    location.href = url+page;
+}
