@@ -15,7 +15,7 @@
                 <img src="__PUBLIC__/img/logo3.png" alt="">
             </a>
             <ul class="nav">
-                <li class="act" >
+                <li class="act">
                     <a href="{:U('Index/index')}">首页</a>
                 </li>
                 <li class="relative " onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
@@ -48,11 +48,11 @@
             </form>
             <if condition="$Think.SESSION.user.isLogin eq 1">
                 <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-                    <a class="btn-pubt" href="{:U('Menu/add')}" title="发布菜谱">发布</a>
+                    <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0" title="发布菜谱">发布</a>
                 </div>
                 <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
                     <a class="headicon" href="{:U('User/info')}">
-                        <img class="wb100 br50" src="__PUBLIC__/img/70.jpg" alt="" title="{$Think.SESSION.user.nickname}">
+                        <img class="wb100 br50" src="__PUBLIC__/img/favicon_index.ico" alt="" title="{$Think.SESSION.user.nickname}">
                         <span class="msgnum"></span>
                     </a>
                     <div class="myedit br8">
@@ -68,7 +68,7 @@
                 </div>
             <else />
                 <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-                    <a class="btn-pubt" href="{:U('Menu/add')}" title="发布菜谱">发布</a>
+                    <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0" title="发布菜谱">发布</a>
                 </div>
                 <div class="perinfo" style="float: right;">
                     <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>

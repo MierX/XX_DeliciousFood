@@ -10,73 +10,73 @@
     <link rel="stylesheet" href="__PUBLIC__/css/search.css">
 </head>
 <body>
-    <div id="header" class="">
-        <div class="header clearfix">
-            <a class="logo left" href="{:U('Index/index')}">
-                <img src="__PUBLIC__/img/logo3.png" alt="">
-            </a>
-            <ul class="nav">
-                <li class="act" >
-                    <a href="{:U('Index/index')}">首页</a>
-                </li>
-                <li class="relative " onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
-                    <a href="javascript:void(0)">专题
-                        <span class="naww"></span>
-                    </a>
-                    <div class="ctip">
-                        <span class="arwwj"> </span>
-                        <volist name="special" id="so">
-                            <div class="ctab clearfix">
-                                <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id} AND status = 1&order=addtime desc&title={$so.title}&id= {$so.id}" target="_blank">
-                                    <img src="__PUBLIC__/img/jx3.png" alt="">
-                                    {$so.title}
-                                </a>
-                            </div>
-                        </volist>
-                    </div>
-                </li>
-                <li >
-                    <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表&id= sid != 0">菜谱</a>
-                </li>
-                <li >
-                    <a href="{:U('Menu/list')}?table=Menu&where=status =1 &order=addtime desc&title=文章列表">文章</a>
-                </li>
-            </ul>
-            <form class="search br4 left" method="POST" id="searchForm" action="" accept-charset="utf-8" onsubmit="document.charset='utf-8';return Search();">
-                <input type="text" id="global_search_inpt" class="sput" name="keywords" value="搜索菜谱、文章、食材" lang="zh-CN" autocomplete="off" onfocus="if(this.value=='搜索菜谱、菜单、食材、用户') {this.value=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.value='';$(this).removeClass('fcbm');} setTimeout(function (){$('#mysu2').html('')},500)" onkeyup="selectItem(event)" onclick="selectItem(event)">
-                <input type="button" value=" " class="lib">
-                <div class="sugg2" id="mysu2" style="display:none;"></div>
-            </form>
-        <if condition="$Think.SESSION.user.isLogin eq 1">
-            <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-                <a class="btn-pubt" href="{:U('Menu/add')}" title="发布菜谱">发布</a>
-            </div>
-            <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
-                <a class="headicon" href="{:U('User/info')}">
-                    <img class="wb100 br50" src="__PUBLIC__/img/70.jpg" alt="" title="{$Think.SESSION.user.nickname}">
-                    <span class="msgnum"></span>
+<div id="header" class="">
+    <div class="header clearfix">
+        <a class="logo left" href="{:U('Index/index')}">
+            <img src="__PUBLIC__/img/logo3.png" alt="">
+        </a>
+        <ul class="nav">
+            <li>
+                <a href="{:U('Index/index')}">首页</a>
+            </li>
+            <li onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();" <if condition="$title neq 菜谱列表">class="relative act"<else />class="relative"</if> >
+                <a href="javascript:void(0)">专题
+                    <span class="naww"></span>
                 </a>
-                <div class="myedit br8">
+                <div class="ctip">
                     <span class="arwwj"> </span>
-                    <a class="relative" href="#" target="_blank">
-                        消息提醒
-                        <span class="boll"></span>
-                    </a>
-                    <a href="#">我的收藏</a>
-                    <a href="#" target="_blank">账号设置</a>
-                    <a href="javascript:void(0)" onclick="out()">退出</a>
+                <volist name="special" id="so">
+                    <div class="ctab clearfix">
+                        <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id} AND status = 1&order=addtime desc&title={$so.title}&id= {$so.id}" target="_blank">
+                            <img src="__PUBLIC__/img/jx3.png" alt="">
+                            {$so.title}
+                        </a>
+                    </div>
+                </volist>
                 </div>
-            </div>
-        <else />
-            <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-                <a class="btn-pubt" href="{:U('Menu/add')}" title="发布菜谱">发布</a>
-            </div>
-            <div class="perinfo" style="float: right;">
-                <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>
-            </div>
-        </if>
+            </li>
+            <li <eq name="title" value="菜谱列表">class="act"</eq> >
+                <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表&id= sid != 0">菜谱</a>
+            </li>
+            <li >
+                <a href="{:U('Menu/list')}?table=Menu&where=status =1 &order=addtime desc&title=文章列表">文章</a>
+            </li>
+        </ul>
+        <form class="search br4 left" method="POST" id="searchForm" action="" accept-charset="utf-8" onsubmit="document.charset='utf-8';return Search();">
+            <input type="text" id="global_search_inpt" class="sput" name="keywords" value="搜索菜谱、文章、食材" lang="zh-CN" autocomplete="off" onfocus="if(this.value=='搜索菜谱、菜单、食材、用户') {this.value=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.value='';$(this).removeClass('fcbm');} setTimeout(function (){$('#mysu2').html('')},500)" onkeyup="selectItem(event)" onclick="selectItem(event)">
+            <input type="button" value=" " class="lib">
+            <div class="sugg2" id="mysu2" style="display:none;"></div>
+        </form>
+    <if condition="$Think.SESSION.user.isLogin eq 1">
+        <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
+            <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0" title="发布菜谱">发布</a>
         </div>
+        <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
+            <a class="headicon" href="{:U('User/info')}">
+                <img class="wb100 br50" src="__PUBLIC__/img/favicon_index.ico" alt="" title="{$Think.SESSION.user.nickname}">
+                <span class="msgnum"></span>
+            </a>
+            <div class="myedit br8">
+                <span class="arwwj"> </span>
+                <a class="relative" href="#" target="_blank">
+                    消息提醒
+                    <span class="boll"></span>
+                </a>
+                <a href="#">我的收藏</a>
+                <a href="#" target="_blank">账号设置</a>
+                <a href="javascript:void(0)" onclick="out()">退出</a>
+            </div>
+        </div>
+    <else />
+        <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
+            <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0" title="发布菜谱">发布</a>
+        </div>
+        <div class="perinfo" style="float: right;">
+            <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>
+        </div>
+    </if>
     </div>
+</div>
     <div id="banner" class="relative">
         <div class="banner absolute">
             <ul class="blist">

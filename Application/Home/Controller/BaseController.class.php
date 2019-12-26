@@ -14,6 +14,24 @@ class BaseController extends Controller
         echo true;
     }
 
+    public function noLogin()
+    {
+        if(!$_SESSION['user']['isLogin'])
+        {
+            $this->redirect('Index/login',[],0);
+            exit;
+        }
+    }
+
+    public function edit()
+    {
+        $this->noLogin();
+
+        $data = D($_GET['table'])->field('*')->where($_GET['where'])->find();
+
+        $this->assign('data', $data);
+    }
+
     public function list()
     {
         $page = $_GET['page'] > 0 ? $_GET['page'] : 1;

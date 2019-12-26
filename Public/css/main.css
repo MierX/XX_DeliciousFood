@@ -104,8 +104,8 @@ input[type=button], input[type=text], input[type=password]{-webkit-appearance:no
 .dgintro .threbl {width: 312px;position: absolute;top: 16px;left:690px;}
 .dgintro h3 {font-size: 14px;color: #333;margin-bottom: 8px;}
 .dgintro ul li {width: 92px;float: left;margin-right: 12px;text-align: center;}
-.emwx {background:url(../images/qrcode.png) no-repeat;background-position: 0 0;}
-.emdgms {background: url("../images/xcx.jpg") no-repeat;background-size: cover;}
+.emwx {background:url(../../Public/img/qrcode.png) no-repeat;background-position: 0 0;}
+.emdgms {background: url("../../Public/img/xcx.jpg") no-repeat;background-size: cover;}
 .emwx, .emdgms {width: 92px;height: 92px;display: block; margin-bottom: 8px;}
 
 #footer .foot {width: 1000px;margin: 0 auto;padding-top: 18px;}
@@ -175,5 +175,5 @@ input[type=button], input[type=text], input[type=password]{-webkit-appearance:no
 .proqy{background-position:0 0;}
 .progr{background-position:0 -22px;}
 /*性别图标*/
-.male{background: url("../images/male.png") no-repeat;background-size: 100% 100%;}
-.female{background: url("../images/female.png") no-repeat;background-size: 100% 100%;}
+.male{background: url("../../Public/img/male.png") no-repeat;background-size: 100% 100%;}
+.female{background: url("../../Public/img/female.png") no-repeat;background-size: 100% 100%;}
