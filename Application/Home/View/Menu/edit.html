@@ -236,7 +236,30 @@
 
         $(function(){
             UE.getEditor('editor', {
-                toolbars : [['indent','bold','italic','underline','fontfamily','forecolor','fontsize','insertimage',],]
+                autoFloatEnabled: false,
+                zIndex: 1,
+                contextMenu : [
+                    {
+                        label: '首行缩进',
+                        cmdName: 'indent',
+                    },
+                    {
+                        label: '字体加粗',
+                        cmdName: 'bold',
+                    },
+                    {
+                        label: '字体斜体',
+                        cmdName: 'italic',
+                    },
+                    {
+                        label: '下划线',
+                        cmdName: 'underline',
+                    },
+                ],
+                enableAutoSave : false,
+                wordCount: false,
+                elementPathEnabled : false,
+                toolbars : [['fontfamily','forecolor','fontsize','insertimage'],]
             });
         });
 

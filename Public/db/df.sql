@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 26/12/2019 18:47:31
+ Date: 26/12/2019 23:34:38
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES (1, 'admin', 'Admin', '123456', 11, 1);
+INSERT INTO `admin` VALUES (1, 'admin', 'Admin', '123456', 12, 1);
 
 -- ----------------------------
 -- Table structure for article
@@ -47,16 +47,17 @@ CREATE TABLE `article`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `hot` int(255) NULL DEFAULT 0,
   `status` int(1) NULL DEFAULT 1,
-  `toptime` int(11) NULL DEFAULT 0,
+  `toptime` int(11) NULL DEFAULT NULL,
   `addtime` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES (1, 'test', '/images/1577357092.png', '<p>test</p>', 0, 1, 0, 1577356969);
-INSERT INTO `article` VALUES (2, 'test2', '/images/1577357135.png', '<p>testtest</p>', 0, 0, 0, 1577357138);
+INSERT INTO `article` VALUES (1, 'test', '/images/1577357092.png', '<p>test</p>', 0, 1, 1577364671, 1577356969);
+INSERT INTO `article` VALUES (2, 'test2', '/images/1577357135.png', '<p>testtest</p>', 0, 0, NULL, 1577357138);
+INSERT INTO `article` VALUES (3, '123', '/images/1577364725.JPG', '<p>123</p><p>asd</p><p>asdasd</p><p>asdasd</p><p><img src=\"/ueditor/php/upload/image/20191226/1577364753246381.jpg\" style=\"\" title=\"1577364753246381.jpg\"/></p><p><img src=\"/ueditor/php/upload/image/20191226/1577364754506650.jpg\" style=\"\" title=\"1577364754506650.jpg\"/></p><p><img src=\"/ueditor/php/upload/image/20191226/1577364755345565.jpg\" style=\"\" title=\"1577364755345565.jpg\"/></p><p><br/></p>', 0, 1, NULL, 1577364773);
 
 -- ----------------------------
 -- Table structure for menu
