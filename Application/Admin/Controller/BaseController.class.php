@@ -2,6 +2,7 @@
 namespace Admin\Controller;
 
 use Think\Controller;
+use Think\Upload;
 
 class BaseController extends Controller
 {
@@ -99,6 +100,49 @@ class BaseController extends Controller
             $result = $result ? true : false;
         }
         echo $result;
+    }
+
+    public function upload()
+    {
+
+        if ($_FILES)
+        {
+            $config = C('UPLOAD_IMG');
+            $path_name = I('path_name', '');
+            if($path_name) $config['savePath'] = str_replace('images', $path_name, $config['savePath']);
+            $save_path = $config['rootPath'] . $config['savePath'];
+            if (!is_dir($save_path))
+            {
+                if (IS_WIN)
+                {
+                    mkdir($save_path, '0777', true);
+                }
+                else
+                {
+                    xmkdir($save_path);
+                }
+            }
+
+            $upload = new Upload($config);
+            $info = $upload->upload();
+            if (!$info)
+            {
+                echo false;
+                exit;
+            }
+            $file_arr = array();
+            foreach ($info as $value)
+            {
+                $url = $value['savepath'] . $value['savename'];
+                $url = str_replace('\\', '/', $url);
+                $file_arr[] = $url;
+            }
+            $response['data'] = $file_arr;
+            echo json_encode($response);
+            exit;
+        }
+        echo false;
+        exit;
     }
 
     public function out()
