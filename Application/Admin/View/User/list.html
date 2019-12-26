@@ -67,12 +67,12 @@
 						</eq>
 						</td>
 						<td class="td-manage">
-							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="停用"<else />title="启用"</eq> >
-								<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
-							</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
 							<a style="text-decoration:none" onClick="show('用户列表 - 查看用户','{:U(\'content\')}?table=User&where[id]={$do.id}&title=用户列表 - 查看用户',320,230)" href="javascript:void(0);">
 								<i class="Hui-iconfont">&#xe725;</i>
+							</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="停用"<else />title="启用"</eq> >
+							<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
 							</a>
 						</td>
 					</tr>

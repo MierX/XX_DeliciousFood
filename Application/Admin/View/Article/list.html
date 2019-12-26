@@ -81,6 +81,14 @@
 						</eq>
 						</td>
 						<td class="td-manage">
+							<a style="text-decoration:none" href="{:U('Home/Article/content')}?id={$do.id}&title=豆果美食 - {$do.title}" target="_blank" title="查看">
+								<i class="Hui-iconfont">&#xe725;</i>
+							</a>
+							&nbsp;&nbsp;
+							<a style="text-decoration:none" onClick="operation('{:U(\'changeV2\')}?table=Article&where[id]={$do.id}&save[toptime]='+Date.parse(new Date())/1000)" href="javascript:void(0);" title="置顶">
+								<i class="Hui-iconfont">&#xe679;</i>
+							</a>
+							&nbsp;&nbsp;
 							<a style="text-decoration:none" onClick="show('编辑文章','{:U(\'edit\')}?table=Article&where[id]={$do.id}',0,0)" href="javascript:void(0);" title="编辑">
 								<i class="Hui-iconfont">&#xe6df;</i>
 							</a>

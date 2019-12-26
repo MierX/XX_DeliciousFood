@@ -19,7 +19,7 @@
             <li>
                 <a href="{:U('Index/index')}">首页</a>
             </li>
-            <li onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();" <if condition="$title neq 菜谱列表">class="relative act"<else />class="relative"</if> >
+            <li onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
                 <a href="javascript:void(0)">专题
                     <span class="naww"></span>
                 </a>
@@ -35,10 +35,10 @@
                 </volist>
                 </div>
             </li>
-            <li <eq name="title" value="菜谱列表">class="act"</eq> >
+            <li>
                 <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表&id= sid != 0">菜谱</a>
             </li>
-            <li >
+            <li class="act">
                 <a href="{:U('Article/list')}?table=Article&where=status =1 &order=toptime desc,addtime desc&title=豆果美食 - 精彩文章">文章</a>
             </li>
         </ul>
@@ -89,22 +89,24 @@
         </div>
     </div>
     <div id="content" class="clearfix">
-        <h2 class="title">“{$title}”的相关菜谱</h2>
+        <h2 class="title">{$title}</h2>
         <div class="mt25">
             <ul class="cook-list">
                 <volist name="data" id="do">
                     <li class="clearfix" style="display: inline-block;width: 50%">
-                        <a class="cook-img" href="{:U('Menu/content')}?id={$do.id}" style="background: url({$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
+                        <a class="cook-img" href="{:U('Article/content')}?id={$do.id}" style="background: url(__PUBLIC__{$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
                         <div class="cook-info" style="width: 60%">
-                            <a class="cookname text-lips" target="_blank" href="{:U('Menu/content')}?id={$do.id}">{$do.title}</a>
-                            <p class="major">糯米粉,粘米粉,玉米淀粉,低粉,牛奶,炼乳,糯米粉,粘米粉,玉米淀粉,低粉,牛奶,炼乳 </p>
+                            <a class="cookname text-lips" target="_blank" href="{:U('Article/content')}?id={$do.id}">{$do.title}</a>
+                            <p class="major">&nbsp;</p>
+                            <p class="major">热度:{$do.hot}</p>
+                            <p class="major">&nbsp;</p>
+                            <p class="major">{$do.addtime|date='Y-m-d H:i',###}</p>
                             <div class="aut-num clearfix text-lips ">
                                 <p class="author text-lips">
                                     by
-                                    <a class="text-lips author" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{$do.uid}">{$do.author}</a>
+                                    <a class="text-lips author" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{:U('Index/index')}">豆果美食</a>
                                 </p>
                             </div>
-                            <p class="major">{$do.addtime|date='y-m-d',###}</p>
                         </div>
                     </li>
                 </volist>

@@ -79,10 +79,6 @@
 						</eq>
 						</td>
 						<td class="td-manage">
-							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="隐藏"<else />title="显示"</eq> >
-								<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
-							</a>
-							&nbsp;&nbsp;
 							<a style="text-decoration:none" onClick="operation('{:U(\'changeV2\')}?table=Special&where[id]={$do.id}&save[toptime]='+Date.parse(new Date())/1000)" href="javascript:void(0);" title="置顶">
 								<i class="Hui-iconfont">&#xe679;</i>
 							</a>
@@ -97,6 +93,10 @@
 							&nbsp;&nbsp;
 							<a style="text-decoration:none" onClick="show('{$do.title} - 菜谱列表','{:U(\'menuList\')}?table=Menu&&where[sid]={$do.id}&title={$do.title} - 菜谱列表',1100,700)" href="javascript:void(0);" title="踢出">
 								<i class="Hui-iconfont">&#xe6a1;</i>
+							</a>
+							&nbsp;&nbsp;
+							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="隐藏"<else />title="显示"</eq> >
+							<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
 							</a>
 							&nbsp;&nbsp;
 							<a style="text-decoration:none" onClick="operation('{:U(\'del\')}?table=Special&where[id]={$do.id}')" href="javascript:void(0);" title="删除">
