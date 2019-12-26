@@ -55,10 +55,6 @@
 								<i class="Hui-iconfont">&#xe725;</i>
 							</a>
 							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="隐藏"<else />title="显示"</eq> >
-								<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
-							</a>
-							&nbsp;&nbsp;
 							<a style="text-decoration:none" onClick="operation('{:U(\'changeV2\')}?table=Menu&where[id]={$do.id}&save[sid]=0')" href="javascript:void(0);" title="踢出">
 								<i class="Hui-iconfont">&#xe6a1;</i>
 							</a>

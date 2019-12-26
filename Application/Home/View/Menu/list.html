@@ -16,10 +16,10 @@
                 <img src="__PUBLIC__/img/logo3.png" alt="">
             </a>
             <ul class="nav">
-                <li>
+                <li class="act" >
                     <a href="{:U('Index/index')}">首页</a>
                 </li>
-                <li class="relative act" onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
+                <li class="relative " onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
                     <a href="javascript:void(0)">专题
                         <span class="naww"></span>
                     </a>
@@ -27,8 +27,8 @@
                         <span class="arwwj"> </span>
                         <volist name="special" id="so">
                             <div class="ctab clearfix">
-                                <a href="{:U('Menu/list')}?table=Menu&id={$so.sid}&status=1&order=addtime desc&title={$so.title}" target="_blank">
-                                <img src="__PUBLIC__/img/jx3.png" alt="">
+                                <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id} AND status = 1&order=addtime desc&title={$so.title}&id= {$so.id}" target="_blank">
+                                    <img src="__PUBLIC__/img/jx3.png" alt="">
                                     {$so.title}
                                 </a>
                             </div>
@@ -36,10 +36,10 @@
                     </div>
                 </li>
                 <li >
-                    <a href="{:U('Menu/list')}?table=Menu&id=sid != 0&status=1&order=addtime desc&title=菜谱列表">菜谱</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表&id= sid != 0">菜谱</a>
                 </li>
                 <li >
-                    <a href="{:U('Article/List')}?table=Article&where[status]=1&order=toptime desc,addtime desc">文章</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=status =1 &order=addtime desc&title=文章列表">文章</a>
                 </li>
             </ul>
             <form class="search br4 left" method="POST" id="searchForm" action="" accept-charset="utf-8" onsubmit="document.charset='utf-8';return Search();">
@@ -104,6 +104,7 @@
                                     <a class="text-lips author" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{$do.uid}">{$do.author}</a>
                                 </p>
                             </div>
+                            <p class="major">{$do.addtime|date='y-m-d',###}</p>
                         </div>
                     </li>
                 </volist>
@@ -111,10 +112,10 @@
         </div>
         <div class="mt20">
             <div class="pages">
-                <a href="{:U('Menu/list')}?table=Menu&id={$pageId}&status=1&order=addtime desc&title={$so.title}" class="atou hide">首页</a>
-                <a href="javascript:void(0);" onclick="lastPage('{$page}','{:U(\'Menu/list\')}?table=Menu&id={$pageId}&status=1&order=addtime desc&title={$so.title}&page=')" class="ali">上一页</a>
-                <a href="javascript:void(0);" onclick="nextPage('{$page}','{$lastPage}','{:U(\'Menu/list\')}?table=Menu&id={$pageId}&status=1&order=addtime desc&title={$so.title}&page=')" class="anext">下一页</a>
-                <a href="{:U('Menu/list')}?table=Menu&id={$pageId}&status=1&order=addtime desc&title={$so.title}&page={$lastPage}" class="alast">末页</a>
+                <a href="{:U('Menu/list')}?table=Menu&where=sid = {$id} AND status = 1&order=addtime desc&title={$so.title}&id= {$id}" class="atou hide">首页</a>
+                <a href="javascript:void(0);" onclick="lastPage('{$page}','{:U(\'Menu/list\')}?table=Menu&where=sid = {$id} AND status = 1&order=addtime desc&title={$so.title}&id= {$id}&page=')" class="ali">上一页</a>
+                <a href="javascript:void(0);" onclick="nextPage('{$page}','{$lastPage}','{:U(\'Menu/list\')}?table=Menu&where=sid = {$id} AND status = 1&order=addtime desc&title={$so.title}&id= {$id}&page=')" class="anext">下一页</a>
+                <a href="{:U('Menu/list')}?table=Menu&where=sid = {$id} AND status = 1&order=addtime desc&title={$so.title}&id= {$id}&page={$lastPage}" class="alast">末页</a>
             </div>
         </div>
     </div>

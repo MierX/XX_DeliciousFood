@@ -34,6 +34,7 @@ class BaseController extends Controller
         $count = D($_GET['table'])->field('*')->where($_GET['where'])->count();
         $data = D($_GET['table'])->field('*')->where($_GET['where'])->select();
 
+        $this->assign('id',$_GET['id']);
         $this->assign('title',$title);
         $this->assign('count',$count);
         $this->assign('data',$data);

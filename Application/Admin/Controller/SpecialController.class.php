@@ -36,7 +36,7 @@ class SpecialController extends BaseController
 
     public function addMenu()
     {
-        parent::add();
+        parent::list();
         $this->display();
     }
 }

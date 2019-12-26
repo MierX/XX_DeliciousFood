@@ -26,7 +26,7 @@
                         <span class="arwwj"> </span>
                     <volist name="special" id="so">
                         <div class="ctab clearfix">
-                            <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id}&status=1&order=addtime desc&title={$so.title}" target="_blank">
+                            <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id} AND status = 1&order=addtime desc&title={$so.title}&id= {$so.id}" target="_blank">
                                 <img src="__PUBLIC__/img/jx3.png" alt="">
                                 {$so.title}
                             </a>
@@ -35,10 +35,10 @@
                     </div>
                 </li>
                 <li >
-                    <a href="{:U('Menu/list')}?table=Menu&where=sid != 0&status=1&order=addtime desc&title=菜谱列表">菜谱</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表&id= sid != 0">菜谱</a>
                 </li>
                 <li >
-                    <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id}&status=1&order=addtime desc&title=文章列表">文章</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=status =1 &order=addtime desc&title=文章列表">文章</a>
                 </li>
             </ul>
             <form class="search br4 left" method="POST" id="searchForm" action="" accept-charset="utf-8" onsubmit="document.charset='utf-8';return Search();">
