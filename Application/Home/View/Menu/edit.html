@@ -47,7 +47,7 @@
             </form>
         <if condition="$Think.SESSION.user.isLogin eq 1">
             <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-                <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0" title="发布菜谱">发布</a>
+                <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
             </div>
             <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
                 <a class="headicon" href="{:U('User/info')}">
@@ -67,7 +67,7 @@
             </div>
         <else />
             <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-                <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0" title="发布菜谱">发布</a>
+                <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
             </div>
             <div class="perinfo" style="float: right;">
                 <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>
@@ -78,23 +78,31 @@
     <div id="content" class="clearfix">
         <div id="left">
             <form action="" class="mt30" id="upfood">
-                <input type="hidden" name="img" value="" />
-                <input type="hidden" name="id" value="" />
+                <input type="hidden" value="{$data.id}" name="id" />
+                <input type="hidden" value="{$data.img}" name="img" />
+                <div class="name">
+                    <input class="upname" name="title" type="text" value="{$data.title}" maxlength="30" placeholder="菜谱名称" onfocus="if(this.placeholder=='菜谱名称') {this.placeholder=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.placeholder='菜谱名称';$(this).removeClass('fcbm');}" />
+                </div>
                 <div class="cover">
-                    <img alt="" style="display: none" src="" />
-                    <div class="upbefore">
-                        <div class="tiptxt">添加菜谱成品图
+                <notempty name="data.img">
+                    <div class="upbefore" style="background: url(__PUBLIC__{$data.img}) no-repeat center;background-size: 100% 100%">
+                        <div class="tiptxt" style="display: none">
+                            添加菜谱成品图
                             <p>（建议尺寸600*400，图片不超过8M，支持上传图片格式有jpg、jpeg、png、gif）</p>
                         </div>
                     </div>
-                </div>
-                <div class="name">
-                    <input class="upname" id="title" name="title" type="text" maxlength="30" placeholder="菜谱名称" value="" onfocus="if(this.placeholder=='菜谱名称') {this.placeholder=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.placeholder='菜谱名称';$(this).removeClass('fcbm');}"/>
+                    <else />
+                    <div class="upbefore">
+                        <div class="tiptxt">
+                            添加菜谱成品图
+                            <p>（建议尺寸600*400，图片不超过8M，支持上传图片格式有jpg、jpeg、png、gif）</p>
+                        </div>
+                    </div>
+                </notempty>
+                    <input class="uploadImg" type="file" style="display: none" accept="image/*" value="">
                 </div>
                 <div class="rory">
-                <textarea class="strtext " name="cookStory"
-                          onfocus="if(this.value =='这道菜背后的故事～(选填)') {this.value=''; $(this).addClass('fcbm'); }"
-                          onblur="if(!this.value) {this.value='这道菜背后的故事～(选填)';$(this).removeClass('fcbm');}">这道菜背后的故事～(选填)</textarea>
+                    <script id="editor" name="content" type="text/plain" style="width:100%;height:400px;margin-top: 20px;">{$data.content|default='这道菜背后的故事～'}</script>
                 </div>
                 <div class="material clearfix">
                     <h2>食材清单</h2>
@@ -103,46 +111,17 @@
                             <span class="liaotit"> 食材</span><span class="liangtit"> 用量</span>
                         </div>
                         <div class="mct clearfix">
-                            <input type="text" class="liaoext zhuliao" name="zhuliao[]" value="如:五花肉"
-                                   onfocus="if(this.value=='如:五花肉') {this.value=''; $(this).addClass('fcbm'); }"
-                                   onblur="if(!this.value) {this.value='如:五花肉';$(this).removeClass('fcbm');}"/>
-                            <input type="text" class="liangext" name="zhuliaoValue[]" value="如:250g"
-                                   onfocus="if(this.value=='如:250g') {this.value=''; $(this).addClass('fcbm'); }"
-                                   onblur="if(!this.value) {this.value='如:250g';$(this).removeClass('fcbm');}"/>
-                            <a href="javascript:void(0);" class="add" onclick="addZhuLiao($(this).parent())"></a>
-                            <a href="javascript:void(0);" class="up" onclick="moveUp(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="down" onclick="moveDown(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>
-                        </div>
-                        <div class="mct clearfix">
-                            <input type="text" class="liaoext zhuliao fcbm" name="zhuliao[]" value=""/>
-                            <input type="text" class="liangext fcbm" name="zhuliaoValue[]" value=""/>
-                            <a href="javascript:void(0);" class="add" onclick="addZhuLiao($(this).parent())"></a>
-                            <a href="javascript:void(0);" class="up" onclick="moveUp(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="down" onclick="moveDown(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>
-                        </div>
-                        <div class="mct clearfix">
-                            <input type="text" class="liaoext zhuliao fcbm" name="zhuliao[]" value=""/>
-                            <input type="text" class="liangext fcbm" name="zhuliaoValue[]" value=""/>
-                            <a href="javascript:void(0);" class="add" onclick="addZhuLiao($(this).parent())"></a>
-                            <a href="javascript:void(0);" class="up" onclick="moveUp(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="down" onclick="moveDown(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>
-                        </div>
-                        <div class="mct clearfix">
-                            <input type="text" class="liaoext zhuliao fcbm" name="zhuliao[]" value=""/>
-                            <input type="text" class="liangext fcbm" name="zhuliaoValue[]" value=""/>
-                            <a href="javascript:void(0);" class="add" onclick="addZhuLiao($(this).parent())"></a>
-                            <a href="javascript:void(0);" class="up" onclick="moveUp(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="down" onclick="moveDown(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>
+                            <input type="text" class="liaoext zhuliao" name="zhuliao[]" value="如:五花肉" onfocus="if(this.value=='如:五花肉') {this.value=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.value='如:五花肉';$(this).removeClass('fcbm');}"/>
+                            <input type="text" class="liangext" name="zhuliaoValue[]" value="如:250g" onfocus="if(this.value=='如:250g') {this.value=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.value='如:250g';$(this).removeClass('fcbm');}"/>
+                            <a href="javascript:void(0);" class="add" onclick="selfAddObj($(this).parent())"></a>
+                            <a href="javascript:void(0);" class="up" onclick="selfUpObj(this,'mct')"></a>
+                            <a href="javascript:void(0);" class="down" onclick="selfDownObj(this,'mct')"></a>
+                            <a href="javascript:void(0);" class="wrng" onclick="selfDeleteObj(this)"></a>
                         </div>
                     </div>
                 </div>
                 <div class="complete">
-                    <a class="submit" href="javascript:void(0)" onclick="checkArtinfo(release,)">发布</a>
-                    <a class="savedraft" href="javascript:void(0)" onclick="draft()">存草稿</a>
+                    <a class="submit" href="javascript:void(0)" onclick="">发布</a>
                 </div>
             </form>
         </div>
@@ -191,18 +170,24 @@
             </div>
         </div>
     </div>
-    <script src="__PUBLIC__/js/base.js"></script>
-    <script src='__PUBLIC__/js/jquery.js' ></script>
-    <script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
-    <script src="__PUBLIC__/js/layui/layui.all.js"></script>
-    <script src="__PUBLIC__/js/layer/layer.js"></script>
-    <script src="__PUBLIC__/js/ajaxfileupload.js?234"></script>
-    <script src="__PUBLIC__/js/jquery.form.min.js?0604"></script>
-    <script src="__PUBLIC__/js/gt.js?234"></script>
-    <script src='__PUBLIC__/js/tip.js?v=2019' ></script>
-    <script src='__PUBLIC__/js/search.js?v=12171145' ></script>
-    <script src='__PUBLIC__/js/main.js?v=201911'></script>
-    <script src="__PUBLIC__/js/Sortable.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/base.js"></script>
+    <script type="text/javascript" src='__PUBLIC__/js/jquery.js' ></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layui/layui.all.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/ajaxfileupload.js?234"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery.form.min.js?0604"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/gt.js?234"></script>
+    <script type="text/javascript" src='__PUBLIC__/js/tip.js?v=2019' ></script>
+    <script type="text/javascript" src='__PUBLIC__/js/search.js?v=12171145' ></script>
+    <script type="text/javascript" src='__PUBLIC__/js/main.js?v=201911'></script>
+    <script type="text/javascript" src="__PUBLIC__/js/Sortable.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/hui/lib/ueditor/1.4.3/ueditor.config.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/hui/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+    <script type="text/javascript" src="__PUBLIC__/hui/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/jquery_file_upload/js/vendor/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/jquery_file_upload/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/jquery_file_upload/js/jquery.fileupload.js"></script>
     <script type="text/javascript">
         function out() {
             selfMsg('一旦退出账户将停止当前操作并返回首页','温馨提示',false,false,['退出','取消'],
@@ -229,704 +214,50 @@
             }
         }
 
+        $('.cover').on('click', '.upbefore', function () {
+            $('.uploadImg').click();
+        });
+
+        $('.cover').on('click', '.uploadImg', function (e) {
+            $('.uploadImg').fileupload({
+                url: "{:U('upload')}",
+                dataType: 'json',
+                done: function (e, data) {
+                    var result_data = data.jqXHR.responseJSON;
+                    if (result_data.data[0])
+                    {
+                        $('.tiptxt').hide();
+                        $("input[name='img']").val(result_data.data[0]);
+                        $('.upbefore').css("background","url(__PUBLIC__"+result_data.data[0]+") no-repeat center").css("background-size","100% 100%");
+                    }
+                },
+            });
+        });
+
+        $(function(){
+            UE.getEditor('editor', {
+                toolbars : [['indent','bold','italic','underline','fontfamily','forecolor','fontsize','insertimage',],]
+            });
+        });
+
         (function () {
             document.getElementById('___szfw_logo___').oncontextmenu = function () {
                 return false;
             }
         })();
-    </script>
-    <script type="text/javascript">
-        var isSub = 0;
+
         var prefix = "";
-        var dragElement = null;
         window.isUpload = false;
-        //移动元素
-        function movefile(ev,fileId) {
-            var oEvent = ev || event;
-            var oDiv = document.getElementById(fileId);
-
-            var scrollTop=document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-            var scrollLeft=document.documentElement.scrollLeft || window.pageXOffset || document.body.scrollLeft;
-
-            oDiv.style.left = scrollLeft + oEvent.clientX + 'px';
-            oDiv.style.top = scrollTop + oEvent.clientY + 'px';
-        };
-        function moveStepFile(ev,fileId,ele) {
-            if(window.isUpload){
-                return false;
-            }
-            window.selectEle = $(ele).parent();
-            var oEvent = ev || event;
-            var oDiv = document.getElementById(fileId);
-            //屏幕滚动的距离
-            var scrollTop=document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-            var scrollLeft=document.documentElement.scrollLeft || window.pageXOffset || document.body.scrollLeft;
-
-            oDiv.style.left = scrollLeft + oEvent.clientX + 'px';
-            oDiv.style.top = scrollTop + oEvent.clientY + 'px';
-        };
-        //删除草稿
-        function del(cookid, obj) {
-            var num = "0";
-            var token = $('#_token').val();
-            if (confirm('确定要删除吗?删除后将不可恢复')) {
-                $.ajax({
-                    type: "post",
-                    url: "/draft/del",
-                    data: {draft_id: cookid, type: 'recipe', _token: token},
-                    dataType: "json",
-                    success: function (res) {
-                        if (res.msg === "删除成功") {
-
-                            if (($(".shannum").html() - 0) > 1) {
-                                $(".shannum").html($(".shannum").html() - 1)
-                            } else {
-                                $(".caogao").hide()
-                            }
-                            obj.parent().remove()
-                        }
-                    }
-                })
-            }
-        }
-
-        //刷新验证码
-        function refreshcode() {
-            $(".codeImg").attr("src", "/captcha?t" + (new Date()).getTime());
-        }
-        function changecover(){
-            showUp(".upnow");
-            uploadCoverImg()
-        }
-        $(window).load(function () {
-            // var options = {
-            //     handle: ['.icross','.loading','.upimgsucc','.buzhou'],
-            //     animation: 100
-            // }
-            //
-            // Sortable.create(step, options);
-            $(".muti").click(function () {
-                if ($('.sydimg').is(':visible')) {
-                    $('.sydimg').hide()
-                    $('#jiaotou').html('>>')
-                } else {
-                    $('.sydimg').show()
-                    $('#jiaotou').html('<<')
-                }
-            })
-            window.selectEle = null
-            if ($("#moreImg")[0].files) {
-                $(".piliang-btn").css("display","inline-block");
-                $(".piliang").show()
-            }
-            //上传封面图
-
-            /*$("#coverImageUrl").on("change",function () {
-                alert("666");
-                showUp(".upnow");
-                uploadCoverImg()
-            });*/
-            //上传步骤图片
-            /*$("#buzhou-file").change(function () {
-                uploadBuZhouImg()
-            })*/
-            //上传视频
-            /*$("#vidoeFile").change(function () {
-                uploadVideo()
-            })*/
-            //点击最后一个添加主料
-            $(".zl-list").click(function (e) {
-                if ($(e.target).parent()[0] === $(".zl-list .mct")[$(".zl-list .mct").length - 1] && $(e.target).attr("name") === "zhuliao[]") {
-                    addZhuLiao('')
-                }
-            })
-            //点击最后一个添加辅料
-            /*$(".fl-list").click(function (e) {
-                if ($(e.target).parent()[0] === $(".fl-list .mct")[$(".fl-list .mct").length - 1] && $(e.target).attr("name") === "fuliao[]") {
-                    addFuLiao()
-                }
-            })*/
-            //点击最后一个添加步骤
-            $(".step-list").click(function (e) {
-                if ($(e.target).parent().parent()[0] === $(".nsetp")[$(".nsetp").length - 1]) {
-                    addBuZhou()
-                }
-            });
-
-            $("#reup").click(function () {
-                $("#vidoeFile").click()
-                $(".video-more").hide()
-                $(".upload-video").show()
-            })
-            $("#delup").click(function () {
-                $('#video').val('')
-                $("#src_url").val('')
-                $("#pickv").show()
-                $(".video-more").hide()
-            })
-        })
-        function dragstartNsetp(that){
-            dragElement = that;
-        }
-        function dragenterNsetp(that){
-            if(dragElement != that){
-                if(that == that.parentNode.lastElementChild || that == that.parentNode.lastChild){
-                    that.parentNode.appendChild(dragElement);
-                }else{
-                    that.parentNode.insertBefore(dragElement,that);
-                }
-            }
-        }
-        function dragleaveNsetp(that){
-
-        }
-        document.ondragover = function(e){e.preventDefault();}
-        document.ondrop = function(e){e.preventDefault();}
-        //多图上传
-        function upMoreImg(e){
-            var nsetpIndex = -1;
-            var nsetpList = $(".nsetp");
-            var fileNum = e.target.files.length;
-            nsetpList.each(function (index,item) {
-                if($(item).children(".upimgsucc").children("img").attr("src")!=""||$(item).children(".bzmw").children(".steptext").val()!=""){
-                    nsetpIndex = index;
-                }
-            });
-            nsetpList.each(function (index,item) {
-                if(index>nsetpIndex){
-                    $(item).remove()
-                }
-            });
-            for(var i=0;i<fileNum;i++){
-                addBuZhou(" ", " ")
-            }
-            $.ajaxFileUpload(
-                {
-                    url: '/upload/image',
-                    // type: "post",
-                    data: {type: 6,'size':'200', '_token': "dtYNMwJ819ZBg9OOtW0xPvp0skryaUG1aOvKNhXd"},
-                    secureuri: false,
-                    fileElementId: 'moreImg',
-                    dataType: 'json',
-                    success: function (res) {
-                        if(res.errcode=="10000"){
-                            tip({text: res.msg + "请更换图片后重试！",time: 2500})
-                        }
-                        var nsetpIndex = -1;
-                        var nsetpList = $(".nsetp");
-                        nsetpList.each(function (index,item) {
-                            if($(item).children(".upimgsucc").children("img").attr("src")!=" "||$(item).children(".bzmw").children(".steptext").val()!=""){
-                                nsetpIndex = index;
-                            }
-                        });
-                        nsetpList.each(function (index,item) {
-                            if(index>nsetpIndex){
-                                $(item).remove()
-                            }
-                        });
-                        var images = res.data.success;
-                        images.forEach(function (item) {
-                            addBuZhou(item.image_url, item.actual_url)
-                        })
-                        $("#moreImg").val("");
-                    },
-                    error: function (res) {
-                        tip({text: "上传失败"})
-                        var nsetpIndex = -1;
-                        var nsetpList = $(".nsetp");
-                        nsetpList.each(function (index,item) {
-                            if($(item).children(".upimgsucc").children("img").attr("src")!=" "||$(item).children(".bzmw").children(".steptext").val()!=""){
-                                nsetpIndex = index;
-                            }
-                        });
-                        nsetpList.each(function (index,item) {
-                            if(index>nsetpIndex){
-                                $(item).remove()
-                            }
-                        });
-                        addBuZhou()
-                    }
-                })
-        }
-
-        //上传封面图
-        function uploadCoverImg() {
-            $.ajaxFileUpload({
-                url: '/upload/image',
-                data: {type: 6,'size':'750', '_token': "dtYNMwJ819ZBg9OOtW0xPvp0skryaUG1aOvKNhXd"},
-                secureuri: false,
-                fileElementId: 'coverImageUrl',
-                dataType: 'json',
-                success: function (res) {
-                    if(res.errcode=="10000"){
-                        tip({text: res.msg + "请更换图片后重试！",time: 2500})
-                    }
-                    var image = res.data.success[0];
-                    hideUP(".upnow")
-                    $("#coverImageUrl").val("")
-                    setUrl($("#coverImgUrl"), image.actual_url);
-                    $(".upsucc").css({'background':'url('+image.image_url+') no-repeat center center','backgroundSize':'cover'});
-                    showUp(".upsucc");
-                    $("#coverImageUrl").change(function () {
-                        showUp(".upnow")
-                        uploadCoverImg()
-                    })
-                },
-                error: function (res) {
-                    hideUP(".upnow")
-                    $("#coverImageUrl").val("")
-                    $("#coverImageUrl").change(function () {
-                        showUp(".upnow")
-                        uploadCoverImg()
-                    })
-                }
-            })
-        }
-
-        //添加主料
-        function addZhuLiao(el) {
-            var mct = document.createElement("div");
-            mct.setAttribute("class", "mct clearfix");
-            /*mct.innerHTML = '<input type="text" class="liaoext zhuliao fcbm" name="zhuliao[]" value="" /><input type="text" class="liangext fcbm" name="zhuliaoValue[]" value="" /><a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>';*/
-            mct.innerHTML = '<input type="text" class="liaoext zhuliao fcbm" name="zhuliao[]" value=""/><input type="text" class="liangext fcbm" name="zhuliaoValue[]" value=""/><a href="javascript:void(0);" class="add" onclick="addZhuLiao($(this).parent())"></a><a href="javascript:void(0);" class="up" onclick="moveUp(this,\'mct\')"></a><a href="javascript:void(0);" class="down" onclick="moveDown(this,\'mct\')"></a><a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>';
-            if(el){
-                el.after(mct);
-            }else{
-                $(".zl-list").append(mct);
-            }
-        }
-
-        //添加辅料
-        /*function addFuLiao() {
-            var mct = document.createElement("div");
-            mct.setAttribute("class", "mct clearfix");
-            mct.innerHTML = '<input type="text" class="liaoext fuliao fcbm" name="fuliao[]" value="" /> <input type="text" class="liangext fcbm" name="fuliaoValue[]" value="" /><a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>';
-            $(".fl-list").append(mct)
-        }*/
-
-        //删除这个节点
-        function deleteThisEle(ele) {
-            $(ele).parent().remove()
-        }
-
-        function resetBuzhou(ele) {
-            $('#buzhou-file').click();
-            window.selectEle = $(ele).parent().parent()
-        }
-
-        //添加步骤
-        function addBuZhou(url, actual_url,ele) {
-            url = url || "";
-            actual_url = actual_url || "";
-
-            var buzhou, opreate, deleteEle, icross, loading, upimgsucc, bzmw;
-            if (url) {
-                buzhou = document.createElement("li");
-                buzhou.setAttribute("class", "nsetp clearfix");
-                // buzhou.setAttribute("draggable", true);
-                // buzhou.setAttribute("ondragstart", "dragstartNsetp(this)");
-                // buzhou.setAttribute("ondragenter", "dragenterNsetp(this)");
-                // buzhou.setAttribute("ondragleave", "dragleaveNsetp(this)");
-
-                opreate = ' <a href="javascript:void(0);" class="up" onclick="moveUp(this,\'nsetp\')"></a><a href="javascript:void(0);" class="down" onclick="moveDown(this,\'nsetp\')"></a><a href="javascript:void(0);" class="add" onclick="addBuZhou(null,null,$(this).parent())"></a>';
-                deleteEle = '<a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>';
-                icross = '<div class="icross" onmousemove="moveStepFile(event,\'buzhou-file\',this)" style="display: none;">添加步骤图</div>';
-                loading = '<div class="loading" style="display: inline-block;"> 正在上传…</div>';
-                upimgsucc = '<div class="upimgsucc" style="display: block"><img src="' + url + '" /><input type="text" name="setpImages[]" class="buzhou" value="' + actual_url + '"><button type="button" onclick="resetBuzhou(this)"></button></div>';
-                bzmw = '<div class="bzmw mrs"><textarea name="setpInfos[]"class="steptext" ></textarea>\n</div>';
-                buzhou.innerHTML = opreate + deleteEle + icross + loading + upimgsucc + bzmw;
-
-            } else {
-                buzhou = document.createElement("li");
-                buzhou.setAttribute("class", "nsetp clearfix");
-                // buzhou.setAttribute("draggable", true);
-                // buzhou.setAttribute("ondragstart", "dragstartNsetp(this)");
-                // buzhou.setAttribute("ondragenter", "dragenterNsetp(this)");
-                // buzhou.setAttribute("ondragleave", "dragleaveNsetp(this)");
-                opreate = ' <a href="javascript:void(0);" class="up" onclick="moveUp(this,\'nsetp\')"></a><a href="javascript:void(0);" class="down" onclick="moveDown(this,\'nsetp\')"></a><a href="javascript:void(0);" class="add" onclick="addBuZhou(null,null,$(this).parent())"></a>';
-                deleteEle = '<a href="javascript:void(0);" class="wrng" onclick="deleteThisEle(this)"></a>';
-                icross = '<div class="icross" onmousemove="moveStepFile(event,\'buzhou-file\',this)">添加步骤图</div>';
-                loading = '<div class="loading"> 正在上传…</div>';
-                upimgsucc = '<div class="upimgsucc"><img src="' + url + '"/><input type="text" name="setpImages[]" class="buzhou" value= ""><button type="button" onclick="resetBuzhou(this)"></button></div>';
-                bzmw = '<div class="bzmw mrs"><textarea name="setpInfos[]"class="steptext"></textarea>\n</div>';
-                buzhou.innerHTML = opreate + deleteEle + icross + loading + upimgsucc + bzmw;
-            }
-            if(ele){
-                ele.after(buzhou)
-            }else{
-                $(".step-list").append(buzhou)
-            }
-
-        }
-
-        //前移
-        function moveUp(ele,parentclass) {
-            var allNsetp = $("."+parentclass);
-            if ($(ele).parent()[0] === allNsetp[0]) {
-                return false;
-            } else {
-                var newEle = $(ele).parent().clone(true);
-                deleteThisEle(ele);
-                allNsetp.each(function (index, item) {
-                    if ($(ele).parent()[0] == item) {
-                        $($(allNsetp[index - 1])).before(newEle[0]);
-                    }
-                })
-            }
-
-        }
-
-        //后移
-        function moveDown(ele,parentclass) {
-            var allNsetp = $("."+parentclass);
-            if ($(ele).parent()[0] === allNsetp[allNsetp.length - 1]) {
-                return false;
-            } else {
-                var newEle = $(ele).parent().clone(true);
-                deleteThisEle(ele);
-                allNsetp.each(function (index, item) {
-                    if ($(ele).parent()[0] == item) {
-                        $($(allNsetp[index + 1])).after(newEle[0]);
-                    }
-                })
-            }
-        }
-
-        //设置获取焦点时textarea内容
-        function setFoucsText(that) {
-            if (that.value === '这道菜背后的故事～(选填)') {
-                that.value = '';
-                $(that).addClass('fcbm');
-            }
-        }
-
-        //设置离开焦点是textarea内容
-        function setBlurText(that) {
-            if (!that.value) {
-                that.value = '这道菜背后的故事～(选填)';
-                $(that).removeClass('fcbm');
-            }
-        }
-
-        //上传图片成功设置input的值为图片地址
-        function setUrl(ele, url) {
-            ele.val(url)
-        }
-
-        // 显示加载状态
-        function showUp(eleClass) {
-            $(eleClass).show()
-        }
-
-        // 隐藏加载状态
-        function hideUP(eleClass) {
-            $(eleClass).hide()
-        }
-
-        //选择步骤图
-        function upload(ele) {
-            window.selectEle = $(ele).parent()
-            $('#buzhou-file').click()
-        }
-
-        //上传步骤图
-        function uploadBuZhouImg() {
-            window.isUpload = true;
-            window.selectEle.children(".loading").show();
-            $.ajaxFileUpload(
-                {
-                    url: '/upload/image',
-                    // type: "post",
-                    data: {type: 6,'size':'200', '_token': "dtYNMwJ819ZBg9OOtW0xPvp0skryaUG1aOvKNhXd"},
-                    secureuri: false,
-                    fileElementId: 'buzhou-file',
-                    dataType: 'json',
-                    success: function (res) {
-                        if(res.errcode=="10000"){
-                            tip({text: res.msg + "请更换图片后重试！",time: 2500})
-                        }
-                        var image = res.data.success[0];
-                        upBuZhouSuccess(image)
-                        $("#buzhou-file").change(function () {
-                            uploadBuZhouImg()
-                        })
-                    },
-                    error: function (res) {
-                        $("#buzhou-file").val("");
-                        window.isUpload = false;
-                        window.selectEle.children(".loading").hide();
-                        $("#buzhou-file").change(function () {
-                            uploadBuZhouImg()
-                        })
-                    }
-                });
-        }
-
-        //上传步骤图成功的回调函数
-        function upBuZhouSuccess(data) {
-            window.selectEle.children(".loading").hide();
-            $("#buzhou-file").val("");
-            if (data['image_url'] === undefined) {
-                tip({text: "上传失败！！"})
-                window.isUpload = false;
-            } else {
-                window.selectEle.children(".upimgsucc").children(".buzhou").val(data["actual_url"]);
-                window.selectEle.children(".upimgsucc").children("img").attr("src", data["image_url"]);
-                window.selectEle.children(".upimgsucc").show();
-                window.isUpload = false;
-            }
-        }
-
-        //上传视频
-        function uploadVideo() {
-            if (navigator.appName == "Microsoft Internet Explorer" && parseInt(navigator.appVersion.split(";")[1].replace(/[ ]/g, "").replace("MSIE", "")) < 10) {
-                alert('您的浏览器版本过低，不能上传视频。请下载IE10及以上版本，或者更换浏览器');
-                return false;
-            }
-            var impic = document.getElementById("vidoeFile");
-            if (impic.files) {
-                var f = impic.files[0];
-
-                if (f.size > 1024 * 1024 * 1024) {//check size
-                    tip({text: '文件太大'});
-                    return false;
-                }
-            } else {
-                tip({text: "您的浏览器不支持上传视频，请更换浏览器"})
-            }
-
-            var formFile = new FormData();
-            var fileObj = document.getElementById("vidoeFile").files.item(0);
-            var token = document.querySelector("input[name='token']").value;
-            formFile.append("token", token);
-            formFile.append("file", fileObj);
-            $(".upload-video").html("已上传0%")
-            $.ajax({
-                url: "https://upload-z1.qiniup.com/",
-                data: formFile,
-                type: "post",
-                dataType: "json",
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (result) {
-                    $('#video').val(prefix + result.hash);
-                    $('input[name="src_url"]').val(result.hash);
-                    $(".upload-video").html("已上传100%");
-                    $(".video-more").show();
-                    $(".upload-video").hide();
-                    $(".upload-video").html("上传视频");
-                    $("#vidoeFile").val("");
-                },
-
-                xhr: function () {
-                    myXhr = $.ajaxSettings.xhr();
-                    if (myXhr.upload) {
-                        myXhr.upload.addEventListener('progress', function (e) {
-                            if (e.lengthComputable) {
-                                var percent = Math.floor(e.loaded / e.total * 100);
-                                showPercent(percent)
-                            }
-                        }, false);
-                    }
-                    return myXhr;
-                },
-            })
-        }
-
-        //显示进度
-        function showPercent(percent) {
-            if(percent<=99){
-                $(".upload-video").html("已上传" + percent + "%");
-            }
-        }
-
-        // 上传
-        function release() {
-            isSub = 1;
-            var cook_id = $('#cook_id').val();
-            if (cook_id > 0) {
-                $("#upfood").attr("action", "/recipe/upEditFoodData");
-            } else {
-                $("#upfood").attr("action", "/recipe/upFoodData");
-            }
-            sessionStorage.removeItem("cook_menu");
-            $("#upfood").submit();
-            setTimeout(function(){
-                $('.submit').html('发布');
-                isSub = 0;
-            },3000);
-        }
-
-        //存草稿
-        function draft() {
-            checkCover()
-            && checkTitlt()
-            && (function () {
-                var steptext = $(".steptext");
-
-                steptext.each(function (index, item) {
-                    if ($(item).val() === '这道菜背后的故事～(选填)') {
-                        $(item).val("")
-                    }
-                });
-                $.ajax({
-                    url: "/cgcook/upfoodDataCg",
-                    data: $("#upfood").serialize(),
-                    type: "post",
-                    success: function (res) {
-                        if (res.errcode === 0) {
-                            tip({text: "保存成功"})
-                            // window.location.reload()
-                            var li = document.createElement("li");
-                            li.innerHTML = '<a href="/cgcook/cgedit/' + res.data.id + '">' +
-                                '<h2>' + $("#title").val() + '</h2>' +
-                                '<p>上传于刚刚</p>' +
-                                '</a>' +
-                                '<i onclick="del(' + res.data.id + ',$(this))"></i>' +
-                                '</li>'
-                            $(".list ul").append(li)
-                            $(".shannum").html(($(".shannum").html() - 0) + 1)
-                            $(".caogao").show()
-                        }
-                    }
-                })
-            }())
-        }
-
-        //验证信息
-        function checkCover() {
-            if (!$("#coverImgUrl").val()) {
-                tip({text: "请选择封面图"})
-                return false
-            }
-            return true
-        }
-
-        function checkTitlt() {
-            if ($("#title").val() === "菜谱名称") {
-                tip({text: "请输入菜谱名称"})
-                return false
-            }
-            return true
-        }
-
-        function checkZhuLiao() {
-            var zhuliao = [];
-            $(".zhuliao").each(function (index, item) {
-                if ($(item).val() !== "如:五花肉" && $.trim($(item).val()) !== "") {
-                    zhuliao.push($(item).val())
-                }
-            })
-            if (zhuliao.length <= 0) {
-                tip({text: "请选择主料"})
-                return false
-            }
-            return true
-        }
-
-        /*function checkFuLiao() {
-            var fuliao = [];
-            $(".fuliao").each(function (index, item) {
-                if ($(item).val() !== "如:五花肉" && $.trim($(item).val()) !== "") {
-                    fuliao.push($(item).val())
-                }
-            })
-            if (fuliao.length <= 0) {
-                tip({text: "请选择主料"})
-                return false
-            }
-            return true
-        }*/
-
-        function checkBuZhou() {
-            var buzhou = [];
-            $(".buzhou").each(function (index, item) {
-                if ($(item).val() !== "") {
-                    buzhou.push($(item).val())
-                }
-            });
-            if (buzhou.length <= 0) {
-                tip({text: "请上传步骤图"})
-                return false
-            }
-            return true
-        }
-
-        function checkArtinfo(fun,levelid) {
-            if(levelid==2)
-            {
-                checkCover()
-                && checkTitlt()
-                && checkZhuLiao()
-                && checkBuZhou()
-                && (function () {
-                    $('.submit').html('发布中...');
-                    $.ajax({
-                        url: "/recipe/checkRecipe",
-                        type: "post",
-                        dataType: 'json',
-                        data: {
-                            "coverImgUrl": $("#coverImgUrl").val(),
-                            "check": $("input[name='check']").val() || "",
-                            "signupcode": $("input[name='signupcode']").val() || "",
-                            "title": $("#title").val(),
-                            '_token': "dtYNMwJ819ZBg9OOtW0xPvp0skryaUG1aOvKNhXd"
-                        },
-                        success: function (res) {
-                            if (res.errcode >= 0 && isSub==0) {
-                                fun()
-                            } else {
-                                $('.submit').html('发布');
-                                tip({text: res.msg})
-                                refreshcode()
-                            }
-                        }
-                    })
-                }())
-            }else{
-                checkCover()
-                && checkTitlt()
-                && checkZhuLiao()
-                && checkBuZhou()
-                && (function () {
-                    $('.submit').html('发布中...');
-                    $.ajax({
-                        url: "/recipe/checkRecipe",
-                        type: "post",
-                        dataType: 'json',
-                        data: {
-                            "coverImgUrl": $("#coverImgUrl").val(),
-                            "check": $("input[name='check']").val() || "",
-                            "signupcode": $("input[name='signupcode']").val() || "",
-                            "title": $("#title").val(),
-                            '_token': "dtYNMwJ819ZBg9OOtW0xPvp0skryaUG1aOvKNhXd"
-                        },
-                        success: function (res) {
-                            if (res.errcode >= 0 && isSub==0) {
-                                fun()
-                            } else {
-                                $('.submit').html('发布');
-                                tip({text: res.msg})
-                                refreshcode()
-                            }
-                        }
-                    })
-                }())
-            }
-        }
-
+        document.ondragover = function(e){e.preventDefault();};
+        document.ondrop = function(e){e.preventDefault();};
         document.getElementsByClassName('strtext')[0].addEventListener('paste',function(e){
             if ( !(e.clipboardData && e.clipboardData.items) ) {
                 return;
             }
-
             var item = e.clipboardData.items[0];
-
             if (item.kind === "string") {
                 item.getAsString(function (str) {
                     document.getElementsByClassName('strtext')[0].value = document.getElementsByClassName('strtext')[0].value.replace(str,' '+str+' ');
-                    // console.log(document.getElementsByClassName('strtext')[0].value);
                 })
             }
         });

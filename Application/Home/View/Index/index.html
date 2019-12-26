@@ -47,7 +47,7 @@
             </form>
             <if condition="$Think.SESSION.user.isLogin eq 1">
                 <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-                    <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0" title="发布菜谱">发布</a>
+                    <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
                 </div>
                 <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
                     <a class="headicon" href="{:U('User/info')}">
@@ -67,7 +67,7 @@
                 </div>
             <else />
                 <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-                    <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0" title="发布菜谱">发布</a>
+                    <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
                 </div>
                 <div class="perinfo" style="float: right;">
                     <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>
