@@ -124,3 +124,69 @@ function selfEdit(url) {
 function selfOperation(url) {
     if(url) selfAjax(url,"post", {},true,function (data) {if(data){location.reload();}else{selfMsg('操作失败！','提示',false,true,[])}});
 }
+
+function selfOperationV2(url) {
+    if(url) selfAjax(url,"post", {},true,function (data) {if(data){selfMsg('修改成功！请重新登录！','提示',false,false,['确定'],function () {selfAjax("/Home/Index/out",'get',{},true,function (data) {if(data) location.reload();});})}else{selfMsg('操作失败！','提示',false,true,[])}});
+}
+
+function selfUserChange(id,nickname,username,url) {
+    selfMsg('<p>昵&nbsp;&nbsp;&nbsp;称：'+nickname+'</p><p>手机号：'+username+'</p>','个人信息',false,true,['修改个人信息'],
+        function() {
+                selfMsg('请选择要修改的信息','修改个人信息',false,true,['昵称','密码'],
+            function () {
+                    layer.prompt({
+                        title: '请输入昵称',
+                    },
+            function (value,index,elem) {
+                        if(selfNickname(value)) selfOperationV2(url+id+'&save[nickname]='+value);
+                    });
+                },
+            function () {
+                    layer.prompt({
+                        formType: 1,
+                        title: '请输入密码',
+                    },
+            function (value,index,elem) {
+                        if(selfPassword(value)) selfOperationV2(url+id+'&save[password]='+value);
+                    });
+                },
+            );
+        }
+    );
+}
+
+function selfNickname(v) {
+    if(v.length >= 2 || v.length <= 16) {
+        var status = selfCheck("/Home/Index/check",'user','nickname','=',v);
+        if(status) {
+            selfMsg('您要修改的昵称已被使用！','温馨提示',false,true,[]);
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+}
+
+function selfPassword(v) {
+    var regNumber = /\d+/;
+    var regString = /[a-zA-Z]+/;
+    var regSpecial= /[-~!@#$%^&*()/\|,.<>?"'();:_+=\[\]{}]/;
+    var check_3 = 0;
+    if(regNumber.test(v)){
+        check_3 += 1;
+    }
+    if(regString.test(v)){
+        check_3 += 1;
+    }
+    if(regSpecial.test(v)){
+        check_3 += 1;
+    }
+    if(v.length < 6 || v.length > 20 || v.indexOf(" ") != -1 || check_3 < 2) {
+        selfMsg('您的密码不符合要求！','温馨提示',false,true,[]);
+        return false;
+    } else {
+        return true;
+    }
+}

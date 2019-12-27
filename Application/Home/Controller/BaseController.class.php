@@ -44,7 +44,7 @@ class BaseController extends Controller
         $lastPage = ceil($lastPage[0]['count'] / 20);
 
         $this->assign('title',$_GET['title']);
-        $this->assign('id',$_GET['id']);
+        $this->assign('where',$_GET['where']);
         $this->assign('pageId',$_GET['id']);
         $this->assign('data',$data);
         $this->assign('page',$page);
@@ -137,6 +137,18 @@ class BaseController extends Controller
         exit;
     }
 
+    public function change()
+    {
+        $result = false;
+        if($_GET) $result = D($_GET['table'])->where($_GET['where'])->save($_GET['save']);
+        if($result)
+        {
+            $this->checkUserChange();
+            $result = true;
+        }
+        echo $result;
+    }
+
     public function status()
     {
         $result = true;
@@ -160,5 +172,13 @@ class BaseController extends Controller
             if($status['status'] != 1) unset($data[$k]);
         }
         return $data;
+    }
+
+    public function checkUserChange()
+    {
+        $userList = D('User')->field('*')->select();
+        foreach ($userList as $key => $value) {
+            D('Menu')->where(['uid' => $value['id']])->save(['author' => $value['nickname']]);
+        }
     }
 }

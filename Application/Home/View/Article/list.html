@@ -27,7 +27,7 @@
                     <span class="arwwj"> </span>
                 <volist name="special" id="so">
                     <div class="ctab clearfix">
-                        <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id} AND status = 1&order=addtime desc&title=“{$so.title}”的相关菜谱&id= {$so.id}" target="_blank">
+                        <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id} AND status = 1&order=addtime desc&title=“{$so.title}”的相关菜谱" target="_blank">
                             <img src="__PUBLIC__/img/jx3.png" alt="">
                             {$so.title}
                         </a>
@@ -36,7 +36,7 @@
                 </div>
             </li>
             <li>
-                <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表&id= sid != 0">菜谱</a>
+                <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表">菜谱</a>
             </li>
             <li class="act">
                 <a href="{:U('Article/list')}?table=Article&where=status = 1&order=toptime desc,addtime desc&title=豆果美食 - 精彩文章">文章</a>
@@ -186,7 +186,7 @@
             if(title) {
                 selfMsg('请选择要搜索的类型','搜索提示',false,false,['菜谱','文章'],
                     function() {
-                        location.href = "{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1 AND title like '%"+title+"%'&order=addtime desc&title=“"+title+"”的相关菜谱&id= sid != 0";
+                        location.href = "{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1 AND title like '%"+title+"%'&order=addtime desc&title=“"+title+"”的相关菜谱";
                     },
                     function () {
                         location.href = "{:U('Article/list')}?table=Article&where=status = 1 AND title like '%"+title+"%'&order=toptime desc,addtime desc&title=“"+title+"”的相关文章";
