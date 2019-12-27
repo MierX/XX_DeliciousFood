@@ -24,6 +24,7 @@ a.one{padding-left: 0;}
 .cook-info .cookname{padding-top:8px;font-size: 18px;font-weight: bold;overflow: hidden;line-height:18px;display:inline-block;width:483px;margin-bottom:14px;}
 .cook-info .cookname:hover{color:#ffaa00;}
 .cook-info .author a:hover{color:#ffaa00;}
+.cook-info .sall:hover{color:#ffaa00;}
 .cook-info .headicon{display:inline-block;vertical-align:middle;overflow:hidden;}
 .cook-info .headicon img{display: inline-block;width: 21px;height: 21px;vertical-align:middle;border-radius:50%;position:relative;top:-2px;}
 .cook-info p,.cook-info span{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;font-size:14px;color: #2a2a2a;line-height:14px;vertical-align:middle;}

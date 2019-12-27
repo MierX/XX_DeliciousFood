@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="@font-face{font-family:&quot;Times New Roman&quot;;}@font-face{font-family:&quot;宋体&quot;;}...">
+    <title>{$title}</title>
+
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/img/favicon_index.ico">
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/desArticle.css">
+</head>
+<body>
+    <div id="header" class="">
+        <div class="header clearfix">
+            <a class="logo left" href="{:U('Index/index')}">
+                <img src="__PUBLIC__/img/logo3.png" alt="">
+            </a>
+            <ul class="nav">
+                <li class="act">
+                    <a href="{:U('Index/index')}">首页</a>
+                </li>
+                <li class="relative " onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
+                    <a href="javascript:void(0)">专题
+                        <span class="naww"></span>
+                    </a>
+                    <div class="ctip">
+                        <span class="arwwj"> </span>
+                    <volist name="special" id="so">
+                        <div class="ctab clearfix">
+                            <a href="{:U('Menu/list')}?table=Menu&where=sid = {$so.id} AND status = 1&order=addtime desc&title=“{$so.title}”的相关菜谱&id= {$so.id}" target="_blank">
+                                <img src="__PUBLIC__/img/jx3.png" alt="">
+                                {$so.title}
+                            </a>
+                        </div>
+                    </volist>
+                    </div>
+                </li>
+                <li >
+                    <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表&id= sid != 0">菜谱</a>
+                </li>
+                <li >
+                    <a href="{:U('Article/list')}?table=Article&where=status = 1&order=toptime desc,addtime desc&title=豆果美食 - 精彩文章">文章</a>
+                </li>
+            </ul>
+            <form class="search br4 left" action="">
+                <input type="text" class="sput searchValue" name="keywords" placeholder="搜索菜谱、文章" />
+                <button type="button" class="lib" onclick="search()"></button>
+            </form>
+            <if condition="$Think.SESSION.user.isLogin eq 1">
+                <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
+                    <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
+                </div>
+                <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
+                    <a class="headicon" href="{:U('User/info')}">
+                        <img class="wb100 br50" src="__PUBLIC__/img/favicon_index.ico" alt="" title="{$Think.SESSION.user.nickname}">
+                        <span class="msgnum"></span>
+                    </a>
+                    <div class="myedit br8">
+                        <span class="arwwj"> </span>
+                        <a class="relative" href="#" target="_blank">
+                            消息提醒
+                            <span class="boll"></span>
+                        </a>
+                        <a href="#">我的收藏</a>
+                        <a href="#" target="_blank">账号设置</a>
+                        <a href="javascript:void(0)" onclick="out()">退出</a>
+                    </div>
+                </div>
+            <else />
+                <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
+                    <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
+                </div>
+                <div class="perinfo" style="float: right;">
+                    <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>
+                </div>
+            </if>
+        </div>
+    </div>
+    <div id="content" class="clearfix">
+        <div class="type-tab">
+            <div class="type-head clearfix"></div>
+        </div>
+        <div id="left">
+            <div class="article-content">
+                <div class="header">
+                    <h3>{$data.title}</h3>
+                    <div class="art-info">
+                        <span>
+                            <a href="{:U('index')}">来自：豆果美食官方号</a>
+                        </span>
+                        <span>
+                            <a href="{:U('index')}">作者：小尾巴</a>
+                        </span>
+                        <span>{$data.addtime|date='Y-m-d H:i:s',###}</span>
+                        <span>{$data.hot}次阅读</span>
+                    </div>
+                </div>
+                <div class="text">
+                    <div class="par">{$data.content}</div>
+                    <div class="copy">
+                        <p>本文版权属于豆果美食（
+                            <a href="{:U('index')}">douguo.com</a>
+                            ），转载请注明出处。商业使用请
+                            <a href="{:U('index')}">联系豆果美食</a>
+                        </p>
+                    </div>
+                    <div id="comment" class="comment">
+                        <div id="comment-text"></div>
+                        <ul id="comments"></ul>
+                        <div id="page"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="right">
+            <div style="width:280px;overflow: hidden;margin-bottom: 40px;">
+                <script type="text/javascript" src="//abc.douguo.com/todpqnwuwrvpq.js"></script>
+            </div>
+            <div style="width:280px;overflow: hidden;">
+                <script type="text/javascript" src="//abc.douguo.com/lgvhifopmjn.js"></script>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="foot">
+            <div class="clink relative">
+                <a href="http://www.douguo.com/about.html" rel="nofollow" target="_blank">关于豆果</a> ·
+                <a href="http://www.douguo.com/hr.html" rel="nofollow" target="_blank">在豆果工作</a> ·
+                <a href="http://www.douguo.com/user/feedback" rel="nofollow" target="_blank">意见反馈</a> ·
+                <a href="http://www.douguo.com/links.html" target="_blank">友情链接</a> ·
+                <a href="http://www.douguo.com/allrecipes/" target="_blank">菜谱大全</a> ·
+                <a href="http://www.douguo.com/brand" target="_blank">品牌馆</a>
+            </div>
+            <div class="cght" style="text-align: center;">
+                ©2009-2018
+                <a href="https://www.douguo.com" target="_blank">北京豆果信息技术有限公司</a>
+                <a href="http://www.miibeian.gov.cn" target="_blank" rel="nofollow">京ICP证111032号</a>
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502038268">
+                    <img alt="" src="https://i1.douguo.com//upload/banner/1564469142.png" lazysrc="" style="margin-bottom: -3px;width:20px" />
+                    京公网安备 11010502038268号
+                </a>
+                <p style="margin:5px 0;cursor: pointer;" onclick="$('.smask2').show();$('.medicinal_box').show();">互联网药品信息服务资格证书</p>
+                <a href="http://sq.ccm.gov.cn/ccnt/sczr/doLogin" target="_blank">
+                    <img alt="" src="https://i1.douguo.com//upload/banner/1522057799.png" style="margin-bottom: -3px;width:20px"/>
+                    京网文【2017】6954-770号
+                </a>
+                食品流通许可证SP1101061510252413
+                <a href="javascript:void(0);" style="display:block;text-align:center;margin-top:5px;" onclick="$('.smask2').show();$('.tvbox').show();">广播电视节目制作经营许可证（京）字第11624号</a>
+                <p style="margin:5px 0;">本网站不涉及药品交易、不撮合药品交易、不发布麻醉药品、精神药品、医疗用毒性药品、放射性药品、性药品、戒毒药品和医疗机构制剂的药品信息</p>
+                <div class="smask2" style="position:fixed;width:100%;height:100%;top:0;left:0;background: black;z-index:999;display: none;opacity: .6;filter: alpha(opacity=60)"></div>
+                <div class="tvbox" style="position: fixed;top:50%;left:50%;z-index:1000;margin-left:-350px;margin-top:-250px;display: none;">
+                    <img src="https://i1.douguo.com//upload/banner/1551092008.jpg" alt="">
+                    <img style="position: absolute;top:15px;right:15px;cursor: pointer;" src="https://cp1.douguo.com/static/nweb/images/close.png" alt="" onclick="$('.smask2').hide();$('.tvbox').hide();">
+                </div>
+                <div class="medicinal_box" style="position: fixed;top:50%;left:50%;z-index:1000;margin-left:-350px;margin-top:-250px;display: none;">
+                    <img style="display:block;width:700px;" src="https://i1.douguo.com//upload/banner/1577185524.jpg" alt="">
+                    <img style="position: absolute;top:15px;right:15px;cursor: pointer;" src="https://cp1.douguo.com/static/nweb/images/close.png" alt="" onclick="$('.smask2').hide();$('.medicinal_box').hide();">
+                </div>
+            </div>
+            <div class="botfans">
+                <span class="bonefans" style="display: inline-block;width: 64px;overflow: hidden;position: relative;top: 6px;"></span>
+                <a style="margin-left: 12px;" id='___szfw_logo___' href='https://credit.szfw.org/CX20170707035016320368.html' target='_blank'>
+                    <img alt="" src='https://i1.douguo.com/upload/banner/1528470330.png' border='0' style="height: 22px;"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="__PUBLIC__/js/base.js"></script>
+    <script src='__PUBLIC__/js/jquery.js' ></script>
+    <script src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
+    <script src="__PUBLIC__/js/layui/layui.all.js"></script>
+    <script src="__PUBLIC__/js/layer/layer.js"></script>
+    <script type="text/javascript">
+        function out() {
+            selfMsg('一旦退出账户将停止当前操作并返回首页','温馨提示',false,false,['退出','取消'],
+                function() {
+                    selfAjax("{:U('out')}",'get',{},true,function (data) {if(data) location.reload();});
+                },
+                function () {
+                    return true;
+                }
+            );
+        }
+
+        function search() {
+            var title = $("input[name='keywords']").val();
+            if(title) {
+                selfMsg('请选择要搜索的类型','搜索提示',false,false,['菜谱','文章'],
+                    function() {
+                        location.href = "{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1 AND title like '%"+title+"%'&order=addtime desc&title=“"+title+"”的相关菜谱&id= sid != 0";
+                    },
+                    function () {
+                        location.href = "{:U('Article/list')}?table=Article&where=status = 1 AND title like '%"+title+"%'&order=toptime desc,addtime desc&title=“"+title+"”的相关文章";
+                    }
+                );
+            }
+        }
+
+        (function () {
+            document.getElementById('___szfw_logo___').oncontextmenu = function () {
+                return false;
+            }
+        })();
+    </script>
+</body>
+</html>

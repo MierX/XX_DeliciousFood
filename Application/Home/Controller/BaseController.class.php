@@ -51,6 +51,15 @@ class BaseController extends Controller
         $this->assign('lastPage',$lastPage);
     }
 
+    public function content()
+    {
+        D($_GET['table'])->where($_GET['where'])->setInc('hot');
+        $data = D($_GET['table'])->field('*')->where($_GET['where'])->find();
+
+        $this->assign('title',$data['title']);
+        $this->assign('data',$data);
+    }
+
     public function special()
     {
         $special = D('Special')->field('*')->where(['status' => 1])->order('toptime desc,addtime asc')->select();

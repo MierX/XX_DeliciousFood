@@ -92,20 +92,20 @@
         <div class="mt25">
             <ul class="cook-list">
                 <volist name="data" id="do">
-                    <li class="clearfix" style="display: inline-block;width: 50%">
-                        <a class="cook-img" href="{:U('Article/content')}?id={$do.id}" style="background: url(__PUBLIC__{$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
+                    <li class="clearfix">
+                        <a class="cook-img" href="{:U('Article/content')}?table=Article&where[id]={$do.id}" style="background: url(__PUBLIC__{$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
                         <div class="cook-info" style="width: 60%">
-                            <a class="cookname text-lips" target="_blank" href="{:U('Article/content')}?id={$do.id}">{$do.title}</a>
+                            <a class="cookname text-lips" target="_blank" href="{:U('Article/content')}?table=Article&where[id]={$do.id}">{$do.title}</a>
+                            <p class="major">点击量:{$do.hot}</p>
                             <p class="major">&nbsp;</p>
-                            <p class="major">热度:{$do.hot}</p>
-                            <p class="major">&nbsp;</p>
-                            <p class="major">{$do.addtime|date='Y-m-d H:i',###}</p>
                             <div class="aut-num clearfix text-lips ">
                                 <p class="author text-lips">
                                     by
                                     <a class="text-lips author" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{:U('Index/index')}">豆果美食</a>
                                 </p>
                             </div>
+                            <p class="major">{$do.addtime|date='Y-m-d H:i',###}</p>
+                            <a class="sall" href="{:U('Article/content')}?table=Article&where[id]={$do.id}">查看全文</a>
                         </div>
                     </li>
                 </volist>

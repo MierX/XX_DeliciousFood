@@ -17,4 +17,10 @@ class ArticleController extends BaseController
         parent::list();
         $this->display();
     }
+
+    public function content()
+    {
+        parent::content();
+        $this->display();
+    }
 }
