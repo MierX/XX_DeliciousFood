@@ -84,7 +84,7 @@
 								<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
 							</a>
 							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="operation('{:U(\'del\')}?table=Menu&where[id]={$do.id}')" href="javascript:void(0);" title="删除">
+							<a style="text-decoration:none" onClick="selfOperation('{:U(\'del\')}?table=Menu&where[id]={$do.id}')" href="javascript:void(0);" title="删除">
 								<i class="Hui-iconfont">&#xe609;</i>
 							</a>
 						</td>
@@ -135,7 +135,7 @@
 
 		function status(id,status) {
 			status = status == 1 ? 0 : 1;
-			operation('{:U(\'changeV2\')}?table=Menu&where[id]='+id+'&save[status]='+status);
+			selfOperation('{:U(\'changeV2\')}?table=Menu&where[id]='+id+'&save[status]='+status);
 		}
 	</script>
 </body>

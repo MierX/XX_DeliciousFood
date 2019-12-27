@@ -55,7 +55,7 @@
 								<i class="Hui-iconfont">&#xe725;</i>
 							</a>
 							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="operation('{:U(\'changeV2\')}?table=Menu&where[id]={$do.id}&save[sid]={$id}')" href="javascript:void(0);" title="加入">
+							<a style="text-decoration:none" onClick="selfOperation('{:U(\'changeV2\')}?table=Menu&where[id]={$do.id}&save[sid]={$id}')" href="javascript:void(0);" title="加入">
 								<i class="Hui-iconfont">&#xe600;</i>
 							</a>
 						</td>
@@ -109,7 +109,7 @@
 
 		function status(id,status) {
 			status = status == 1 ? 0 : 1;
-			operation('{:U(\'changeV2\')}?table=Menu&where[id]='+id+'&save[status]='+status);
+			selfOperation('{:U(\'changeV2\')}?table=Menu&where[id]='+id+'&save[status]='+status);
 		}
 	</script>
 </body>

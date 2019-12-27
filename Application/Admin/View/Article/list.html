@@ -24,7 +24,7 @@
 <nav class="breadcrumb">
 	<div class="text-c">
 			<span class="l" style="margin-left: -20px">
-				<button type="submit" class="btn btn-success radius" onclick="show('添加文章','{:U(\'edit\')}?table=Article&where[id]=0',0,0)">
+				<button type="submit" class="btn btn-success radius" onclick="selfShow('添加文章','{:U(\'edit\')}?table=Article&where[id]=0',0,0)">
 					<i class="Hui-iconfont">&#xe600;</i>
 					添加
 				</button>
@@ -85,11 +85,11 @@
 								<i class="Hui-iconfont">&#xe725;</i>
 							</a>
 							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="operation('{:U(\'changeV2\')}?table=Article&where[id]={$do.id}&save[toptime]='+Date.parse(new Date())/1000)" href="javascript:void(0);" title="置顶">
+							<a style="text-decoration:none" onClick="selfOperation('{:U(\'changeV2\')}?table=Article&where[id]={$do.id}&save[toptime]='+Date.parse(new Date())/1000)" href="javascript:void(0);" title="置顶">
 								<i class="Hui-iconfont">&#xe679;</i>
 							</a>
 							&nbsp;&nbsp;
-							<a style="text-decoration:none" onClick="show('编辑文章','{:U(\'edit\')}?table=Article&where[id]={$do.id}',0,0)" href="javascript:void(0);" title="编辑">
+							<a style="text-decoration:none" onClick="selfShow('编辑文章','{:U(\'edit\')}?table=Article&where[id]={$do.id}',0,0)" href="javascript:void(0);" title="编辑">
 								<i class="Hui-iconfont">&#xe6df;</i>
 							</a>
 							&nbsp;&nbsp;
@@ -147,7 +147,7 @@
 
 		function status(id,status) {
 			status = status == 1 ? 0 : 1;
-			operation('{:U(\'changeV2\')}?table=Article&where[id]='+id+'&save[status]='+status);
+			selfOperation('{:U(\'changeV2\')}?table=Article&where[id]='+id+'&save[status]='+status);
 		}
 	</script>
 </body>
