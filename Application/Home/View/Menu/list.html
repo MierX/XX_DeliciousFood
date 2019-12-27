@@ -36,7 +36,7 @@
                 </div>
             </li>
             <li <eq name="title" value="菜谱列表">class="act"</eq> >
-                <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表">菜谱</a>
+                <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=菜谱列表">菜谱</a>
             </li>
             <li >
                 <a href="{:U('Article/list')}?table=Article&where=status = 1&order=toptime desc,addtime desc&title=豆果美食 - 精彩文章">文章</a>
@@ -93,14 +93,14 @@
             <ul class="cook-list">
                 <volist name="data" id="do">
                     <li class="clearfix" style="display: inline-block;width: 50%">
-                        <a class="cook-img" href="{:U('Menu/content')}?id={$do.id}" style="background: url({$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
+                        <a class="cook-img" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}" style="background: url({$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
                         <div class="cook-info" style="width: 60%">
-                            <a class="cookname text-lips" target="_blank" href="{:U('Menu/content')}?id={$do.id}">{$do.title}</a>
+                            <a class="cookname text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}">{$do.title}</a>
                             <p class="major">糯米粉,粘米粉,玉米淀粉,低粉,牛奶,炼乳,糯米粉,粘米粉,玉米淀粉,低粉,牛奶,炼乳 </p>
                             <div class="aut-num clearfix text-lips ">
                                 <p class="author text-lips">
                                     by
-                                    <a class="text-lips author" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{$do.uid}">{$do.author}</a>
+                                    <a class="text-lips author" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="javascript:void(0)">{$do.author}</a>
                                 </p>
                             </div>
                             <p class="major">{$do.addtime|date='y-m-d',###}</p>
@@ -111,10 +111,10 @@
         </div>
         <div class="mt20">
             <div class="pages">
-                <a href="{:U('Menu/list')}?table=Menu&where={$where}&order=addtime desc&title={$so.title}" class="atou hide">首页</a>
-                <a href="javascript:void(0);" onclick="selfLastPage('{$page}','{:U(\'Menu/list\')}?table=Menu&where={$where}&order=addtime desc&title={$so.title}&page=')" class="ali">上一页</a>
-                <a href="javascript:void(0);" onclick="selfNextPage('{$page}','{$lastPage}','{:U(\'Menu/list\')}?table=Menu&where={$where}&order=addtime desc&title={$so.title}&page=')" class="anext">下一页</a>
-                <a href="{:U('Menu/list')}?table=Menu&where={$where}&order=addtime desc&title={$so.title}&page={$lastPage}" class="alast">末页</a>
+                <a href="{:U('Menu/list')}?table=Menu&where={$where}&order=addtime desc&title={$title}" class="atou hide">首页</a>
+                <a href="javascript:void(0);" onclick="selfLastPage('{$page}','{:U(\'Menu/list\')}?table=Menu&where={$where}&order=addtime desc&title={$title}&page=')" class="ali">上一页</a>
+                <a href="javascript:void(0);" onclick="selfNextPage('{$page}','{$lastPage}','{:U(\'Menu/list\')}?table=Menu&where={$where}&order=addtime desc&title={$title}&page=')" class="anext">下一页</a>
+                <a href="{:U('Menu/list')}?table=Menu&where={$where}&order=addtime desc&title={$title}&page={$lastPage}" class="alast">末页</a>
             </div>
         </div>
     </div>
@@ -184,7 +184,7 @@
             if(title) {
                 selfMsg('请选择要搜索的类型','搜索提示',false,false,['菜谱','文章'],
                     function() {
-                        location.href = "{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1 AND title like '%"+title+"%'&order=addtime desc&title=“"+title+"”的相关菜谱";
+                        location.href = "{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1 AND title like '%"+title+"%'&order=addtime desc&title=“"+title+"”的相关菜谱";
                     },
                     function () {
                         location.href = "{:U('Article/list')}?table=Article&where=status = 1 AND title like '%"+title+"%'&order=toptime desc,addtime desc&title=“"+title+"”的相关文章";

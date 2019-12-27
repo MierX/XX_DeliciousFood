@@ -35,7 +35,7 @@
                     </div>
                 </li>
                 <li >
-                    <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=菜谱列表">菜谱</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=菜谱列表">菜谱</a>
                 </li>
                 <li >
                     <a href="{:U('Article/list')}?table=Article&where=status = 1&order=toptime desc,addtime desc&title=豆果美食 - 精彩文章">文章</a>
@@ -56,9 +56,9 @@
                     </a>
                     <div class="myedit br8">
                         <span class="arwwj"> </span>
-                        <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.id}&order=addtime desc&title=菜谱列表">我的菜谱</a>
-                        <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=我的收藏">我的收藏</a>
-                        <a href="{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1&order=addtime desc&title=评论过的菜谱">评论过的菜谱</a>
+                        <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.user.id}&order=addtime desc&title=菜谱列表&my=1">我的菜谱</a>
+                        <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=我的收藏">我的收藏</a>
+                        <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=评论过的菜谱">评论过的菜谱</a>
                         <a href="javascript:void(0)" onclick="selfUserChange('{$Think.SESSION.user.id}','{$Think.SESSION.user.nickname}','{$Think.SESSION.user.username}','{:U(\'Change\')}?table=User&where[id]=')">账号设置</a>
                         <a href="javascript:void(0)" onclick="out()">退出</a>
                     </div>
@@ -282,7 +282,7 @@
             if(title) {
                 selfMsg('请选择要搜索的类型','搜索提示',false,false,['菜谱','文章'],
                     function() {
-                        location.href = "{:U('Menu/list')}?table=Menu&where=sid != 0 AND status = 1 AND title like '%"+title+"%'&order=addtime desc&title=“"+title+"”的相关菜谱";
+                        location.href = "{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1 AND title like '%"+title+"%'&order=addtime desc&title=“"+title+"”的相关菜谱";
                     },
                     function () {
                         location.href = "{:U('Article/list')}?table=Article&where=status = 1 AND title like '%"+title+"%'&order=toptime desc,addtime desc&title=“"+title+"”的相关文章";

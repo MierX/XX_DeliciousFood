@@ -21,6 +21,6 @@ class MenuController extends BaseController
     public function edit()
     {
         parent::edit();
-        $this->display();
+        $this->display('edit');
     }
 }

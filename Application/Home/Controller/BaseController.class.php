@@ -45,6 +45,7 @@ class BaseController extends Controller
 
         $this->assign('title',$_GET['title']);
         $this->assign('where',$_GET['where']);
+        $this->assign('my',$_GET['my']);
         $this->assign('pageId',$_GET['id']);
         $this->assign('data',$data);
         $this->assign('page',$page);
@@ -53,6 +54,13 @@ class BaseController extends Controller
 
     public function content()
     {
+        if($_GET['my'] && $_SESSION['user']['id'] == $_GET['author'])
+        {
+            $menu = new MenuController();
+            $menu->edit();
+            exit;
+        }
+
         D($_GET['table'])->where($_GET['where'])->setInc('hot');
         $data = D($_GET['table'])->field('*')->where($_GET['where'])->find();
 
