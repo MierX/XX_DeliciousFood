@@ -12,6 +12,7 @@ class BaseController extends Controller
         {
             $this->login();
             exit;
+            exit;
         }
     }
 
