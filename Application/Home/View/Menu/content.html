@@ -6,7 +6,7 @@
 
     <link rel="shortcut icon" type="image/png" href="__PUBLIC__/img/favicon_index.ico">
     <link rel="stylesheet" href="__PUBLIC__/css/main.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/index.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/recipe.css">
 </head>
 <body>
     <div id="header" class="">
@@ -15,10 +15,10 @@
                 <img src="__PUBLIC__/img/logo3.png" alt="">
             </a>
             <ul class="nav">
-                <li class="act">
+                <li>
                     <a href="{:U('Index/index')}">首页</a>
                 </li>
-                <li class="relative " onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();">
+                <li onmouseover="$('.ctip').show();" onmouseout="$('.ctip').hide();" <if condition="$title neq 菜谱列表">class="relative act"<else />class="relative"</if> >
                     <a href="javascript:void(0)">专题
                         <span class="naww"></span>
                     </a>
@@ -34,7 +34,7 @@
                     </volist>
                     </div>
                 </li>
-                <li >
+                <li <eq name="title" value="菜谱列表">class="act"</eq> >
                     <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=菜谱列表">菜谱</a>
                 </li>
                 <li >
@@ -63,7 +63,7 @@
                         <a href="javascript:void(0)" onclick="out()">退出</a>
                     </div>
                 </div>
-            <else />
+                <else />
                 <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
                     <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
                 </div>
@@ -73,148 +73,145 @@
             </if>
         </div>
     </div>
-    <div id="banner" class="relative">
-        <div class="banner absolute">
-            <ul class="blist">
-                <li>
-                    <a href="javascript:void(0);" class="DGTrack">
-                        <img  width="100%" src="https://i1.douguo.com//upload/banner/1576658265.jpg" alt="" >
+    <div id="content" class="recipe-content clearfix">
+        <div id="left">
+            <div class="relative">
+                <div id="banner" class="cboxElement cboxElement1" data-origin="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}" data-snum="1" href="javascript:void(0);" rel="recipe_img">
+                    <a href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}" >
+                        <img class="wb100" src="__PUBLIC__{$data.img}" style="height: 100%" alt="{$data.title}">
                     </a>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <div class="rinfo relative">
+                <h1 class="title text-lips"  style="display: inline-block">{$data.title}</h1>
+                <div class="boutiExclu">
+                    <span class="bouti">精品</span>
+                </div>
+                <div class="vcnum relative">
+                    <span>{$data.hot}</span> 浏览
+                    <div class="absolute operate">
+                        <a class="btn-collect" href="javascript:void(0);" data-status="0" >收藏</a>
+                    </div>
+                </div>
+                <div class="clearfix aut-info relative">
+                    <a class="author-img left" href="javascript:void(0);" target="_blank" title="{$data.author}">
+                        <img class="br50" src="__PUBLIC__/img/favicon_index.ico" alt="{$data.author}" width="30" height="30">
+                    </a>
+                    <div class="author-info left">
+                        <a class="nickname text-lips" href="javascript:void(0);" target="_blank">{$data.author}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="metarial">
+                <h2 class="mini-title">{$data.title}的食材用料</h2>
+                <table width="690" border="0" cellspacing="0" cellpadding="0" class="retamr br8">
+                    <tr>
+                        <td class="lirre" style="border-top:0;">
+                            <span class="scname">
+                                <a href="/caipu/熟米饭" target="_blank">熟米饭</a>
+                            </span>
+                            <span class='right scnum'>1大碗</span>
+                        </td>
+                        <td style="border-top:0;">
+                            <span class="scname"><a href="/caipu/肥牛" target="_blank">肥牛</a></span>
+                            <span class='right scnum'>130克</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lirre" >
+                            <span class="scname"><a href="/caipu/泡菜" target="_blank">泡菜</a></span>
+                            <span class='right scnum'>150克</span>
+                        </td>
+                        <td >
+                            <span class="scname"><a href="/caipu/香菇" target="_blank">香菇</a></span>
+                            <span class='right scnum'>3朵</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tips">
+                <h2 class="mini-title">{$data.title}的烹饪技巧</h2>
+                <p>
+                    <br />
+                    {$data.content}
+                </p>
+            </div>
+            <p class="creattime">发布时间:{$data.addtime|date='Y-m-d H:i:s',###}</p>
+            <div class="copyright">©本菜谱的做法由 <a class="author" href="javascript:void(0)" target="_blank">{$data.author}</a> 编写，未经授权不得转载</div>
+            <div style="padding-top: 10px;"></div>
+            <div class="bot-list">
+                <h2 class="mini-title">{$data.title}的相关菜谱</h2>
+                <ul class="recipe-list clearfix">
+                    <li class="item ">
+                        <a class="cover br8 relative" target="_blank" href="/cookbook/206667.html" >
+                            <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/9/a/8/220_9a9d77658ef91ccc8c9b4ce6fbc99368.jpg" alt="可乐鸡翅[简单到没下过厨也会做]">
+                        </a>
+                        <div>
+                            <a class="name text-lips" target="_blank" href="/cookbook/206667.html">可乐鸡翅[简单到没下过厨也会做]</a>
+                            <a class="author" href="/u/u49617908834149.html">by <span>stta小铭</span></a>
+                        </div>
+                    </li>
+                    <li class="item ">
+                        <a class="cover br8 relative" target="_blank" href="/cookbook/961224.html" >
+                            <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/d/2/3/220_d2017ec4908b6acb49339d99121cce33.jpg" alt="吃过就会爱上--番茄烩金针菇">
+                        </a>
+                        <div>
+                            <a class="name text-lips" target="_blank" href="/cookbook/961224.html">吃过就会爱上--番茄烩金针菇</a>
+                            <a class="author" href="/u/u81418481249988.html">by <span>晴安</span></a>
+                        </div>
+                    </li>
+                    <li class="item  mr0 ">
+                        <a class="cover br8 relative" target="_blank" href="/cookbook/211993.html" >
+                            <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/2/7/3/220_27d4770982651e9cb2d31c1b77c58303.jpg" alt="茄汁焖大虾">
+                        </a>
+                        <div>
+                            <a class="name text-lips" target="_blank" href="/cookbook/211993.html">茄汁焖大虾</a>
+                            <a class="author" href="/u/u62182782331893.html">by <span>妙妙小姐姐</span></a>
+                        </div>
+                    </li>
+                    <li class="item ">
+                        <a class="cover br8 relative" target="_blank" href="/cookbook/763523.html" >
+                            <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/d/7/4/220_d7909a4ecbb0bdb069f0eab38d5924e4.jpg" alt="入口即化的玛格丽特饼干～">
+                        </a>
+                        <div>
+                            <a class="name text-lips" target="_blank" href="/cookbook/763523.html">入口即化的玛格丽特饼干～</a>
+                            <a class="author" href="/u/u94457742794738.html">by <span>丸子与牛肉饼</span></a>
+                        </div>
+                    </li>
+                    <li class="item ">
+                        <a class="cover br8 relative" target="_blank" href="/cookbook/83620.html" >
+                            <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/f/5/9/220_f513e77f6c147dbb5c3d2f62f5d6e239.jpg" alt="8寸原味芝士蛋糕">
+                            <div style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;">
+                                <img src="https://cp1.douguo.com/static/nweb/images/video_icon.png" alt="" style="width: 20%;position: absolute;top: 50%;margin-top: -10%;left: 50%;margin-left: -10%;">
+                            </div>
+                        </a>
+                        <div>
+                            <a class="name text-lips" target="_blank" href="/cookbook/83620.html">8寸原味芝士蛋糕</a>
+                            <a class="author" href="/u/u85041230.html">by <span>小聪明</span></a>
+                        </div>
+                    </li>
+                    <li class="item  mr0 ">
+                        <a class="cover br8 relative" target="_blank" href="/cookbook/1300771.html" >
+                            <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/d/9/8/220_d9eaf305b1df2ee5da16075ad85d4138.jpg" alt="迷迭香美食| 糖醋排骨">
+                            <div style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;">
+                                <img src="https://cp1.douguo.com/static/nweb/images/video_icon.png" alt="" style="width: 20%;position: absolute;top: 50%;margin-top: -10%;left: 50%;margin-left: -10%;">
+                            </div>
+                        </a>
+                        <div>
+                            <a class="name text-lips" target="_blank" href="/cookbook/1300771.html">迷迭香美食| 糖醋排骨</a>
+                            <a class="author" href="/u/u48350980597650.html">by <span>迷迭香Rosemary</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 评论 -->
+            <div id="comment" class="comment">
+                <div id="comment-text"></div>
+                <ul id="comments"></ul>
+                <div id="page"></div>
+            </div>
         </div>
-    </div>
-    <div id="content" class="clearfix">
-    <empty name="special">
-        <h2 class="title">每日精选菜谱<a class="more" href="/jingxuan">更多 <img src="https://cp1.douguo.com/static/nweb/images/more2.png?1" alt=""></a></h2>
-        <ul class="recipe-list clearfix">
-            <li class="item" >
-                <a class="cover br8" href="/cookbook/2386719.html" target="_blank">
-                    <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/6/3/5/220x220_636e47172d5a9b382dd0b5221f253d55.jpg" alt="莲藕排骨汤 | 一碗鲜美的暖汤">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="/cookbook/2386719.html">莲藕排骨汤 | 一碗鲜美的暖汤</a>
-                    <p class="author text-lips">by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="/u/u01292565766218.html">食域家</a>
-                    </p>
-                </div>
-            </li>
-            <li class="item" >
-                <a class="cover br8" href="/cookbook/2386810.html" target="_blank">
-                    <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/e/d/9/220x220_edf09138bff06ddec2fea6410b41c7b9.jpg" alt="圣诞果蔬花环沙拉">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="/cookbook/2386810.html">#今天吃什么#圣诞果蔬花环沙拉</a>
-                    <p class="author text-lips">by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="/u/u70410512652712.html">牛妈家的厨房</a>
-                    </p>
-                </div>
-            </li>
-            <li class="item" >
-                <a class="cover br8" href="/cookbook/2386828.html" target="_blank">
-                    <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/a/f/3/220x220_afc95e43b05880babcf1261da9b62f43.jpg" alt="汪涵版葱油面">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="/cookbook/2386828.html">汪涵版葱油面</a>
-                    <p class="author text-lips">by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="/u/u97879889600521.html">吾爱烘焙_</a>
-                    </p>
-                </div>
-            </li>
-            <li class="item"    style="margin-right: 0px"   >
-                <a class="cover br8" href="/cookbook/2386740.html" target="_blank">
-                    <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/8/7/9/220x220_879ffd050693b9a10cd36754724e5319.jpg" alt="芝士焗红薯">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="/cookbook/2386740.html">芝士焗红薯#今天吃什么#</a>
-                    <p class="author text-lips">by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="/u/u55529288452325.html">爱糖果</a>
-                    </p>
-                </div>
-            </li>
-            <li class="item" >
-                <a class="cover br8" href="/cookbook/2386949.html" target="_blank">
-                    <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/4/e/f/220x220_4e0d1e44013efaf0a7faf1fac37e0acf.jpg" alt="大米肉圆">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="/cookbook/2386949.html">大米肉圆</a>
-                    <p class="author text-lips">by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="/u/u98965501516416.html">禹馨</a>
-                    </p>
-                </div>
-            </li>
-            <li class="item" >
-                <a class="cover br8" href="/cookbook/2386808.html" target="_blank">
-                    <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/8/1/9/220x220_81921c2f21915e99d479bf908e588d59.jpg" alt="翡翠白菜饺">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="/cookbook/2386808.html">翡翠白菜饺</a>
-                    <p class="author text-lips">by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="/u/u42943041860509.html">蜜桃厨房</a>
-                    </p>
-                </div>
-            </li>
-            <li class="item" >
-                <a class="cover br8" href="/cookbook/2386857.html" target="_blank">
-                    <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/f/d/f/220x220_fdfa36d94887e6422416ebca6bfe037f.jpeg" alt="家常一锅炖菜">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="/cookbook/2386857.html">#今天吃什么#家常一锅炖菜</a>
-                    <p class="author text-lips">by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="/u/u47593557106907.html">料理小兔子</a>
-                    </p>
-                </div>
-            </li>
-            <li class="item"    style="margin-right: 0px"   >
-                <a class="cover br8" href="/cookbook/2386947.html" target="_blank">
-                    <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/c/8/e/220x220_c8eb6b7bfb317a237aaca7042c93ee8e.jpg" alt="肠粉">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="/cookbook/2386947.html">肠粉</a>
-                    <p class="author text-lips">by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;"  target="_blank" href="/u/u47756556791688.html">寻找桃花岛</a>
-                    </p>
-                </div>
-            </li>
-        </ul>
-    <else />
-    <volist name="special" id="so">
-        <h2 class="title">
-            {$so.title}
-        </h2>
-        <ul class="recipe-list clearfix">
-        <foreach name="so.menu" item="mo" key="k">
-        <if condition="($k eq 3) or ($k eq 7)">
-            <li class="item" style="margin-right: 0">
-                <a class="cover br8" href="{:U('Menu/content')}?id={$mo.id}" target="_blank">
-                    <img width="220" height="220" src="__PUBLIC__{$mo.img}" alt="{$mo.title}" title="{$mo.title}">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?id={$mo.id}">{$mo.title}</a>
-                    <p class="author text-lips">
-                        by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{$mo.uid}">{$mo.author}</a>
-                    </p>
-                </div>
-            </li>
-        <else />
-            <li class="item">
-                <a class="cover br8" href="{:U('Menu/content')}?id={$mo.id}" target="_blank">
-                    <img width="220" height="220" src="__PUBLIC__{$mo.img}" alt="{$mo.title}" title="{$mo.title}">
-                </a>
-                <div>
-                    <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?id={$mo.id}">{$mo.title}</a>
-                    <p class="author text-lips">
-                        by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{$mo.uid}">{$mo.author}</a>
-                    </p>
-                </div>
-            </li>
-        </if>
-        </foreach>
-        </ul>
-    </volist>
-    </empty>
+        <div id="right"></div>
     </div>
     <div id="footer">
         <div class="foot">

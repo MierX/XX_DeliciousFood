@@ -50,28 +50,26 @@
                 <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
                     <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
                 </div>
-                <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
-                    <a class="headicon" href="{:U('User/info')}">
+                <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();" style="float: right;">
+                    <a class="headicon" href="javascript:void(0)" onclick="selfUserChange('{$Think.SESSION.user.id}','{$Think.SESSION.user.nickname}','{$Think.SESSION.user.username}','{:U(\'Change\')}?table=User&where[id]=')">
                         <img class="wb100 br50" src="__PUBLIC__/img/favicon_index.ico" alt="" title="{$Think.SESSION.user.nickname}">
                         <span class="msgnum"></span>
                     </a>
                     <div class="myedit br8">
                         <span class="arwwj"> </span>
-                        <a class="relative" href="#" target="_blank">
-                            消息提醒
-                            <span class="boll"></span>
-                        </a>
-                        <a href="#">我的收藏</a>
-                        <a href="#" target="_blank">账号设置</a>
+                        <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.user.id}&order=addtime desc&title=菜谱列表&my=1">我的菜谱</a>
+                        <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=我的收藏">我的收藏</a>
+                        <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=评论过的菜谱">评论过的菜谱</a>
+                        <a href="javascript:void(0)" onclick="selfUserChange('{$Think.SESSION.user.id}','{$Think.SESSION.user.nickname}','{$Think.SESSION.user.username}','{:U(\'Change\')}?table=User&where[id]=')">账号设置</a>
                         <a href="javascript:void(0)" onclick="out()">退出</a>
                     </div>
                 </div>
-            <else />
+                <else />
                 <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
                     <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
                 </div>
                 <div class="perinfo" style="float: right;">
-                    <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>
+                    <a class="login" href="{:U('Index/login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('Index/register')}" target="_blank"> 注册 </a>
                 </div>
             </if>
         </div>

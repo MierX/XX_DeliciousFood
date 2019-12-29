@@ -46,34 +46,32 @@
             <input type="text" class="sput searchValue" name="keywords" placeholder="搜索菜谱、文章" />
             <button type="button" class="lib" onclick="search()"></button>
         </form>
-    <if condition="$Think.SESSION.user.isLogin eq 1">
-        <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-            <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
-        </div>
-        <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();">
-            <a class="headicon" href="{:U('User/info')}">
-                <img class="wb100 br50" src="__PUBLIC__/img/favicon_index.ico" alt="" title="{$Think.SESSION.user.nickname}">
-                <span class="msgnum"></span>
-            </a>
-            <div class="myedit br8">
-                <span class="arwwj"> </span>
-                <a class="relative" href="#" target="_blank">
-                    消息提醒
-                    <span class="boll"></span>
-                </a>
-                <a href="#">我的收藏</a>
-                <a href="#" target="_blank">账号设置</a>
-                <a href="javascript:void(0)" onclick="out()">退出</a>
+        <if condition="$Think.SESSION.user.isLogin eq 1">
+            <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
+                <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
             </div>
-        </div>
-    <else />
-        <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
-            <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
-        </div>
-        <div class="perinfo" style="float: right;">
-            <a class="login" href="{:U('login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('register')}" target="_blank"> 注册 </a>
-        </div>
-    </if>
+            <div class="myinfo relative" onmouseover="$('.myedit').show();" onmouseout="$('.myedit').hide();" style="float: right;">
+                <a class="headicon" href="javascript:void(0)" onclick="selfUserChange('{$Think.SESSION.user.id}','{$Think.SESSION.user.nickname}','{$Think.SESSION.user.username}','{:U(\'Change\')}?table=User&where[id]=')">
+                    <img class="wb100 br50" src="__PUBLIC__/img/favicon_index.ico" alt="" title="{$Think.SESSION.user.nickname}">
+                    <span class="msgnum"></span>
+                </a>
+                <div class="myedit br8">
+                    <span class="arwwj"> </span>
+                    <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.user.id}&order=addtime desc&title=菜谱列表&my=1">我的菜谱</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=我的收藏">我的收藏</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=评论过的菜谱">评论过的菜谱</a>
+                    <a href="javascript:void(0)" onclick="selfUserChange('{$Think.SESSION.user.id}','{$Think.SESSION.user.nickname}','{$Think.SESSION.user.username}','{:U(\'Change\')}?table=User&where[id]=')">账号设置</a>
+                    <a href="javascript:void(0)" onclick="out()">退出</a>
+                </div>
+            </div>
+            <else />
+            <div class="pubt" onmouseover="$('.pubt-box').show();" onmouseout="$('.pubt-box').hide();">
+                <a class="btn-pubt" href="{:U('Menu/edit')}?table=Menu&where[id]=0&title=豆果美食 - 发布菜谱" title="发布菜谱">发布</a>
+            </div>
+            <div class="perinfo" style="float: right;">
+                <a class="login" href="{:U('Index/login')}" target="_blank"> 登录 </a> | <a class="register" href="{:U('Index/register')}" target="_blank"> 注册 </a>
+            </div>
+        </if>
     </div>
 </div>
     <div id="banner" class="relative">
@@ -93,10 +91,11 @@
             <ul class="cook-list">
                 <volist name="data" id="do">
                     <li class="clearfix" style="display: inline-block;width: 50%">
-                        <a class="cook-img" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}" style="background: url({$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
+                        <a class="cook-img" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}" style="background: url(__PUBLIC__{$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
                         <div class="cook-info" style="width: 60%">
                             <a class="cookname text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}">{$do.title}</a>
                             <p class="major">糯米粉,粘米粉,玉米淀粉,低粉,牛奶,炼乳,糯米粉,粘米粉,玉米淀粉,低粉,牛奶,炼乳 </p>
+                            <p class="major">&nbsp;</p>
                             <div class="aut-num clearfix text-lips ">
                                 <p class="author text-lips">
                                     by
