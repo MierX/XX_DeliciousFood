@@ -35,8 +35,26 @@ class BaseController extends Controller
         $this->assign('data', $data);
     }
 
+    public function collection()
+    {
+        $result = D('Collection')->field('*')->where(['uid' => $_POST['uid'], 'mid' => $_POST['mid']])->find();
+        $result = $result['id'] ? D('Collection')->where(['uid' => $_POST['uid'], 'mid' => $_POST['mid']])->delete() : D('Collection')->add(['uid' => intval($_POST['uid']), 'mid' => intval($_POST['mid']), 'addtime' => time()]);
+        echo $result;
+    }
+
     public function list()
     {
+        if($_GET['my'] == 2)
+        {
+            $midList = implode(',', array_column(D('Collection')->field('mid')->where(['uid' => $_SESSION['user']['id']])->select(),'mid'));
+            $_GET['where'] = $midList ? "id in (".$midList.") AND status = 1" : "id = 0 AND status = 1";
+        }
+        elseif($_GET['my'] == 3)
+        {
+            $midList = implode(',', array_column(D('Collection')->field('mid')->where(['uid' => $_SESSION['user']['id']])->select(),'mid'));
+            $_GET['where'] = $midList ? "id in (".$midList.") AND status = 1" : "id = 0 AND status = 1";
+        }
+
         $page = $_GET['page'] > 0 ? $_GET['page'] : 1;
         $psize = ($page-1)*20;
         $data = D()->query("select * from ".$_GET['table']." where ".$_GET['where']." ORDER BY ".$_GET['order']." limit ".$psize.",20");
@@ -54,7 +72,7 @@ class BaseController extends Controller
 
     public function content()
     {
-        if($_GET['my'] && $_SESSION['user']['id'] == $_GET['author'])
+        if($_GET['my'] == 1 && $_SESSION['user']['id'] == $_GET['author'])
         {
             $menu = new MenuController();
             $menu->edit();
@@ -63,8 +81,10 @@ class BaseController extends Controller
 
         D($_GET['table'])->where($_GET['where'])->setInc('hot');
         $data = D($_GET['table'])->field('*')->where($_GET['where'])->find();
+        $isCollection = D('collection')->field('id')->where(['uid' => $_SESSION['user']['id'], 'mid' => $_GET['where']['id']])->find() ? 1 : 0;
 
         $this->assign('title',$data['title']);
+        $this->assign('isCollection',$isCollection);
         $this->assign('data',$data);
     }
 
