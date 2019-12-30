@@ -202,3 +202,16 @@ function selfCollection(url,uid,mid) {
         selfMsg('登录后再来收藏菜谱吧','温馨提示',false,true,[]);
     }
 }
+
+function selfComment(url,uid,mid,value) {
+    if(uid && mid && value) {
+        let data = {
+            'uid' : uid,
+            'mid' : mid,
+            'content' : value,
+        };
+        selfAjax(url,"post", data,true,function (data) {if(data){location.reload();}else{selfMsg('操作失败！','提示',false,true,[])}});
+    } else {
+        selfMsg('登录后再来发表评论吧','温馨提示',false,true,[]);
+    }
+}

@@ -140,18 +140,62 @@
             <p class="creattime">发布时间:{$data.addtime|date='Y-m-d H:i:s',###}</p>
             <div class="copyright">©本菜谱的做法由 <a class="author" href="javascript:void(0)" target="_blank">{$data.author}</a> 编写，未经授权不得转载</div>
             <div class="comment">
-                <h3>评论</h3>
+                <h3 style="padding-bottom: 10px">评论</h3>
                 <div id="comment-text">
                     <div class="in-comment clearfix">
                         <div class="author-img" style="float: left;">
                             <img alt="" src="__PUBLIC__/img/favicon_index.ico" class="br50" width="30" height="30" />
                         </div>
                         <textarea class="left" style="width: 648px;height: 112px;resize: none;padding: 12px;border: 1px solid #E5E3DF;border-radius: 4px;margin-left: 12px"></textarea>
-                        <a href="javascript:void(0)" style="float: right;color:#FFB31A;right: 0;margin-top: 10px;display: inline-block;border-radius: 4px;height:34px;width:104px;text-align:center;line-height:34px;font-size: 15px;border:1px solid #FFB31A;">发表评论</a>
+                        <a href="javascript:void(0)" style="float: right;color:#FFB31A;right: 0;margin-top: 10px;display: inline-block;border-radius: 4px;height:34px;width:104px;text-align:center;line-height:34px;font-size: 15px;border:1px solid #FFB31A;" onclick="selfComment('{:U(\'comment\')}','{$Think.SESSION.user.id}','{$data.id}',this.previousElementSibling.value)">发表评论</a>
                     </div>
                 </div>
                 <ul class="comment-list">
-                    <marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount="5" scrolldelay="1" direction="up" width="200" height="350">
+                    <marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount="5" scrolldelay="1" direction="up" width="650" height="350">
+                    <notempty name="comment">
+                    <volist name="comment" id="co">
+                        <li>
+                            <a href="javascript:void(0);" target="_blank">
+                                <img src="__PUBLIC__/img/favicon_index.ico" alt="" class="user-head">
+                            </a>
+                            <div class="des-comment">
+                                <h4>{$co.author}</h4>
+                                <p style="width: 600px">{$co.content}</p>
+                                <span class="time">{$co.addtime|date='Y-m-d H:i:s',###}</span>
+                            </div>
+                        </li>
+                    </volist>
+                    <else />
+                        <li>
+                            <a href="javascript:void(0);" target="_blank">
+                                <img src="https://tx1.douguo.com/upload/photo/3/0/5/70_u04973117567938215750.jpg" alt="" class="user-head">
+                            </a>
+                            <div class="des-comment">
+                                <h4>玥轩</h4>
+                                <p>好用心</p>
+                                <span class="time">2019-12-28 22:17:07</span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/u/u1814684855262" target="_blank">
+                                <img src="https://tx1.douguo.com/upload/photo/8/f/f/70_u69757368891254095658.jpeg" alt="" class="user-head">
+                            </a>
+                            <div class="des-comment">
+                                <h4>our et la haineD</h4>
+                                <p>看着很不错呢~ </p>
+                                <span class="time">2019-12-28 22:07:07</span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/u/u317396394220" target="_blank">
+                                <img src="https://tx1.douguo.com/upload/photo/1/2/3/70_u9422031739630330020618.jpg" alt="" class="user-head">
+                            </a>
+                            <div class="des-comment">
+                                <h4>Jonawdcf</h4>
+                                <p>真厉害</p>
+                                <span class="time">2019-12-28 22:01:08</span>
+                            </div>
+                        </li>
                         <li>
                             <a href="/u/u04973117567938" target="_blank">
                                 <img src="https://tx1.douguo.com/upload/photo/3/0/5/70_u04973117567938215750.jpg" alt="" class="user-head">
@@ -181,74 +225,17 @@
                                 <p>真厉害</p>
                                 <span class="time">2019-12-28 22:01:08</span>
                             </div>
-                        </li><li>
-                        <a href="/u/u04973117567938" target="_blank">
-                            <img src="https://tx1.douguo.com/upload/photo/3/0/5/70_u04973117567938215750.jpg" alt="" class="user-head">
-                        </a>
-                        <div class="des-comment">
-                            <h4>玥轩</h4>
-                            <p>好用心</p>
-                            <span class="time">2019-12-28 22:17:07</span>
-                        </div>
-                    </li>
-                        <li>
-                            <a href="/u/u1814684855262" target="_blank">
-                                <img src="https://tx1.douguo.com/upload/photo/8/f/f/70_u69757368891254095658.jpeg" alt="" class="user-head">
-                            </a>
-                            <div class="des-comment">
-                                <h4>our et la haineD</h4>
-                                <p>看着很不错呢~ </p>
-                                <span class="time">2019-12-28 22:07:07</span>
-                            </div>
                         </li>
                         <li>
-                            <a href="/u/u317396394220" target="_blank">
-                                <img src="https://tx1.douguo.com/upload/photo/1/2/3/70_u9422031739630330020618.jpg" alt="" class="user-head">
+                            <a href="/u/u04973117567938" target="_blank">
+                                <img src="https://tx1.douguo.com/upload/photo/3/0/5/70_u04973117567938215750.jpg" alt="" class="user-head">
                             </a>
                             <div class="des-comment">
-                                <h4>Jonawdcf</h4>
-                                <p>真厉害</p>
-                                <span class="time">2019-12-28 22:01:08</span>
-                            </div>
-                        </li><li>
-                        <a href="/u/u04973117567938" target="_blank">
-                            <img src="https://tx1.douguo.com/upload/photo/3/0/5/70_u04973117567938215750.jpg" alt="" class="user-head">
-                        </a>
-                        <div class="des-comment">
-                            <h4>玥轩</h4>
-                            <p>好用心</p>
-                            <span class="time">2019-12-28 22:17:07</span>
-                        </div>
-                    </li>
-                        <li>
-                            <a href="/u/u1814684855262" target="_blank">
-                                <img src="https://tx1.douguo.com/upload/photo/8/f/f/70_u69757368891254095658.jpeg" alt="" class="user-head">
-                            </a>
-                            <div class="des-comment">
-                                <h4>our et la haineD</h4>
-                                <p>看着很不错呢~ </p>
-                                <span class="time">2019-12-28 22:07:07</span>
+                                <h4>玥轩</h4>
+                                <p>好用心</p>
+                                <span class="time">2019-12-28 22:17:07</span>
                             </div>
                         </li>
-                        <li>
-                            <a href="/u/u317396394220" target="_blank">
-                                <img src="https://tx1.douguo.com/upload/photo/1/2/3/70_u9422031739630330020618.jpg" alt="" class="user-head">
-                            </a>
-                            <div class="des-comment">
-                                <h4>Jonawdcf</h4>
-                                <p>真厉害</p>
-                                <span class="time">2019-12-28 22:01:08</span>
-                            </div>
-                        </li><li>
-                        <a href="/u/u04973117567938" target="_blank">
-                            <img src="https://tx1.douguo.com/upload/photo/3/0/5/70_u04973117567938215750.jpg" alt="" class="user-head">
-                        </a>
-                        <div class="des-comment">
-                            <h4>玥轩</h4>
-                            <p>好用心</p>
-                            <span class="time">2019-12-28 22:17:07</span>
-                        </div>
-                    </li>
                         <li>
                             <a href="/u/u1814684855262" target="_blank">
                                 <img src="https://tx1.douguo.com/upload/photo/8/f/f/70_u69757368891254095658.jpeg" alt="" class="user-head">
@@ -269,6 +256,37 @@
                                 <span class="time">2019-12-28 22:01:08</span>
                             </div>
                         </li>
+                        <li>
+                            <a href="/u/u04973117567938" target="_blank">
+                                <img src="https://tx1.douguo.com/upload/photo/3/0/5/70_u04973117567938215750.jpg" alt="" class="user-head">
+                            </a>
+                            <div class="des-comment">
+                                <h4>玥轩</h4>
+                                <p>好用心</p>
+                                <span class="time">2019-12-28 22:17:07</span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/u/u1814684855262" target="_blank">
+                                <img src="https://tx1.douguo.com/upload/photo/8/f/f/70_u69757368891254095658.jpeg" alt="" class="user-head">
+                            </a>
+                            <div class="des-comment">
+                                <h4>our et la haineD</h4>
+                                <p>看着很不错呢~ </p>
+                                <span class="time">2019-12-28 22:07:07</span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/u/u317396394220" target="_blank">
+                                <img src="https://tx1.douguo.com/upload/photo/1/2/3/70_u9422031739630330020618.jpg" alt="" class="user-head">
+                            </a>
+                            <div class="des-comment">
+                                <h4>Jonawdcf</h4>
+                                <p>真厉害</p>
+                                <span class="time">2019-12-28 22:01:08</span>
+                            </div>
+                        </li>
+                    </notempty>
                     </marquee>
                 </ul>
             </div>

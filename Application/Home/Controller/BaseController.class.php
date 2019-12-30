@@ -38,7 +38,16 @@ class BaseController extends Controller
     public function collection()
     {
         $result = D('Collection')->field('*')->where(['uid' => $_POST['uid'], 'mid' => $_POST['mid']])->find();
-        $result = $result['id'] ? D('Collection')->where(['uid' => $_POST['uid'], 'mid' => $_POST['mid']])->delete() : D('Collection')->add(['uid' => intval($_POST['uid']), 'mid' => intval($_POST['mid']), 'addtime' => time()]);
+        $_POST['addtime'] = time();
+        $result = $result['id'] ? D('Collection')->where(['uid' => $_POST['uid'], 'mid' => $_POST['mid']])->delete() : D('Collection')->add($_POST);
+        echo $result;
+    }
+
+    public function comment()
+    {
+        $_POST['addtime'] = time();
+        $_POST['author'] = $_SESSION['user']['nickname'];
+        $result = D('Comment')->add($_POST);
         echo $result;
     }
 
@@ -51,7 +60,7 @@ class BaseController extends Controller
         }
         elseif($_GET['my'] == 3)
         {
-            $midList = implode(',', array_column(D('Collection')->field('mid')->where(['uid' => $_SESSION['user']['id']])->select(),'mid'));
+            $midList = implode(',',array_unique(array_column(D('Comment')->field('mid')->where(['uid' => $_SESSION['user']['id']])->select(),'mid')));
             $_GET['where'] = $midList ? "id in (".$midList.") AND status = 1" : "id = 0 AND status = 1";
         }
 
@@ -82,9 +91,15 @@ class BaseController extends Controller
         D($_GET['table'])->where($_GET['where'])->setInc('hot');
         $data = D($_GET['table'])->field('*')->where($_GET['where'])->find();
         $isCollection = D('collection')->field('id')->where(['uid' => $_SESSION['user']['id'], 'mid' => $_GET['where']['id']])->find() ? 1 : 0;
+        $comment = D('Comment')->field('*')->where(['mid' => $_GET['where']['id']])->order('addtime desc')->select();
+        foreach ($comment as $key => &$value)
+        {
+            if($value['status'] != 1) $value['content'] = "<span style='color: red'>该评论已被管理员删除！</span>！";
+        }
 
         $this->assign('title',$data['title']);
         $this->assign('isCollection',$isCollection);
+        $this->assign('comment',$comment);
         $this->assign('data',$data);
     }
 

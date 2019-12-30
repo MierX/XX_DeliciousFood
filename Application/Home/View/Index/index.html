@@ -186,24 +186,24 @@
         <foreach name="so.menu" item="mo" key="k">
         <if condition="($k eq 3) or ($k eq 7)">
             <li class="item" style="margin-right: 0">
-                <a class="cover br8" href="{:U('Menu/content')}?id={$mo.id}" target="_blank">
+                <a class="cover br8" href="{:U('Menu/content')}?table=Menu&where[id]={$mo.id}&title={$mo.title}&author={$mo.uid}&my=" target="_blank">
                     <img width="220" height="220" src="__PUBLIC__{$mo.img}" alt="{$mo.title}" title="{$mo.title}">
                 </a>
                 <div>
-                    <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?id={$mo.id}">{$mo.title}</a>
+                    <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$mo.id}&title={$mo.title}&author={$mo.uid}&my=">{$mo.title}</a>
                     <p class="author text-lips">
                         by
-                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{$mo.uid}">{$mo.author}</a>
+                        <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="javascript:void(0);">{$mo.author}</a>
                     </p>
                 </div>
             </li>
         <else />
             <li class="item">
-                <a class="cover br8" href="{:U('Menu/content')}?id={$mo.id}" target="_blank">
+                <a class="cover br8" href="{:U('Menu/content')}?table=Menu&where[id]={$mo.id}&title={$mo.title}&author={$mo.uid}&my=" target="_blank">
                     <img width="220" height="220" src="__PUBLIC__{$mo.img}" alt="{$mo.title}" title="{$mo.title}">
                 </a>
                 <div>
-                    <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?id={$mo.id}">{$mo.title}</a>
+                    <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$mo.id}&title={$mo.title}&author={$mo.uid}&my=">{$mo.title}</a>
                     <p class="author text-lips">
                         by
                         <a class="text-lips" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="{$mo.uid}">{$mo.author}</a>
