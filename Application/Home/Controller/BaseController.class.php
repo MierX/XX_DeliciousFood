@@ -94,7 +94,7 @@ class BaseController extends Controller
         $comment = D('Comment')->field('*')->where(['mid' => $_GET['where']['id']])->order('addtime desc')->select();
         foreach ($comment as $key => &$value)
         {
-            if($value['status'] != 1) $value['content'] = "<span style='color: red'>该评论已被管理员删除！</span>！";
+            if($value['status'] != 1) $value['content'] = "<span style='color: red'>该评论已被管理员删除！！</span>";
         }
 
         $this->assign('title',$data['title']);
@@ -222,6 +222,7 @@ class BaseController extends Controller
         $userList = D('User')->field('*')->select();
         foreach ($userList as $key => $value) {
             D('Menu')->where(['uid' => $value['id']])->save(['author' => $value['nickname']]);
+            D('Comment')->where(['uid' => $value['id']])->save(['author' => $value['nickname']]);
         }
     }
 }

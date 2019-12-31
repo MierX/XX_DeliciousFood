@@ -45,7 +45,8 @@
                     <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="side">
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:void(0);">
-                                <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite>用户管理</cite>
+                                <i class="layui-icon" style="top: 3px;">&#xe612;</i>
+                                <cite>用户管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -62,7 +63,21 @@
                         </li>
                         <li class="layui-nav-item">
                             <a class="javascript:void(0);" href="javascript:void(0);">
-                                <i class="layui-icon" style="top: 3px;">&#xe62a;</i><cite>专题管理</cite>
+                                <i class="layui-icon" style="top: 3px;">&#xe60a;</i>
+                                <cite>文章管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd class="">
+                                    <a href="javascript:void(0);" _href="{:U('Article/list')}?table=Article&title=文章管理 - 文章列表">
+                                        <cite>文章列表</cite>
+                                    </a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a class="javascript:void(0);" href="javascript:void(0);">
+                                <i class="layui-icon" style="top: 3px;">&#xe62a;</i>
+                                <cite>专题管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -74,7 +89,21 @@
                         </li>
                         <li class="layui-nav-item">
                             <a class="javascript:void(0);" href="javascript:void(0);">
-                                <i class="layui-icon" style="top: 3px;">&#xe621;</i><cite>菜谱管理</cite>
+                                <i class="layui-icon" style="top: 3px;">&#xe62e;</i>
+                                <cite>食材管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd class="">
+                                    <a href="javascript:void(0);" _href="{:U('Foods/list')}?table=Foods&title=食材管理 - 食材列表">
+                                        <cite>食材列表</cite>
+                                    </a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a class="javascript:void(0);" href="javascript:void(0);">
+                                <i class="layui-icon" style="top: 3px;">&#xe621;</i>
+                                <cite>菜谱管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -86,12 +115,13 @@
                         </li>
                         <li class="layui-nav-item">
                             <a class="javascript:void(0);" href="javascript:void(0);">
-                                <i class="layui-icon" style="top: 3px;">&#xe60a;</i><cite>文章管理</cite>
+                                <i class="layui-icon" style="top: 3px;">&#xe609;</i>
+                                <cite>评论管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
-                                    <a href="javascript:void(0);" _href="{:U('Article/list')}?table=Article&title=文章管理 - 文章列表">
-                                        <cite>文章列表</cite>
+                                    <a href="javascript:void(0);" _href="{:U('Comment/list')}?table=Comment&where[status]=1&title=评论管理 - 评论列表">
+                                        <cite>评论列表</cite>
                                     </a>
                                 </dd>
                             </dl>

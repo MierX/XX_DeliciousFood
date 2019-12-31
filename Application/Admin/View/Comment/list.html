@@ -1,0 +1,130 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/html5shiv.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/hui/static/h-ui/css/H-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/hui/static/h-ui.admin/css/H-ui.admin.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/hui/lib/Hui-iconfont/1.0.8/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/hui/static/h-ui.admin/skin/default/skin.css" id="skin" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/hui/static/h-ui.admin/css/style.css" />
+	<!--[if IE 6]>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	<title>{$title}</title>
+</head>
+<body>
+	<nav class="breadcrumb">
+		<div class="text-c">
+			<span class="l">
+				共有数据：
+				<strong>{$count}</strong>
+				条
+			</span>
+			<input name="author" type="text" class="input-text searchValue" style="width:250px" placeholder="输入用户" />
+			<button type="submit" class="btn btn-success radius" onclick="search()">
+				<i class="Hui-iconfont">&#xe665;</i>
+				搜索
+			</button>
+			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:void(0);" onclick="location.reload();" title="刷新" >
+				<i class="Hui-iconfont">&#xe68f;</i>
+			</a>
+		</div>
+	</nav>
+	<div class="page-container">
+		<div class="mt-20">
+			<table class="table table-border table-bordered table-hover table-bg table-sort">
+				<thead>
+					<tr class="text-c">
+						<th>ID</th>
+						<th>菜谱</th>
+						<th>用户</th>
+						<th>内容</th>
+						<th>发言时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<volist name="data" id="do">
+					<tr class="text-c">
+						<td>{$do.id}</td>
+						<td>{$do.menu}</td>
+						<td>{$do.author}</td>
+						<td>{$do.content|mb_substr=0,25}...</td>
+						<td>{$do.addtime|date='Y-m-d H:i:s',###}</td>
+						<td class="td-manage">
+							<a style="text-decoration:none" href="javascript:void(0);" onclick="selfMsg('{$do.content}','评论详情',false,true,[])" title="查看评论">
+								<i class="Hui-iconfont">&#xe603;</i>
+							</a>
+							&nbsp;&nbsp;
+							<a style="text-decoration:none" href="{:U('Home/Menu/content')}?table=Menu&where[id]={$do.mid}&title={$do.menu}&author={$do.uid}&my=" target="_blank" title="查看菜谱">
+								<i class="Hui-iconfont">&#xe626;</i>
+							</a>
+							&nbsp;&nbsp;
+							<a style="text-decoration:none" onClick="selfShow('用户列表 - 查看用户','{:U(\'User/content\')}?table=User&where[id]={$do.uid}&title=用户列表 - 查看用户',320,230)" href="javascript:void(0);" title="查看用户">
+								<i class="Hui-iconfont">&#xe62c;</i>
+							</a>
+							&nbsp;&nbsp;
+							<a style="text-decoration:none" onClick="status('{$do.id}','{$do.status}')" href="javascript:void(0);" <eq name="do.status" value="1">title="隐藏"<else />title="显示"</eq> >
+								<i class="Hui-iconfont"><eq name="do.status" value="1">&#xe6dd;<else />&#xe6e1;</eq></i>
+							</a>
+						</td>
+					</tr>
+				</volist>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/laydate/laydate.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/static/h-ui/js/H-ui.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/static/h-ui.admin/js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/webuploader/0.1.5/webuploader.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/ueditor/1.4.3/ueditor.config.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+	<script type="text/javascript" src="__PUBLIC__/hui/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/admin_base.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.table-sort').dataTable({
+				"aaSorting": [[ 0, "asc" ]],
+				"bStateSave": true,
+				"bLengthChange": false,
+				"bAutoWidth": true,
+				"searching": false,
+				"aoColumnDefs": [
+					{
+						"orderable":false,
+						"aTargets":[5]
+					},
+				]
+			});
+		});
+
+		function search() {
+			var where = selfSearch();
+			location.href = where ? "{:U('Comment/list')}?table=Comment&where[status]=1&title=专题管理 - 专题列表"+where : "{:U('Comment/list')}?table=Comment&title=专题管理 - 专题列表";
+		}
+
+		function status(id,status) {
+			status = status == 1 ? 0 : 1;
+			selfOperation('{:U(\'changeV2\')}?table=Comment&where[id]='+id+'&save[status]='+status);
+		}
+	</script>
+</body>
+</html>
