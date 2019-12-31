@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 31/12/2019 11:51:27
+ Date: 31/12/2019 17:52:57
 */
 
 SET NAMES utf8mb4;
@@ -69,7 +69,7 @@ CREATE TABLE `collection`  (
   `mid` int(11) NULL DEFAULT 0,
   `addtime` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of collection
@@ -92,7 +92,7 @@ CREATE TABLE `comment`  (
   `status` int(1) NULL DEFAULT 1,
   `addtime` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment
@@ -126,7 +126,21 @@ CREATE TABLE `foods`  (
 -- ----------------------------
 INSERT INTO `foods` VALUES (1, '西红柿', '1kg', 2, 1, 1577763221);
 INSERT INTO `foods` VALUES (2, '五花肉', '1kg', 1, 1, 1577763247);
-INSERT INTO `foods` VALUES (3, '排骨', '1kg', 1, 0, 1577763451);
+INSERT INTO `foods` VALUES (3, '排骨', '1kg', 1, 1, 1577763451);
+INSERT INTO `foods` VALUES (4, '葵花籽油', '1滴', 3, 1, 1577771291);
+INSERT INTO `foods` VALUES (5, '蝶豆花', '1克', 2, 1, 1577783224);
+INSERT INTO `foods` VALUES (6, '开水', '1L', 4, 1, 1577783240);
+INSERT INTO `foods` VALUES (7, '珍珠米', '100克', 4, 1, 1577783256);
+INSERT INTO `foods` VALUES (8, '青瓜', '1根', 2, 1, 1577783271);
+INSERT INTO `foods` VALUES (9, '鸡蛋', '1颗', 1, 1, 1577783285);
+INSERT INTO `foods` VALUES (10, '脆皮肠', '1根', 1, 1, 1577783302);
+INSERT INTO `foods` VALUES (11, '白芝麻', '1克', 4, 1, 1577783321);
+INSERT INTO `foods` VALUES (12, '寿司醋', '1滴', 3, 1, 1577783337);
+INSERT INTO `foods` VALUES (13, '芝麻油', '1滴', 3, 1, 1577783348);
+INSERT INTO `foods` VALUES (14, '盐', '1克', 3, 1, 1577783361);
+INSERT INTO `foods` VALUES (15, '寿司海苔', '1片', 4, 1, 1577783391);
+INSERT INTO `foods` VALUES (16, '蛋黄酱', '1克', 3, 1, 1577783404);
+INSERT INTO `foods` VALUES (17, '肉松', '1克', 1, 1, 1577783416);
 
 -- ----------------------------
 -- Table structure for menu
@@ -177,6 +191,19 @@ INSERT INTO `menu` VALUES (25, 2, 2, 'a莲藕排骨汤 | 一碗鲜美的暖汤',
 INSERT INTO `menu` VALUES (26, 2, 2, 'a莲藕排骨汤 | 一碗鲜美的暖汤', '13616019194', 'Mier123', '/images/1577420176.png', '对我来说，这是一篇有温度的菜谱，满含着我童年时代最美好的回忆。 小的时候我住在湖北，村子里有大片荷塘，每到收获的季节就会像过节一样热闹。荷塘中的水会被排掉一些，池塘里的鲤鱼在浅水中蹦蹦跳跳。 男人们都赤脚进到荷塘中摸莲藕，女人和孩子们在岸上呐喊着加油。当谁摸出一节特别大的莲藕时，大家都会惊叹着为他鼓掌。 在那个季节，莲藕排骨汤就经常出现在我们的餐桌上。 它制作简单又美味可口，不仅是家常菜，湖北人也喜欢用这道汤款待最珍贵的客人。如今我在美国生活多年，仍然很喜欢给家人做这道汤。 我做的时候还另外添加了海带和枸杞，这是可选的。海带是为了让汤更鲜美，枸杞是从我妈妈那学来的，她做汤的时候总喜欢放点枸杞增加营养。 如果你不常煲汤，还需要注意这几点： 1）煲汤过程中尽量不要加水，如果必须加，请加开水。 2）尽量选择用带肉的猪肋条，也可以用猪颈骨，不要用肉很少的猪骨。 3）煲汤就像炖肉一样，隔夜后更入味。我先生Bill总是说最后一碗汤是最好喝的。 4）尽量选择新鲜的莲藕，越新鲜味道越好。 5）上桌的时候可以备点生抽，当作排骨的蘸料。煲过汤后的排骨和生抽是绝配，不信你试试。', 0, 1, 1577191925);
 
 -- ----------------------------
+-- Table structure for menu_foods
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_foods`;
+CREATE TABLE `menu_foods`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mid` int(11) NULL DEFAULT 0,
+  `fid` int(11) NULL DEFAULT 0,
+  `dose` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '',
+  `addtime` int(11) NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for special
 -- ----------------------------
 DROP TABLE IF EXISTS `special`;
@@ -215,7 +242,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, '13616019194', 'MierX', '123456aa', 1576222795, '', 1);
+INSERT INTO `user` VALUES (1, '13616019194', 'MierX', '123456a', 1576222795, '', 1);
 INSERT INTO `user` VALUES (2, '13616019195', 'Mier123', '123456A', 1576222897, '', 1);
 INSERT INTO `user` VALUES (3, '13616016165', 'test', '123456a', 1576224755, '', 1);
 INSERT INTO `user` VALUES (4, '13616019191', 'Mier', '123456a', 1576648140, '', 1);

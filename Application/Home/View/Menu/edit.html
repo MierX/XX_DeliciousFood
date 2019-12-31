@@ -75,11 +75,9 @@
     </div>
     <div id="content" class="clearfix">
         <div id="left">
-            <form action="" class="mt30" id="upfood">
-                <input type="hidden" value="{$data.id}" name="id" />
-                <input type="hidden" value="{$data.img}" name="img" />
+            <form action="{:U('edit')}" method="post" class="mt30" id="upfood">
                 <div class="name">
-                    <input class="upname" name="title" type="text" value="{$data.title}" maxlength="30" placeholder="菜谱名称" onfocus="if(this.placeholder=='菜谱名称') {this.placeholder=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.placeholder='菜谱名称';$(this).removeClass('fcbm');}" />
+                    <input class="upname" name="title" type="text" value="{$data.title}" maxlength="30" required placeholder="菜谱名称" onfocus="if(this.placeholder=='菜谱名称') {this.placeholder=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.placeholder='菜谱名称';$(this).removeClass('fcbm');}" />
                 </div>
                 <div class="cover">
                 <notempty name="data.img">
@@ -106,20 +104,25 @@
                     <h2>食材清单</h2>
                     <div class="zl-list mlist">
                         <div>
-                            <span class="liaotit"> 食材</span><span class="liangtit"> 用量</span>
+                            <span class="liaotit"> 食材</span>
+                            <span class="liangtit"> 用量</span>
                         </div>
                         <div class="mct clearfix">
-                            <select class="liaoext zhuliao" name="foods[]" readonly="readonly" onclick="foods(this)"></select>
-                            <input type="text" class="liangext" name="dose[]" readonly="readonly" />
-                            <a href="javascript:void(0);" class="add" onclick="selfAddObj($(this).parent())"></a>
-                            <a href="javascript:void(0);" class="up" onclick="selfUpObj(this,'mct')"></a>
-                            <a href="javascript:void(0);" class="down" onclick="selfDownObj(this,'mct')"></a>
+                            <select class="liaoext zhuliao" name="foods[]" onclick="foods(this)"></select>
+                            <input type="text" class="liangext" name="dose[]" />
+                            <a href="javascript:void(0);" class="add" onclick="selfAddObj($(this).parent())" style="padding-right: 25px;padding-left: 55px"></a>
+<!--                            <a href="javascript:void(0);" class="up" onclick="selfUpObj(this,'mct')"></a>-->
+<!--                            <a href="javascript:void(0);" class="down" onclick="selfDownObj(this,'mct')"></a>-->
                             <a href="javascript:void(0);" class="wrng" onclick="selfDeleteObj(this)"></a>
                         </div>
                     </div>
                 </div>
                 <div class="complete">
-                    <a class="submit" href="javascript:void(0)" onclick="">发布</a>
+                    <input type="hidden" value="{$data.id}" name="id" />
+                    <input type="hidden" value="{$data.img}" name="img" />
+                    <input type="hidden" value="Menu" name="table" />
+                    <a class="submit" href="javascript:void(0)" onclick="$('.submitBtn').trigger('click')">发布</a>
+                    <input class="submitBtn" style="display: none" type="submit" />
                 </div>
             </form>
         </div>

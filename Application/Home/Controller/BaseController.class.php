@@ -29,6 +29,47 @@ class BaseController extends Controller
     {
         $this->noLogin();
 
+        if($_POST)
+        {
+            if($_POST['table'] == 'Menu')
+            {
+                if($_POST['title'] && $_POST['img'] && $_POST['content'])
+                {
+                    if($_POST['id'])
+                    {
+                        $result = D('Menu')->where(['id' => $_POST['id']])->save(['title' => $_POST['title'], 'img' => $_POST['img'], 'content' => $_POST['content']]);
+                    }
+                    else
+                    {
+                        $addData['uid'] = $_SESSION['user']['id'];
+                        $addData['title'] = $_POST['title'];
+                        $addData['phone'] = $_SESSION['user']['username'];
+                        $addData['author'] = $_SESSION['user']['nickname'];
+                        $addData['img'] = $_POST['img'];
+                        $addData['content'] = $_POST['content'];
+                        $addData['addtime'] = time();
+                        $result = D('Menu')->add($addData);
+                    }
+                    if($result)
+                    {
+                        $mid = $_POST['id'] ? $_POST['id'] : $result;
+                        if(count($_POST['foods']) > 0 && count($_POST['dose']) > 0 && count($_POST['foods']) == count($_POST['dose']))
+                        {
+                            D('MenuFoods')->where(['mid' => $mid])->delete();
+                            $addMFData['mid'] = $mid;
+                            foreach ($_POST['foods'] as $key => $value)
+                            {
+                                $addMFData['fid'] = $value;
+                                $addMFData['dose'] = $_POST['foods'][$key];
+                                D('MenuFoods')->add($addMFData);
+                            }
+                        }
+                    }
+                }
+            }
+            exit;
+        }
+
         $data = D($_GET['table'])->field('*')->where($_GET['where'])->find();
 
         $this->assign('title', $_GET['title']);

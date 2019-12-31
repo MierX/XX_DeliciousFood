@@ -111,11 +111,11 @@ function selfUpObj(obj,parentclass) {
 function selfAddObj(obj) {
     var mct = document.createElement("div");
     mct.setAttribute("class", "mct clearfix");
-    mct.innerHTML = '<select class="liaoext zhuliao" name="foods[]" readonly="readonly" onclick="foods(this)"></select>' +
-                    '<input type="text" class="liangext" name="dose[]" readonly="readonly" />' +
-                    '<a href="javascript:void(0);" class="add" onclick="selfAddObj($(this).parent())"></a>' +
-                    '<a href="javascript:void(0);" class="up" onclick="selfUpObj(this,\'mct\')"></a>' +
-                    '<a href="javascript:void(0);" class="down" onclick="selfDownObj(this,\'mct\')"></a>' +
+    mct.innerHTML = '<select class="liaoext zhuliao" name="foods[]" onclick="foods(this)"></select>' +
+                    '<input type="text" class="liangext" name="dose[]" />' +
+                    '<a href="javascript:void(0);" class="add" onclick="selfAddObj($(this).parent())" style="padding-right: 25px;padding-left: 55px"></a>' +
+                    // '<a href="javascript:void(0);" class="up" onclick="selfUpObj(this,\'mct\')"></a>' +
+                    // '<a href="javascript:void(0);" class="down" onclick="selfDownObj(this,\'mct\')"></a>' +
                     '<a href="javascript:void(0);" class="wrng" onclick="selfDeleteObj(this)"></a>';
     if(obj){
         obj.after(mct);
@@ -238,17 +238,17 @@ function selfComment(url,uid,mid,value) {
 
 function selfSelectValue(obj,value) {
     value = JSON.parse(value);
-    let str = "<option id=''></option>";
+    let str = "<option value=''></option>";
     for (let i = 0; i < value.length; i++) {
-        str += "<option dose='"+value[i]['dose']+"' id='"+value[i]['id']+"'>"+value[i]['name']+"</option>";
+        str += "<option id='"+value[i]['dose']+"' value='"+value[i]['id']+"'>"+value[i]['name']+"</option>";
     }
-    $(obj).removeAttr('onclick').removeAttr('readonly').attr('onchange',"selfChoseValue(this)").html(str);
+    $(obj).removeAttr('onclick').attr('onchange',"selfChoseValue(this)").html(str);
 }
 
 function selfChoseValue(obj) {
-    if($(obj).find('option:selected').attr('id')) {
+    if($(obj).find('option:selected').attr('value')) {
         $(obj).addClass('fcbm');
-        $(obj.nextElementSibling).val($(obj).find('option:selected').attr('dose')).addClass('fcbm');
+        $(obj.nextElementSibling).val($(obj).find('option:selected').attr('id')).addClass('fcbm');
     } else {
         $(obj).removeClass('fcbm');
         $(obj.nextElementSibling).val('').removeClass('fcbm');
