@@ -29,4 +29,11 @@ class MenuController extends BaseController
         parent::content();
         $this->display();
     }
+
+    public function foods()
+    {
+        if($_POST) $result = D('Foods')->field('id,name,dose')->where(['type' => $_POST['type'], 'status' => 1])->order('addtime desc')->select();
+        $result = $result ? json_encode($result) : false;
+        echo $result;
+    }
 }

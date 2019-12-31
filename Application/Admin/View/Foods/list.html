@@ -40,6 +40,8 @@
 					<option class="select-option" value="">选择类别：</option>
 					<option class="select-option" value="1">荤类</option>
 					<option class="select-option" value="2">素类</option>
+					<option class="select-option" value="3">调味品类</option>
+					<option class="select-option" value="4">调味品类</option>
 				</select>
 			</span>
 			<span class="select-box" style="width:150px;height: 30px;line-height: 30px;">
@@ -78,7 +80,7 @@
 						<td>{$do.id}</td>
 						<td>{$do.name}</td>
 						<td>{$do.dose|default='无'}</td>
-						<td><eq name="do.type" value="1">荤类<else />素类</eq></td>
+						<td><if condition="$do.type eq 1">荤类<elseif condition="$do.type eq 2" />素类<elseif condition="$do.type eq 3" />调味品类<elseif condition="$do.type eq 4" />其它</if></td>
 						<td>{$do.addtime|date='Y-m-d H:i:s',###}</td>
 						<td class="td-status">
 						<eq name="do.status" value="1">

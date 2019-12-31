@@ -109,8 +109,8 @@
                             <span class="liaotit"> 食材</span><span class="liangtit"> 用量</span>
                         </div>
                         <div class="mct clearfix">
-                            <input type="text" class="liaoext zhuliao" name="zhuliao[]" value="如:五花肉" onfocus="if(this.value=='如:五花肉') {this.value=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.value='如:五花肉';$(this).removeClass('fcbm');}"/>
-                            <input type="text" class="liangext" name="zhuliaoValue[]" value="如:250g" onfocus="if(this.value=='如:250g') {this.value=''; $(this).addClass('fcbm'); }" onblur="if(!this.value) {this.value='如:250g';$(this).removeClass('fcbm');}"/>
+                            <select class="liaoext zhuliao" name="foods[]" readonly="readonly" onclick="foods(this)"></select>
+                            <input type="text" class="liangext" name="dose[]" readonly="readonly" />
                             <a href="javascript:void(0);" class="add" onclick="selfAddObj($(this).parent())"></a>
                             <a href="javascript:void(0);" class="up" onclick="selfUpObj(this,'mct')"></a>
                             <a href="javascript:void(0);" class="down" onclick="selfDownObj(this,'mct')"></a>
@@ -168,7 +168,6 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="__PUBLIC__/js/base.js"></script>
     <script type="text/javascript" src='__PUBLIC__/js/jquery.js' ></script>
     <script type="text/javascript" src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/layui/layui.all.js"></script>
@@ -186,6 +185,7 @@
     <script type="text/javascript" src="__PUBLIC__/jquery_file_upload/js/vendor/jquery.ui.widget.js"></script>
     <script type="text/javascript" src="__PUBLIC__/jquery_file_upload/js/jquery.iframe-transport.js"></script>
     <script type="text/javascript" src="__PUBLIC__/jquery_file_upload/js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/base.js"></script>
     <script type="text/javascript">
         function out() {
             selfMsg('一旦退出账户将停止当前操作','温馨提示',false,false,['退出','取消'],
@@ -210,6 +210,44 @@
                     }
                 );
             }
+        }
+
+        function foods(obj) {
+            selfMsg(false,'选择食材类别',false,true,['荤类','素类','调味品类','其它'],
+                function (index) {
+                    selfAjax('{:U(\'foods\')}','post',{'type':1},true,
+                        function (data) {
+                            if(data) selfSelectValue(obj,data);
+                            layer.msg('请再次点击食材框');
+                        }
+                    );
+                    layer.close(index);
+                },
+                function () {
+                    selfAjax('{:U(\'foods\')}','post',{'type':2},true,
+                        function (data) {
+                            if(data) selfSelectValue(obj,data);
+                            layer.msg('请再次点击食材框');
+                        }
+                    );
+                },
+                function () {
+                    selfAjax('{:U(\'foods\')}','post',{'type':3},true,
+                        function (data) {
+                            if(data) selfSelectValue(obj,data);
+                            layer.msg('请再次点击食材框');
+                        }
+                    );
+                },
+                function () {
+                    selfAjax('{:U(\'foods\')}','post',{'type':4},true,
+                        function (data) {
+                            if(data) selfSelectValue(obj,data);
+                            layer.msg('请再次点击食材框');
+                        }
+                    );
+                },
+            );
         }
 
         $('.cover').on('click', '.upbefore', function () {
@@ -266,22 +304,6 @@
                 return false;
             }
         })();
-
-        var prefix = "";
-        window.isUpload = false;
-        document.ondragover = function(e){e.preventDefault();};
-        document.ondrop = function(e){e.preventDefault();};
-        document.getElementsByClassName('strtext')[0].addEventListener('paste',function(e){
-            if ( !(e.clipboardData && e.clipboardData.items) ) {
-                return;
-            }
-            var item = e.clipboardData.items[0];
-            if (item.kind === "string") {
-                item.getAsString(function (str) {
-                    document.getElementsByClassName('strtext')[0].value = document.getElementsByClassName('strtext')[0].value.replace(str,' '+str+' ');
-                })
-            }
-        });
     </script>
 </body>
 </html>

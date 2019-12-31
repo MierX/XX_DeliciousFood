@@ -41,6 +41,7 @@
 .material .mlist {margin: 20px 0 10px;background: #F1F7FA;border-radius: 8px;}
 .material .mct {padding: 8px 0;}
 .material input {height: 42px;line-height: 42px;border: 1px solid #E5E3DF;border-radius: 4px;float: left;padding: 0 10px;color: #999;display: inline-block;width:305px;}
+.material select {height: 42px;line-height: 42px;border: 1px solid #E5E3DF;border-radius: 4px;float: left;padding: 0 10px;color: #999;display: inline-block;width:305px;}
 .material .fcbm {color: #333;}
 .material .liaotit{width: 305px;margin-right: 16px;display: inline-block;font-size: 14px;padding-left: 5px;}
 .material .liangtit{width: 200px;display: inline-block;font-size: 14px;padding-left: 5px;}
@@ -79,6 +80,7 @@
 .tips .fcbm {color: #333;}
 .tips .check-icon {display: inline-block;width: 14px;height: 14px;margin: 0 6px;background: url("../../Public/img/roundCheck.png") no-repeat;background-size: 100%;}
 .tips input[type='checkbox']:checked + .check-icon {background: url("../../Public/img/roundChecked.png");}
+.tips select[type='checkbox']:checked + .check-icon {background: url("../../Public/img/roundChecked.png");}
 .tips p {display: inline-block;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;font-size: 15px;color: #333;line-height: 20px;}
 .tips span {color: #3f3f3f;}
 /*�ϴ���Ƶ*/
@@ -108,6 +110,7 @@
 /*�û���*/
 .username {font-size: 16px;}
 .username input {padding: 0 12px;border-radius: 4px;font-size: 16px;line-height: 42px;border: 1px solid #E5E3DF;color: #CCC;}
+.username select {padding: 0 12px;border-radius: 4px;font-size: 16px;line-height: 42px;border: 1px solid #E5E3DF;color: #CCC;}
 .username .fcbm {color: #333;}
 
 /*����ѡ����ͼ*/

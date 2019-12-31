@@ -37,13 +37,31 @@ function selfSearch() {
     return where;
 }
 
-function selfMsg(content, title = false, closeBtn = true, shadeClose= false, button = [], fun1 = function () {return true}, fun2 = function () {return true}, fun3 = function () {return true}, fun4 = function () {return true}, fun5 = function () {return true}, fun6 = function () {return true}, fun7 = function () {return true}, fun8 = function () {return true}, fun9 = function () {return true}) {
+function selfMsg_last(content, title = false, closeBtn = true, shadeClose= false, button = [], fun1 = function () {return true}, fun2 = function () {return true}, fun3 = function () {return true}, fun4 = function () {return true}, fun5 = function () {return true}, fun6 = function () {return true}, fun7 = function () {return true}, fun8 = function () {return true}, fun9 = function () {return true},) {
     layer.confirm(content, {
         title:title,
         closeBtn:closeBtn,
         shadeClose:shadeClose,
         btn: button,
-    },fun1,fun2, fun3, fun4, fun5, fun6, fun7, fun8, fun9,);
+    },fun1,fun2,fun3,fun4,fun5,fun6,fun7,fun8,fun9,);
+}
+
+function selfMsg(content, title = false, closeBtn = true, shadeClose= false, button = [], fun1 = function () {return true}, fun2 = function () {return true}, fun3 = function () {return true}, fun4 = function () {return true}, fun5 = function () {return true}, fun6 = function () {return true}, fun7 = function () {return true}, fun8 = function () {return true}, fun9 = function () {return true},) {
+    layer.confirm(content, {
+        title:title,
+        closeBtn:closeBtn,
+        shadeClose:shadeClose,
+        btn: button,
+        btn1:fun1,
+        btn2:fun2,
+        btn3:fun3,
+        btn4:fun4,
+        btn5:fun5,
+        btn6:fun6,
+        btn7:fun7,
+        btn8:fun8,
+        btn9:fun9,
+    });
 }
 
 function selfNextPage(page,lastPage,url) {
@@ -93,8 +111,8 @@ function selfUpObj(obj,parentclass) {
 function selfAddObj(obj) {
     var mct = document.createElement("div");
     mct.setAttribute("class", "mct clearfix");
-    mct.innerHTML = '<input type="text" class="liaoext zhuliao fcbm" name="zhuliao[]" value=""/>' +
-                    '<input type="text" class="liangext fcbm" name="zhuliaoValue[]" value=""/>' +
+    mct.innerHTML = '<select class="liaoext zhuliao" name="foods[]" readonly="readonly" onclick="foods(this)"></select>' +
+                    '<input type="text" class="liangext" name="dose[]" readonly="readonly" />' +
                     '<a href="javascript:void(0);" class="add" onclick="selfAddObj($(this).parent())"></a>' +
                     '<a href="javascript:void(0);" class="up" onclick="selfUpObj(this,\'mct\')"></a>' +
                     '<a href="javascript:void(0);" class="down" onclick="selfDownObj(this,\'mct\')"></a>' +
@@ -135,7 +153,8 @@ function selfUserChange(id,nickname,username,url) {
                 selfMsg('请选择要修改的信息','修改个人信息',false,true,['昵称','密码'],
             function () {
                     layer.prompt({
-                        title: '请输入昵称',
+                            closeBtn:false,
+                            title: '请输入昵称',
                     },
             function (value,index,elem) {
                         if(selfNickname(value)) selfOperationV2(url+id+'&save[nickname]='+value);
@@ -143,6 +162,7 @@ function selfUserChange(id,nickname,username,url) {
                 },
             function () {
                     layer.prompt({
+                        closeBtn:false,
                         formType: 1,
                         title: '请输入密码',
                     },
@@ -215,3 +235,23 @@ function selfComment(url,uid,mid,value) {
         selfMsg('登录后再来发表评论吧','温馨提示',false,true,[]);
     }
 }
+
+function selfSelectValue(obj,value) {
+    value = JSON.parse(value);
+    let str = "<option id=''></option>";
+    for (let i = 0; i < value.length; i++) {
+        str += "<option dose='"+value[i]['dose']+"' id='"+value[i]['id']+"'>"+value[i]['name']+"</option>";
+    }
+    $(obj).removeAttr('onclick').removeAttr('readonly').attr('onchange',"selfChoseValue(this)").html(str);
+}
+
+function selfChoseValue(obj) {
+    if($(obj).find('option:selected').attr('id')) {
+        $(obj).addClass('fcbm');
+        $(obj.nextElementSibling).val($(obj).find('option:selected').attr('dose')).addClass('fcbm');
+    } else {
+        $(obj).removeClass('fcbm');
+        $(obj.nextElementSibling).val('').removeClass('fcbm');
+    }
+}
+
