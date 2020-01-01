@@ -57,7 +57,7 @@
                 </a>
                 <div class="myedit br8">
                     <span class="arwwj"> </span>
-                    <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.user.id}&order=addtime desc&title=菜谱列表&my=1">我的菜谱</a>
+                    <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.user.id}&order=addtime desc&title=我的菜谱&my=1">我的菜谱</a>
                     <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=我的收藏&my=2">我的收藏</a>
                     <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=评论过的菜谱&my=3">评论过的菜谱</a>
                     <a href="javascript:void(0)" onclick="selfUserChange('{$Think.SESSION.user.id}','{$Think.SESSION.user.nickname}','{$Think.SESSION.user.username}','{:U(\'Change\')}?table=User&where[id]=')">账号设置</a>

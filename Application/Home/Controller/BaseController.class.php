@@ -50,24 +50,27 @@ class BaseController extends Controller
                         $addData['addtime'] = time();
                         $result = D('Menu')->add($addData);
                     }
-                    if($result)
+                    $mid = $_POST['id'] ? $_POST['id'] : $result;
+                    if(count($_POST['foods']) > 0 && count($_POST['dose']) > 0 && count($_POST['foods']) == count($_POST['dose']))
                     {
-                        $mid = $_POST['id'] ? $_POST['id'] : $result;
-                        if(count($_POST['foods']) > 0 && count($_POST['dose']) > 0 && count($_POST['foods']) == count($_POST['dose']))
+                        D('MenuFoods')->where(['mid' => $mid])->delete();
+                        $addMFData['mid'] = $mid;
+                        foreach ($_POST['foods'] as $key => $value)
                         {
-                            D('MenuFoods')->where(['mid' => $mid])->delete();
-                            $addMFData['mid'] = $mid;
-                            foreach ($_POST['foods'] as $key => $value)
-                            {
-                                $addMFData['fid'] = $value;
-                                $addMFData['dose'] = $_POST['foods'][$key];
-                                D('MenuFoods')->add($addMFData);
-                            }
+                            $addMFData['fid'] = $value;
+                            $addMFData['addtime'] = time();
+                            $addMFData['dose'] = $_POST['dose'][$key];
+                            D('MenuFoods')->add($addMFData);
                         }
                     }
+                    echo "<script>location.href = '/Home/Menu/content?table=Menu&where[id]=".$mid."&title=".$_POST['title']."&author=".$_SESSION['user']['nickname']."&my='</script>";
+                    exit;
+                }
+                else
+                {
+                    echo "<script>alert('操作失败！');location.reload();</script>";
                 }
             }
-            exit;
         }
 
         $data = D($_GET['table'])->field('*')->where($_GET['where'])->find();
@@ -131,16 +134,9 @@ class BaseController extends Controller
 
         D($_GET['table'])->where($_GET['where'])->setInc('hot');
         $data = D($_GET['table'])->field('*')->where($_GET['where'])->find();
-        $isCollection = D('collection')->field('id')->where(['uid' => $_SESSION['user']['id'], 'mid' => $_GET['where']['id']])->find() ? 1 : 0;
-        $comment = D('Comment')->field('*')->where(['mid' => $_GET['where']['id']])->order('addtime desc')->select();
-        foreach ($comment as $key => &$value)
-        {
-            if($value['status'] != 1) $value['content'] = "<span style='color: red'>该评论已被管理员删除！！</span>";
-        }
+
 
         $this->assign('title',$data['title']);
-        $this->assign('isCollection',$isCollection);
-        $this->assign('comment',$comment);
         $this->assign('data',$data);
     }
 

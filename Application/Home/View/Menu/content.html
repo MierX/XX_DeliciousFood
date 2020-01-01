@@ -57,7 +57,7 @@
                     </a>
                     <div class="myedit br8">
                         <span class="arwwj"> </span>
-                        <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.user.id}&order=addtime desc&title=菜谱列表&my=1">我的菜谱</a>
+                        <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.user.id}&order=addtime desc&title=我的菜谱&my=1">我的菜谱</a>
                         <a href="{:U('Menu/list')}?table=Menu&where=uid = {$Think.SESSION.user.id}&order=addtime desc&title=我的收藏&my=2">我的收藏</a>
                         <a href="{:U('Menu/list')}?table=Menu&where=sid != -1 AND status = 1&order=addtime desc&title=评论过的菜谱&my=3">评论过的菜谱</a>
                         <a href="javascript:void(0)" onclick="selfUserChange('{$Think.SESSION.user.id}','{$Think.SESSION.user.nickname}','{$Think.SESSION.user.username}','{:U(\'Change\')}?table=User&where[id]=')">账号设置</a>
@@ -106,28 +106,42 @@
             <div class="metarial">
                 <h2 class="mini-title">{$data.title}的食材用料</h2>
                 <table width="690" border="0" cellspacing="0" cellpadding="0" class="retamr br8">
+                <foreach name="menuFoods" item="mo" key="k">
+                <if condition="$k % 2 eq 0">
+                <notempty name="menuFoods[$k+1]">
                     <tr>
                         <td class="lirre" style="border-top:0;">
                             <span class="scname">
-                                <a href="/caipu/熟米饭" target="_blank">熟米饭</a>
+                                <a href="javascript:void(0);" target="_blank">{$mo.name}</a>
                             </span>
-                            <span class='right scnum'>1大碗</span>
+                            <span class='right scnum'>{$mo.dose}</span>
+                        </td>
+                <else />
+                    <tr>
+                        <td class="lirre" style="border-top:0;">
+                            <span class="scname">
+                                <a href="javascript:void(0);" target="_blank">{$mo.name}</a>
+                            </span>
+                            <span class='right scnum'>{$mo.dose}</span>
                         </td>
                         <td style="border-top:0;">
-                            <span class="scname"><a href="/caipu/肥牛" target="_blank">肥牛</a></span>
-                            <span class='right scnum'>130克</span>
+                                <span class="scname">
+                                    <a href="javascript:void(0);" target="_blank"></a>
+                                </span>
+                            <span class='right scnum'></span>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="lirre" >
-                            <span class="scname"><a href="/caipu/泡菜" target="_blank">泡菜</a></span>
-                            <span class='right scnum'>150克</span>
-                        </td>
-                        <td >
-                            <span class="scname"><a href="/caipu/香菇" target="_blank">香菇</a></span>
-                            <span class='right scnum'>3朵</span>
+                </notempty>
+                <else />
+                        <td style="border-top:0;">
+                            <span class="scname">
+                                <a href="javascript:void(0);" target="_blank">{$mo.name}</a>
+                            </span>
+                            <span class='right scnum'>{$mo.dose}</span>
                         </td>
                     </tr>
+                </if>
+                </foreach>
                 </table>
             </div>
             <div class="tips">
@@ -294,6 +308,19 @@
             <div class="bot-list">
                 <h2 class="mini-title">{$data.title}的相关菜谱</h2>
                 <ul class="recipe-list clearfix">
+                <notempty name="recommend">
+                    <volist name="recommend" id="ro">
+                        <li class="item ">
+                            <a class="cover br8 relative" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$ro.id}&title={$ro.title}&author={$ro.uid}&my={$my}" >
+                                <img width="220" height="220" src="__PUBLIC__{$ro.img}" alt="{$ro.title}">
+                            </a>
+                            <div>
+                                <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$ro.id}&title={$ro.title}&author={$ro.uid}&my={$my}">{$ro.title}</a>
+                                <a class="author" href="javascript:void(0)">by <span>{$ro.author}</span></a>
+                            </div>
+                        </li>
+                    </volist>
+                <else />
                     <li class="item ">
                         <a class="cover br8 relative" target="_blank" href="/cookbook/206667.html" >
                             <img width="220" height="220" src="https://cp1.douguo.com/upload/caiku/9/a/8/220_9a9d77658ef91ccc8c9b4ce6fbc99368.jpg" alt="可乐鸡翅[简单到没下过厨也会做]">
@@ -354,6 +381,7 @@
                             <a class="author" href="/u/u48350980597650.html">by <span>迷迭香Rosemary</span></a>
                         </div>
                     </li>
+                </notempty>
                 </ul>
             </div>
         </div>
