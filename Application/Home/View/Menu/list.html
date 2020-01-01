@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="__PUBLIC__/css/main.css">
     <link rel="stylesheet" href="__PUBLIC__/css/index.css">
     <link rel="stylesheet" href="__PUBLIC__/css/search.css">
+    <style type="text/css">
+        .delete {
+            color: black!important;
+        }
+        .delete:hover {
+            color:#ffaa00!important;
+        }
+    </style>
 </head>
 <body>
 <div id="header" class="">
@@ -94,6 +102,7 @@
                         <a class="cook-img" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}" style="background: url(__PUBLIC__{$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
                         <div class="cook-info" style="width: 60%">
                             <a class="cookname text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}">{$do.title}</a>
+                            <p class="major">&nbsp;</p>
                             <p class="major">{$do.menuFoods}</p>
                             <p class="major">&nbsp;</p>
                             <div class="aut-num clearfix text-lips ">
@@ -102,7 +111,12 @@
                                     <a class="text-lips author" style="display: inline-block;max-width: 184px;vertical-align: middle;margin-top: -3px"  target="_blank" href="javascript:void(0)">{$do.author}</a>
                                 </p>
                             </div>
-                            <p class="major">{$do.addtime|date='y-m-d',###}</p>
+                            <p class="major">
+                                {$do.addtime|date='y-m-d',###}
+                            <notempty name="my">
+                                &nbsp;&nbsp;<a class="delete" href="javascript:void(0);" onClick="del()">删除</a>
+                            </notempty>
+                            </p>
                         </div>
                     </li>
                 </volist>
@@ -110,10 +124,10 @@
         </div>
         <div class="mt20">
             <div class="pages">
-                <a href="{:U('Menu/list')}?table=Menu&where={$where}&order=addtime desc&title={$title}" class="atou hide">首页</a>
-                <a href="javascript:void(0);" onclick="selfLastPage('{$page}','{:U(\'Menu/list\')}?table=Menu&where={$where}&order=addtime desc&title={$title}&page=')" class="ali">上一页</a>
-                <a href="javascript:void(0);" onclick="selfNextPage('{$page}','{$lastPage}','{:U(\'Menu/list\')}?table=Menu&where={$where}&order=addtime desc&title={$title}&page=')" class="anext">下一页</a>
-                <a href="{:U('Menu/list')}?table=Menu&where={$where}&order=addtime desc&title={$title}&page={$lastPage}" class="alast">末页</a>
+                <a href="{:U('Menu/list')}?table=Menu&where={$where}&order=addtime desc&title={$title}&my={$my}" class="atou hide">首页</a>
+                <a href="javascript:void(0);" onclick="selfLastPage('{$page}','{:U(\'Menu/list\')}?table=Menu&where={$where}&order=addtime desc&title={$title}&my={$my}&page=')" class="ali">上一页</a>
+                <a href="javascript:void(0);" onclick="selfNextPage('{$page}','{$lastPage}','{:U(\'Menu/list\')}?table=Menu&where={$where}&order=addtime desc&title={$title}&my={$my}&page=')" class="anext">下一页</a>
+                <a href="{:U('Menu/list')}?table=Menu&where={$where}&order=addtime desc&title={$title}&page={$lastPage}&my={$my}" class="alast">末页</a>
             </div>
         </div>
     </div>
@@ -174,6 +188,14 @@
                 },
                 function () {
                     return true;
+                }
+            );
+        }
+
+        function del() {
+            selfMsg('确定删除这篇菜谱吗？','删除提示',false,true,['确定','取消'],
+                function () {
+                    selfOperation('{:U(\'del\')}?table=Menu&where[id]={$do.id}');
                 }
             );
         }

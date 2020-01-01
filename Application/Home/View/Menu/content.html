@@ -309,17 +309,29 @@
                 <h2 class="mini-title">{$data.title}的相关菜谱</h2>
                 <ul class="recipe-list clearfix">
                 <notempty name="recommend">
-                    <volist name="recommend" id="ro">
-                        <li class="item ">
-                            <a class="cover br8 relative" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$ro.id}&title={$ro.title}&author={$ro.uid}&my={$my}" >
-                                <img width="220" height="220" src="__PUBLIC__{$ro.img}" alt="{$ro.title}">
-                            </a>
-                            <div>
-                                <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$ro.id}&title={$ro.title}&author={$ro.uid}&my={$my}">{$ro.title}</a>
-                                <a class="author" href="javascript:void(0)">by <span>{$ro.author}</span></a>
-                            </div>
-                        </li>
-                    </volist>
+                <foreach name="recommend" item="ro" key="k">
+                <if condition="($k eq 2) OR ($k eq 5)">
+                    <li class="item mr0">
+                        <a class="cover br8 relative" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$ro.id}&title={$ro.title}&author={$ro.uid}&my={$my}" >
+                            <img width="220" height="220" src="__PUBLIC__{$ro.img}" alt="{$ro.title}">
+                        </a>
+                        <div>
+                            <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$ro.id}&title={$ro.title}&author={$ro.uid}&my={$my}">{$ro.title}</a>
+                            <a class="author" href="javascript:void(0)">by <span>{$ro.author}</span></a>
+                        </div>
+                    </li>
+                <else />
+                    <li class="item">
+                        <a class="cover br8 relative" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$ro.id}&title={$ro.title}&author={$ro.uid}&my={$my}" >
+                            <img width="220" height="220" src="__PUBLIC__{$ro.img}" alt="{$ro.title}">
+                        </a>
+                        <div>
+                            <a class="name text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$ro.id}&title={$ro.title}&author={$ro.uid}&my={$my}">{$ro.title}</a>
+                            <a class="author" href="javascript:void(0)">by <span>{$ro.author}</span></a>
+                        </div>
+                    </li>
+                </if>
+                </foreach>
                 <else />
                     <li class="item ">
                         <a class="cover br8 relative" target="_blank" href="/cookbook/206667.html" >

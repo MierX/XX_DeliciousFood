@@ -123,6 +123,17 @@ class BaseController extends Controller
         $this->assign('lastPage',$lastPage);
     }
 
+    public function del()
+    {
+        $result = false;
+        if($_GET)
+        {
+            $result = D($_GET['table'])->where($_GET['where'])->delete();
+            $result = $result ? true : false;
+        }
+        echo $result;
+    }
+
     public function content()
     {
         if($_GET['my'] == 1 && $_SESSION['user']['id'] == $_GET['author'])
