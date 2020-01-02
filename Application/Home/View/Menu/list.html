@@ -101,7 +101,14 @@
                     <li class="clearfix" style="display: inline-block;width: 50%">
                         <a class="cook-img" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}" style="background: url(__PUBLIC__{$do.img}) no-repeat center center;background-size: cover;position: relative;width: 36%" title="{$do.title}" target="_blank"></a>
                         <div class="cook-info" style="width: 60%">
-                            <a class="cookname text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}">{$do.title}</a>
+                            <a class="cookname text-lips" target="_blank" href="{:U('Menu/content')}?table=Menu&where[id]={$do.id}&title={$do.title}&author={$do.uid}&my={$my}" <eq name="do.status" value="1">title="该菜谱正常"<else />title="该菜谱被管理员隐藏"</eq> >
+                                {$do.title}
+                            <eq name="do.status" value="1">
+                                <span style="color: green;margin-left: -4px;font-size: 6px" title="该菜谱正常">✔</span>
+                            <else />
+                                <span style="color: red;margin-left: -4px;font-size: 6px" title="该菜谱被管理员隐藏">❌</span>
+                            </eq>
+                            </a>
                             <p class="major">&nbsp;</p>
                             <p class="major">{$do.menuFoods}</p>
                             <p class="major">&nbsp;</p>
@@ -113,9 +120,9 @@
                             </div>
                             <p class="major">
                                 {$do.addtime|date='y-m-d',###}
-                            <notempty name="my">
+                            <eq name="my" value="1">
                                 &nbsp;&nbsp;<a class="delete" href="javascript:void(0);" onClick="del()">删除</a>
-                            </notempty>
+                            </eq>
                             </p>
                         </div>
                     </li>
