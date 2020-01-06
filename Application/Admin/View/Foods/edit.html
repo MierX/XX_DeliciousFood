@@ -38,6 +38,12 @@
 				</div>
 			</div>
 			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">食材描述：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<script id="editor" name="desc" type="text/plain" style="width:100%;height:400px;">{$data.desc|default='请编辑食材的详情信息'}</script>
+				</div>
+			</div>
+			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">食材类别：</label>
 				<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 					<div class="radio-box">
@@ -67,7 +73,7 @@
 		</form>
 	</article>
 
-	<script type="text/javascript" src="__PUBLIC__/hui/lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="__PUBLIC__/hui/lib/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="__PUBLIC__/js/laydate/laydate.js"></script>
 	<script type="text/javascript" src="__PUBLIC__/hui/static/h-ui/js/H-ui.min.js"></script>
@@ -86,5 +92,12 @@
 	<script type="text/javascript" src="__PUBLIC__/jquery_file_upload/js/jquery.iframe-transport.js"></script>
 	<script type="text/javascript" src="__PUBLIC__/jquery_file_upload/js/jquery.fileupload.js"></script>
 	<script type="text/javascript" src="__PUBLIC__/js/admin_base.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			UE.getEditor('editor', {
+				toolbars : [['indent','bold','italic','underline','fontfamily','forecolor','fontsize','insertimage',],]
+			});
+		});
+	</script>
 </body>
 </html>

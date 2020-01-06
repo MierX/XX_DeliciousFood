@@ -68,6 +68,7 @@
 						<th>ID</th>
 						<th>名称</th>
 						<th>默认剂量</th>
+						<th>描述</th>
 						<th>类别</th>
 						<th>添加时间</th>
 						<th>状态</th>
@@ -80,6 +81,7 @@
 						<td>{$do.id}</td>
 						<td>{$do.name}</td>
 						<td>{$do.dose|default='无'}</td>
+						<td>{$do.desc|default='无'}</td>
 						<td><if condition="$do.type eq 1">荤类<elseif condition="$do.type eq 2" />素类<elseif condition="$do.type eq 3" />调味品类<elseif condition="$do.type eq 4" />其它</if></td>
 						<td>{$do.addtime|date='Y-m-d H:i:s',###}</td>
 						<td class="td-status">

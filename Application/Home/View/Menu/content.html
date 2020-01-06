@@ -112,7 +112,7 @@
                     <tr>
                         <td class="lirre" style="border-top:0;">
                             <span class="scname">
-                                <a href="javascript:void(0);" target="_blank">{$mo.name}</a>
+                                <a href="javascript:void(0);" onclick="selfMsg('{$mo.desc}','食材信息',false,true,['相关菜谱'],function() {location.href = '{:U(\'Menu/list\')}?table=Menu&where=status = 1&order=addtime desc&title=“{$mo.name}”的相关菜谱&food={$mo.fid}'});">{$mo.name}</a>
                             </span>
                             <span class='right scnum'>{$mo.dose}</span>
                         </td>
@@ -120,13 +120,13 @@
                     <tr>
                         <td class="lirre" style="border-top:0;">
                             <span class="scname">
-                                <a href="javascript:void(0);" target="_blank">{$mo.name}</a>
+                                <a href="javascript:void(0);" onclick="selfMsg('{$mo.desc}','食材信息',false,true,['相关菜谱'],function() {location.href = '{:U(\'Menu/list\')}?table=Menu&where=status = 1&order=addtime desc&title=“{$mo.name}”的相关菜谱&food={$mo.fid}'});">{$mo.name}</a>
                             </span>
                             <span class='right scnum'>{$mo.dose}</span>
                         </td>
                         <td style="border-top:0;">
                                 <span class="scname">
-                                    <a href="javascript:void(0);" target="_blank"></a>
+                                    <a href="javascript:void(0);" onclick="selfMsg('{$mo.desc}','食材信息',false,true,['相关菜谱'],function() {location.href = '{:U(\'Menu/list\')}?table=Menu&where=status = 1&order=addtime desc&title=“{$mo.name}”的相关菜谱&food={$mo.fid}'});">{$mo.name}</a>
                                 </span>
                             <span class='right scnum'></span>
                         </td>
@@ -135,7 +135,7 @@
                 <else />
                         <td style="border-top:0;">
                             <span class="scname">
-                                <a href="javascript:void(0);" target="_blank">{$mo.name}</a>
+                                <a href="javascript:void(0);" onclick="selfMsg('{$mo.desc}','食材信息',false,true,['相关菜谱'],function() {location.href = '{:U(\'Menu/list\')}?table=Menu&where=status = 1&order=addtime desc&title=“{$mo.name}”的相关菜谱&food={$mo.fid}'});">{$mo.name}</a>
                             </span>
                             <span class='right scnum'>{$mo.dose}</span>
                         </td>

@@ -41,6 +41,7 @@ class MenuController extends BaseController
         foreach ($menuFoods as $key => &$value)
         {
             $value['name'] = D('Foods')->field('name')->where(['id' => $value['fid']])->find()['name'];
+            $value['desc'] = D('Foods')->field('desc')->where(['id' => $value['fid']])->find()['desc'];
         }
 
         $fids = array_column($menuFoods,'fid');

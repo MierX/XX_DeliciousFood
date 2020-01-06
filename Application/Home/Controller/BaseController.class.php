@@ -107,6 +107,11 @@ class BaseController extends Controller
             $midList = implode(',',array_unique(array_column(D('Comment')->field('mid')->where(['uid' => $_SESSION['user']['id']])->select(),'mid')));
             $_GET['where'] = $midList ? "id in (".$midList.") AND status = 1" : "id = 0 AND status = 1";
         }
+        elseif($_GET['food'])
+        {
+            $midList = implode(',',array_unique(array_column(D('MenuFoods')->field('mid')->where(['fid' => $_GET['food']])->select(),'mid')));
+            $_GET['where'] = $midList ? "id in (".$midList.") AND status = 1" : "id = 0 AND status = 1";
+        }
 
         $page = $_GET['page'] > 0 ? $_GET['page'] : 1;
         $psize = ($page-1)*20;
